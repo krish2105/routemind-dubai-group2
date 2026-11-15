@@ -217,7 +217,7 @@ export default function ReroutingPage() {
               </div>
             </div>
             <RouteMap orders={res?.orders ?? morning?.orders ?? []} hub={res?.hub ?? morning?.hub ?? null}
-              baseline={res?.before ?? morning?.plan} ai={res?.after} show={res ? show : "baseline"} time={now} riskFrom={res?.after ?? morning?.plan} height={440} />
+              baseline={res?.before ?? morning?.plan} ai={res?.after} show={res ? show : "baseline"} time={now} riskFrom={res?.after ?? morning?.plan} height={440} events={events} />
           </Glass>
 
           <div className="grid gap-5 lg:grid-cols-5">
