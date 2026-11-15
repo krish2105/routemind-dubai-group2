@@ -98,3 +98,14 @@ test("a run can be cancelled and the next run still works", async ({ page }) => 
   await expect(page.getByText(/of 300 orders served/)).toBeVisible({ timeout: 30_000 });
   expect(errors).toEqual([]);
 });
+
+test("copilot drafts EN + AR for the most-late order without an API key", async ({ page }) => {
+  const errors = watchErrors(page);
+  await page.goto("/customer");
+  await page.getByRole("button", { name: "Draft message" }).first().click();
+  await page.getByRole("button", { name: "Draft EN + AR message" }).click();
+  await expect(page.getByText(/must be HH:MM/)).toHaveCount(0);
+  await expect(page.getByText(/Hello from DubaiDash Express/)).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByText(/مرحباً/)).toBeVisible();
+  expect(errors).toEqual([]);
+});
