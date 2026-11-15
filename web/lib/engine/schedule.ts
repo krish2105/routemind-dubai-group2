@@ -2,19 +2,31 @@ import type { Problem, Route, Stop, TrafficEvent, Vehicle } from "@/lib/types";
 import { POINT_POOL } from "./points";
 
 const corridorOf = new Map(POINT_POOL.map((p) => [p.id, p.corridors] as const));
+const HOUR_KEYS = Array.from({ length: 48 }, (_, h) => String(h).padStart(2, "0"));
+
+/** Per-problem cache of each node's corridors (pure speed-up: results are identical to computing them per leg). */
+const nodeCorridorCache = new WeakMap<Problem, readonly string[][]>();
+function nodeCorridors(p: Problem): readonly string[][] {
+  let c = nodeCorridorCache.get(p);
+  if (!c) {
+    c = [[...p.hub.corridors], ...p.orders.map((o) => [...(corridorOf.get(o.pointId) ?? [])])];
+    nodeCorridorCache.set(p, c);
+  }
+  return c;
+}
 
 /** Traffic multiplier for one leg departing at minute t. Events only apply inside their time window. */
 export function legMultiplier(p: Problem, fromNode: number, toNode: number, t: number, type: Vehicle["type"]): number {
   const a = p.assumptions;
-  const hour = String(Math.floor(t / 60)).padStart(2, "0");
+  const hour = HOUR_KEYS[Math.floor(t / 60)] ?? String(Math.floor(t / 60)).padStart(2, "0");
   let m = a.traffic_hour_multipliers[hour] ?? 1;
-  const corridors = new Set<string>();
-  for (const n of [fromNode, toNode]) {
-    const pid = n === 0 ? p.hub.id : p.orders[n - 1].pointId;
-    (n === 0 ? p.hub.corridors : corridorOf.get(pid) ?? []).forEach((c) => corridors.add(c));
-  }
+  let corridors: Set<string> | null = null;
   for (const e of p.events) {
     if (t < e.startMin || t >= e.endMin) continue;
+    if (!corridors) {
+      const nc = nodeCorridors(p);
+      corridors = new Set([...nc[fromNode], ...nc[toNode]]);
+    }
     m *= eventFactor(p, e, corridors);
   }
   return type === "bike" ? 1 + (m - 1) * a.fallback.bike_traffic_sensitivity : m;
