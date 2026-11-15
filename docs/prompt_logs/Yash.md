@@ -12,3 +12,4 @@ Rules (slide 54 of the course brief): copy every prompt you type to Claude Code 
 | 2026-11-15 | git / team | check if Krishna merged any PRs | status report: Krishna merged PRs #11 to #18 at 12:05 Dubai time; PR #21 makes Yash the Slide 6 presenter | no |
 | 2026-11-15 | GenAI disclosure | update the prompt log with these prompts | added these two rows to docs/prompt_logs/Yash.md | no |
 | 2026-11-15 | GenAI disclosure | yes, keep adding prompts to that branch | agreed workflow: new prompts are added to branch feat/yash-prompt-log (PR #23) until Krishna merges it | no |
+| 2026-11-15 | git | check if Krishna merged PR #24 | merge status of PR #24 | no |
