@@ -42,7 +42,10 @@
   },
   "failed_attempt": {
     "base_probability": 0.08,
-    "sandstorm_extra": 0.04
+    "sandstorm_extra": 0.04,
+    "late_extra": 0.05,
+    "cod_extra": 0.03,
+    "tight_window_extra": 0.02
   },
   "traffic_hour_multipliers": {
     "08": 1.35,
@@ -82,5 +85,253 @@
     "note": "Two-shift model: half of each vehicle type starts 08:00, half 11:00; duty ends start + max_duty_min",
     "early_start": "08:00",
     "late_start": "11:00"
+  },
+  "sla": {
+    "risk_buffer_min": 15
+  },
+  "fuel": {
+    "co2_kg_per_litre": {
+      "van": 2.68,
+      "bike": 2.31
+    },
+    "note": "van = diesel, bike = petrol (assumed fuel types)"
+  },
+  "provenance": {
+    "_note": "One row per value: status (assumed unless sourced), one-line reason, plausible range. Shown in the Assumptions drawer.",
+    "seed": {
+      "status": "design choice",
+      "reason": "fixed seed so baseline, AI, slides and demo use identical orders",
+      "range": "n/a"
+    },
+    "vehicles.van.count": {
+      "status": "assumed",
+      "reason": "mid-size courier fleet for about 300 parcels a day",
+      "range": "8 to 16"
+    },
+    "vehicles.bike.count": {
+      "status": "assumed",
+      "reason": "motorbikes are common for small parcels in Dubai",
+      "range": "4 to 12"
+    },
+    "vehicles.van.capacity_parcels": {
+      "status": "assumed",
+      "reason": "small panel van, mixed parcel sizes",
+      "range": "35 to 60"
+    },
+    "vehicles.bike.capacity_parcels": {
+      "status": "assumed",
+      "reason": "top box plus bag",
+      "range": "6 to 15"
+    },
+    "vehicles.van.cost_per_km_aed": {
+      "status": "assumed",
+      "reason": "fuel + maintenance + depreciation per km",
+      "range": "0.6 to 1.2"
+    },
+    "vehicles.bike.cost_per_km_aed": {
+      "status": "assumed",
+      "reason": "lower fuel and upkeep than a van",
+      "range": "0.2 to 0.5"
+    },
+    "vehicles.van.co2_kg_per_km": {
+      "status": "assumed",
+      "reason": "typical light diesel van tailpipe; replace with a cited factor if time",
+      "range": "0.18 to 0.30"
+    },
+    "vehicles.bike.co2_kg_per_km": {
+      "status": "assumed",
+      "reason": "small petrol motorbike",
+      "range": "0.06 to 0.12"
+    },
+    "vehicles.van.co2_kg_per_km_electric": {
+      "status": "assumed",
+      "reason": "electric van on a grid mix (indirect emissions)",
+      "range": "0.03 to 0.10"
+    },
+    "vehicles.bike.co2_kg_per_km_electric": {
+      "status": "assumed",
+      "reason": "electric motorbike on a grid mix",
+      "range": "0.01 to 0.04"
+    },
+    "vehicles.van.service_time_min": {
+      "status": "assumed",
+      "reason": "park, walk, hand over",
+      "range": "3 to 8"
+    },
+    "vehicles.bike.service_time_min": {
+      "status": "assumed",
+      "reason": "faster parking than a van",
+      "range": "2 to 6"
+    },
+    "vehicles.van.max_duty_min": {
+      "status": "assumed",
+      "reason": "9 h duty inside the 08:00 to 20:00 operating window",
+      "range": "480 to 600"
+    },
+    "vehicles.bike.max_duty_min": {
+      "status": "assumed",
+      "reason": "same duty rule as vans",
+      "range": "480 to 600"
+    },
+    "orders.count": {
+      "status": "assumed",
+      "reason": "one demo day for a mid-size courier",
+      "range": "200 to 400"
+    },
+    "orders.time_window_min": {
+      "status": "assumed",
+      "reason": "standard 2-hour customer slot",
+      "range": "60 to 240"
+    },
+    "orders.cod_share": {
+      "status": "assumed",
+      "reason": "cash on delivery is still used in the UAE",
+      "range": "0.05 to 0.30"
+    },
+    "orders.urgent_surge_orders": {
+      "status": "assumed",
+      "reason": "what-if surge size for the re-routing demo",
+      "range": "10 to 50"
+    },
+    "orders.urgent_share": {
+      "status": "assumed",
+      "reason": "share of express orders",
+      "range": "0.05 to 0.20"
+    },
+    "orders.urgent_window_min": {
+      "status": "assumed",
+      "reason": "express 1-hour slot",
+      "range": "30 to 90"
+    },
+    "costs.driver_cost_per_hour_aed": {
+      "status": "assumed",
+      "reason": "loaded hourly driver cost (salary, visa, housing share)",
+      "range": "20 to 40"
+    },
+    "costs.failed_delivery_cost_aed": {
+      "status": "assumed",
+      "reason": "re-delivery trip and handling",
+      "range": "8 to 25"
+    },
+    "costs.sla_penalty_aed": {
+      "status": "assumed",
+      "reason": "voucher or goodwill cost of a missed window",
+      "range": "5 to 30"
+    },
+    "failed_attempt.base_probability": {
+      "status": "assumed",
+      "reason": "industry sources report a wide 8 to 20% range (R3, indicative only)",
+      "range": "0.05 to 0.20"
+    },
+    "failed_attempt.sandstorm_extra": {
+      "status": "assumed",
+      "reason": "customers stay in, access is harder",
+      "range": "0.00 to 0.08"
+    },
+    "failed_attempt.late_extra": {
+      "status": "assumed",
+      "reason": "customer may have left after the window",
+      "range": "0.02 to 0.10"
+    },
+    "failed_attempt.cod_extra": {
+      "status": "assumed",
+      "reason": "cash not ready or order refused",
+      "range": "0.01 to 0.06"
+    },
+    "failed_attempt.tight_window_extra": {
+      "status": "assumed",
+      "reason": "less room to retry inside a 1-hour slot",
+      "range": "0.00 to 0.05"
+    },
+    "sla.risk_buffer_min": {
+      "status": "assumed",
+      "reason": "dispatcher wants 15 min warning before a window closes",
+      "range": "10 to 30"
+    },
+    "fuel.co2_kg_per_litre.van": {
+      "status": "assumed",
+      "reason": "standard diesel combustion factor, used only to show litres",
+      "range": "2.6 to 2.7"
+    },
+    "fuel.co2_kg_per_litre.bike": {
+      "status": "assumed",
+      "reason": "standard petrol combustion factor, used only to show litres",
+      "range": "2.2 to 2.4"
+    },
+    "traffic_hour_multipliers": {
+      "status": "assumed",
+      "reason": "morning and evening peaks on free-flow time",
+      "range": "1.0 to 1.6 per hour"
+    },
+    "event_multipliers.sheikh_zayed_road_jam": {
+      "status": "assumed",
+      "reason": "what-if corridor jam, not a live feed",
+      "range": "1.4 to 2.2"
+    },
+    "event_multipliers.al_khail_road_jam": {
+      "status": "assumed",
+      "reason": "what-if corridor jam, not a live feed",
+      "range": "1.3 to 2.0"
+    },
+    "event_multipliers.sandstorm_citywide": {
+      "status": "assumed",
+      "reason": "what-if low visibility, slower driving",
+      "range": "1.2 to 1.6"
+    },
+    "event_multipliers.heavy_rain_citywide": {
+      "status": "assumed",
+      "reason": "what-if rain, slower driving and flooding",
+      "range": "1.2 to 1.8"
+    },
+    "fallback.haversine_detour_factor": {
+      "status": "assumed",
+      "reason": "straight line to road distance in a grid city",
+      "range": "1.2 to 1.5"
+    },
+    "fallback.average_speed_kmh_free_flow": {
+      "status": "assumed",
+      "reason": "urban average without congestion",
+      "range": "30 to 55"
+    },
+    "fallback.bike_traffic_sensitivity": {
+      "status": "assumed",
+      "reason": "bikes filter through traffic and feel 60% of jams",
+      "range": "0.4 to 0.8"
+    },
+    "business_case.pilot_investment_aed": {
+      "status": "assumed",
+      "reason": "90-day pilot build, integration, training (docs/10)",
+      "range": "300,000 to 600,000"
+    },
+    "business_case.monthly_running_cost_aed": {
+      "status": "assumed",
+      "reason": "cloud, APIs, support",
+      "range": "25,000 to 60,000"
+    },
+    "business_case.parcels_per_day": {
+      "status": "assumed",
+      "reason": "scaled network after rollout",
+      "range": "1,000 to 3,000"
+    },
+    "business_case.working_days_per_year": {
+      "status": "assumed",
+      "reason": "6-day operation minus holidays",
+      "range": "300 to 350"
+    },
+    "business_case.adoption_haircut": {
+      "status": "assumed",
+      "reason": "real savings are lower than simulation",
+      "range": "0.4 to 0.8"
+    },
+    "shifts.early_start": {
+      "status": "assumed",
+      "reason": "two-shift model, half of each vehicle type",
+      "range": "07:00 to 09:00"
+    },
+    "shifts.late_start": {
+      "status": "assumed",
+      "reason": "second wave covers the evening peak",
+      "range": "10:00 to 12:00"
+    }
   }
 }
