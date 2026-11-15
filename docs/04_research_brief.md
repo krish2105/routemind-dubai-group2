@@ -20,7 +20,7 @@ Confidence: **High** = official or primary source. **Medium** = reputable news o
 | 5 | UPS reported 6 to 8 fewer miles driven per route after ORION. | [UPS release via 3BL, Mar 2015](https://app.3blmedia.com/news/ups-accelerates-use-routing-optimization-software-reduce-100-million-miles-driven) | Medium | Compare with our km saving per route. |
 | 6 | UPS added dynamic (mid-route) re-routing to ORION. | [VentureBeat](https://venturebeat.com/business/ups-will-now-use-dynamic-routing-to-get-parcels-to-you-on-time) | Medium | Supports our live re-routing feature (Q2). |
 | 7 | McKinsey: AI in distribution operations can cut logistics costs by roughly 5 to 20 percent. | [McKinsey](https://www.mckinsey.com/industries/industrials-and-electronics/our-insights/distribution-blog/harnessing-the-power-of-ai-in-distribution-operations) | High | Sanity range for our result. If our simulated saving is far above 20%, say it is optimistic because the baseline is simple. |
-| 8 | A widely repeated figure says early AI adopters cut logistics costs about 15% (attributed to McKinsey work, found only in secondary articles). | [Supply Chain Connect](https://www.supplychainconnect.com/supply-chain-technology/article/21282982/unleashing-the-power-of-ai-in-supply-chains) | Low | Optional "often cited" mention only. Prefer #7. |
+| 8 | A widely repeated figure says early AI adopters cut logistics costs about 15%. **[Fact-check 15 Nov, Yash: the Supply Chain Connect page attributes this to Cohen and Tang, "The Role of AI in Developing Resilient Supply Chains", not to McKinsey. Do not call it a McKinsey figure.]** | [Supply Chain Connect](https://www.supplychainconnect.com/supply-chain-technology/article/21282982/unleashing-the-power-of-ai-in-supply-chains) | Low | Optional "often cited" mention only. Prefer #7. |
 
 ## 3. Algorithms (Q3, slide 3)
 
@@ -40,8 +40,8 @@ How to use: slide 3 says GA is a standard method for routing with time windows, 
 | 13 | Makani is Dubai Municipality's address system (launched 2015): a unique 10-digit number that pinpoints the entrance of a building. | [Gulf News](https://gulfnews.com/living-in-uae/housing/makani-number-what-is-it-and-why-do-you-need-it-1.1606302505909), [Bayut](https://www.bayut.com/mybayut/heres-why-you-should-know-your-makani-number/) | Medium | Integration (slide 6): reduces failed deliveries caused by bad addresses. |
 | 14 | UAE midday break: outdoor work in direct sun is banned 12:30 to 3:00 pm from 15 June to 15 September. Delivery riders cannot be forced to work in those hours. Dubai RTA set up 23 temporary rest areas in 2026. | [Khaleej Times](https://www.khaleejtimes.com/uae/delivery-drivers-cannot-be-forced-work-midday-break), [RTA, 22 Jun 2026](https://www.rta.ae/wps/portal/rta/ae/home/news-and-media/all-news/NewsDetails/23-temporary-rest-areas-to-protect-delivery-riders-from-heat-stress) | High | Responsible AI: schedules must respect heat rules and fair workload. |
 | 15 | RTA aims for 25% of mobility journeys to be autonomous by 2030 (one Khaleej Times piece quotes 20%; check before using a number). | [Truck & Fleet ME](https://truckandfleetme.com/news/yango-rolls-out-robot-deliveries-at-sobha-hartland/), [Enterprise AM](https://enterpriseam.com/logistics/2025/09/30/rta-greenlights-framework-for-autonomous-trucking-in-dubai/) | Medium | Ecosystem: future partners (robots, drones). |
-| 16 | RTA, DIEZ and talabat piloted delivery robots ("talabots") in Dubai Silicon Oasis. Yango and noon began robot deliveries in Dubai in Dec 2025. Robots serve short trips, roughly a 2 km radius. | [Gulf Insider](https://gulf-insider.fabianca.com/dubai-rta-launches-autonomous-food-delivery-talabots/), [Khaleej Times](https://www.khaleejtimes.com/kt-network/yango-group-and-noon-announce-strategic-partnership-to-scale-autonomous-robot-delivery-across-the-gcc) | Medium | Slide 6 ecosystem and slide 7 phase 3. |
-| 17 | Dubai Green Mobility Strategy 2030; DEWA's EV Green Charger network passes 1,500 charging points; Dubai's RTA has a Commercial and Logistics Land Transport Strategy 2030 and a First and Last-Mile Strategy. | [Gulf News](https://gulfnews.com/auto/news/dewa-dubai-taxi-ink-long-term-deal-for-ultra-fast-ev-charging-stations-1.500292327), [Khaleej Times](https://www.khaleejtimes.com/business-technology-review/dubais-last-mile-revolution-scaling-electric-delivery-for-a-growing-city) | Medium | Backs the EV-share slider (Q4). |
+| 16 | RTA, DIEZ and talabat piloted delivery robots ("talabots") in Dubai Silicon Oasis. Yango and noon began robot deliveries in Dubai in Dec 2025. Robots serve short trips, roughly a 2 km radius. **[Fact-check 15 Nov, Yash: the 2 km radius is from the Truck & Fleet ME article on Yango + ROOTS at Sobha Hartland (started 24 Mar 2025), not the Khaleej Times noon article. The talabots link (Gulf Insider) did not load: certificate error.]** | [Gulf Insider](https://gulf-insider.fabianca.com/dubai-rta-launches-autonomous-food-delivery-talabots/), [Khaleej Times](https://www.khaleejtimes.com/kt-network/yango-group-and-noon-announce-strategic-partnership-to-scale-autonomous-robot-delivery-across-the-gcc) | Medium | Slide 6 ecosystem and slide 7 phase 3. |
+| 17 | Dubai Green Mobility Strategy 2030; DEWA's EV Green Charger network passes 1,500 charging points; Dubai's RTA has a Commercial and Logistics Land Transport Strategy 2030 and a First and Last-Mile Strategy. **[Fact-check 15 Nov, Yash: the 1,500 points are in the Gulf News link (updated 2 Oct 2025); the strategies are in the Khaleej Times link.]** | [Gulf News](https://gulfnews.com/auto/news/dewa-dubai-taxi-ink-long-term-deal-for-ultra-fast-ev-charging-stations-1.500292327), [Khaleej Times](https://www.khaleejtimes.com/business-technology-review/dubais-last-mile-revolution-scaling-electric-delivery-for-a-growing-city) | Medium | Backs the EV-share slider (Q4). |
 | 18 | Road2.0: 17 UAE companies (supported by talabat and Unilever) aim to cut their UAE road fleet emissions 30% by 2030 and 100% by 2040. | [Emirates Nature-WWF](https://www.emiratesnaturewwf.ae/press-release/8-17-uae-corporates-publish-declaration-to-electric-vehicle-ev-ecosystem-outlining-actions-required-to-scale-up-commercial-adoption-of-evs) | Medium | Q4, sustainability pressure from industry peers. |
 
 ## 5. Privacy and law (slide 6)
@@ -57,6 +57,34 @@ Safe wording for the slide: "UAE PDPL (Federal Decree-Law 45/2021) applies; we m
 - Congestion on Sheikh Zayed Road and Al Khail Road, sandstorm effects, Al Quoz hub layout: these are **scenario assumptions** in our simulation. Say "what-if scenario", not a measured fact.
 - CO2 per km for vans and bikes, cost per km and driver cost: **assumed** in `06_assumptions_table.md`. If time allows, Advait replaces them with a cited source (for example a national conversion-factor table) and records the URL.
 - Slide 56 and the course outline were not available to us.
+
+## 7a. Fact-check status (Yash, 15 Nov 2026; full log in `docs/verification_log.md`)
+Rule: a row marked **could not verify** must not appear on a slide until someone opens the link in a normal browser and confirms it.
+
+| Row | Status | Note |
+|---|---|---|
+| 1 | verified (15 Nov 2026, Yash) | 41% (2018) to 53% (2023), worldwide, Statista Research Department, updated 14 Feb 2024; underlying study not named |
+| 2 | verified (15 Nov 2026, Yash) | Gulf Today 28 Sep 2026 (credited to WAM): AED 42.2B 2025, AED 17.6B 2020, 19% CAGR, 15.7% of retail, >20% by 2030; report by EZDubai with Euromonitor. WAM link loaded without article text |
+| 3 | verified as quoted (Low source) | SmartRoutes says 8 to 20% fail first attempt (links HBR); US $17.2 per parcel, no source given. Indicative only |
+| 4 | partly verified | 100M miles, 10M gallons, 100,000 t CO2 confirmed via VentureBeat. INFORMS page blocks automated access (403); the US$300 to 400M figure **could not verify** |
+| 5 | could not verify | 3BL link host no longer resolves; do not use "6 to 8 miles per route" |
+| 6 | verified (15 Nov 2026, Yash) | VentureBeat: dynamic re-routing added to ORION |
+| 7 | could not verify (automated) | McKinsey page timed out twice; open in a browser before slide 7 / Q&A use |
+| 8 | verified with correction | 15% is Cohen and Tang (see row), not McKinsey |
+| 9 | verified (15 Nov 2026, Yash) | JKSUS review names SA, tabu search, GA for VRPTW |
+| 10 | verified (15 Nov 2026, Yash) | arXiv 2205.02453 "Learning to Solve Vehicle Routing Problems: A Survey": RL and supervised learning |
+| 11 | verified (15 Nov 2026, Yash) | arXiv 2303.04147 "Heuristics for Vehicle Routing Problem: A Survey and Recent Advances" |
+| 12 | not checked | Low-confidence summary site; not used on slides |
+| 13 | verified (15 Nov 2026, Yash) | Gulf News: 10 digits, building entrance, Dubai Municipality, 2015 |
+| 14 | verified (15 Nov 2026, Yash) | Khaleej Times: 12:30 to 15:00, 15 Jun to 15 Sep, riders cannot be compelled; RTA 22 Jun 2026: 23 rest areas |
+| 15 | verified, keep the caveat | Enterprise AM: RTA 25% autonomous by 2030; Khaleej Times gives 20%; Truck & Fleet attributes 25% to the Public Transport Agency. Say "RTA targets a large share" or quote with source |
+| 16 | partly verified | see row note (Yango radius source; talabots link failed) |
+| 17 | verified with source note | see row note |
+| 18 | verified (15 Nov 2026, Yash) | Emirates Nature-WWF: 17 companies, supported by talabat and Unilever, 30% by 2030, 100% by 2040 |
+| 19 | verified (15 Nov 2026, Yash) | CyberSigma: issued 20 Sep 2021, published 26 Sep 2021, effective 2 Jan 2022, UAE Data Office, consent default |
+| 20 | verified (still open) | Executive Regulations status unresolved; no fines or enforcement dates on slides |
+
+Slides 2 and 6 use only rows 1, 2, 13, 14 and 19 (all verified).
 
 ## 7. Check list before presenting
 - [ ] Every number on a slide is either in this file with a URL, or labelled "assumed" or "simulated".

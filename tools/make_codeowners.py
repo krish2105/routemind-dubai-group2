@@ -19,8 +19,8 @@ OWNERS = {  # path -> member (keep in sync with docs/00_TEAM_WORKFLOW.md)
     "/web/app/eta/": "Atharva", "/web/lib/models/": "Atharva", "/web/lib/engine/ga.ts": "Atharva", "/notebook/": "Atharva", "/deck/slides/s3_atharva.js": "Atharva",
     "/web/lib/engine/kpi.ts": "Advait", "/web/app/fleet/": "Advait", "/web/app/customer/": "Advait", "/web/app/api/copilot/": "Advait", "/deck/slides/s5_advait.js": "Advait",
     "/data_seed/": "Advait", "/docs/06_assumptions_table.md": "Advait",
-    "/web/lib/engine/reroute.ts": "Karan", "/web/lib/engine/events.ts": "Karan", "/web/app/rerouting/": "Karan", "/web/app/integration/": "Karan",
-    "/docs/09_risk_register.md": "Karan", "/deck/slides/s6_karan.js": "Karan", "/web/tests/e2e/": "Karan",
+    "/web/lib/engine/reroute.ts": "Yash", "/web/lib/engine/events.ts": "Yash", "/web/app/rerouting/": "Yash", "/web/app/integration/": "Yash",
+    "/docs/09_risk_register.md": "Yash", "/deck/slides/s6_karan.js": "Yash", "/web/tests/e2e/": "Yash",
     "/web/lib/roi.ts": "Harsh", "/web/app/business-case/": "Harsh", "/web/app/rl-lab/": "Harsh", "/web/scripts/freeze.ts": "Harsh", "/notebook/rl_dispatch.ipynb": "Harsh",
     "/deck/slides/s7_harsh.js": "Harsh", "/docs/10_roi_model.md": "Harsh",
 }

@@ -42,3 +42,59 @@ test("/optimizer runs the algorithms and fills the comparison", async ({ page })
   await expect(page.getByText(/of 300 orders served/)).toBeVisible();
   expect(errors).toEqual([]);
 });
+
+test("every scenario re-runs the engine, and the SZR jam shows on the map at 13:30", async ({ page }) => {
+  const errors = watchErrors(page);
+  await page.goto("/command");
+  await expect(page.getByText("% vs baseline").first()).toBeVisible({ timeout: 30_000 });
+  for (const name of ["Heavy rain", "Sandstorm 12:00", "SZR jam 13:00", "Normal day"]) {
+    await page.getByRole("radio", { name }).click();
+    await expect(page.getByRole("radio", { name })).toHaveAttribute("aria-checked", "true");
+    await expect(page.getByText(/Same 300 seeded orders/)).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText("% vs baseline").first()).toBeVisible();
+  }
+  await page.getByRole("radio", { name: "SZR jam 13:00" }).click();
+  await expect(page.getByText(/Same 300 seeded orders/)).toBeVisible({ timeout: 30_000 });
+  await page.getByLabel("Time of day").fill("810");
+  await expect(page.getByText(/Sheikh Zayed Road jam · 13:00-15:00/)).toBeVisible();
+  await page.getByLabel("Time of day").fill("600"); // 10:00, jam not active yet
+  await expect(page.getByText(/Sheikh Zayed Road jam · 13:00-15:00/)).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
+test("dark mode toggle works, persists after reload, and pages stay error-free", async ({ page }) => {
+  const errors = watchErrors(page);
+  await page.goto("/command");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.getByRole("button", { name: "Switch to dark mode" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(page.getByText("% vs baseline").first()).toBeVisible({ timeout: 30_000 });
+  const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+  expect(bg).toBe("rgb(7, 17, 31)");
+  await page.goto("/optimizer");
+  await page.getByRole("button", { name: "Run" }).click();
+  await expect(page.getByText(/of 300 orders served/)).toBeVisible({ timeout: 30_000 });
+  await page.getByRole("button", { name: "Switch to light mode" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  expect(errors).toEqual([]);
+});
+
+test("a run can be cancelled and the next run still works", async ({ page }) => {
+  const errors = watchErrors(page);
+  await page.goto("/optimizer");
+  const result = await page.evaluate(async () => {
+    const btn = (t: string) => [...document.querySelectorAll("button")].find((b) => b.textContent?.trim() === t);
+    btn("Run")!.click();
+    await new Promise((r) => setTimeout(r, 100));
+    const cancel = btn("Cancel");
+    cancel?.click();
+    return Boolean(cancel);
+  });
+  expect(result).toBe(true);
+  await expect(page.getByText(/^Cancelled\./)).toBeVisible();
+  await page.getByRole("button", { name: "Run" }).click();
+  await expect(page.getByText(/of 300 orders served/)).toBeVisible({ timeout: 30_000 });
+  expect(errors).toEqual([]);
+});

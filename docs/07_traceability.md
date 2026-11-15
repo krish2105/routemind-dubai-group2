@@ -32,9 +32,9 @@ The 7 key questions come from the original implementation plan. **Confirm them a
 | Scope bullet | Delivered by |
 |---|---|
 | Identify a real-world supply chain challenge | Slide 2 + `/problem` (Yash) |
-| Propose an AI-driven solution using ML, optimisation, predictive analytics | Slides 3 and 4: ETA model (Atharva), Clarke-Wright + GA (Krishna, Atharva), re-routing (Karan) |
+| Propose an AI-driven solution using ML, optimisation, predictive analytics | Slides 3 and 4: ETA model (Atharva), Clarke-Wright + GA (Krishna, Atharva), re-routing (Yash, from Karan's area) |
 | Design a conceptual workflow or prototype | Deployed Next.js prototype (all members), Slide 4 demo |
-| Present findings and an implementation roadmap | Slides 5 to 7: KPIs (Advait), integration + risk (Karan), ROI + 90-day pilot (Harsh) |
+| Present findings and an implementation roadmap | Slides 5 to 7: KPIs (Advait), integration + risk (Yash, from Karan's area), ROI + 90-day pilot (Harsh) |
 
 ## Boardroom (C-suite) themes -> where
 Business model shifts: Slides 1 and 7 (paid slots, lockers) · Technology investment: Slide 7 (`/business-case`) · Ecosystem integration: Slide 6 (`/integration`) · Operational risks: Slide 6 (risk register) and Slide 4 (jam re-routing).

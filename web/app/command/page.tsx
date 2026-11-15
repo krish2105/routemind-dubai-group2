@@ -30,16 +30,17 @@ const PRESETS: { id: string; label: string; events: TrafficEvent[] }[] = [
 type Show = "baseline" | "ai" | "both";
 
 export default function CommandCenter() {
-  const { results, orders, hub, status, progress, run, setScenario, reset } = useScenario();
+  const { results, orders, hub, status, progress, run, setScenario, reset, cancel } = useScenario();
   const [preset, setPreset] = useState("normal");
   const [show, setShow] = useState<Show>("both");
   const playback = usePlayback(20);
 
   useEffect(() => {
+    cancel(); // switching scenario mid-run: drop the old run at once instead of queueing behind it
     reset(); // the demo always uses the default seeded day (seed 2611, 300 orders, 12 vans + 8 bikes)
     setScenario({ events: PRESETS.find((p) => p.id === preset)!.events });
     void run(["baseline", "cw2opt"]);
-  }, [preset, setScenario, run, reset]);
+  }, [preset, setScenario, run, reset, cancel]);
 
   const bp = results.baseline?.plan;
   const ap = results.cw2opt?.plan;
@@ -75,7 +76,8 @@ export default function CommandCenter() {
           <KpiCard label="CO2" unit="kg" base={f(b?.co2Kg, 0)} ai={f(a?.co2Kg, 0)} deltaPct={d(b?.co2Kg, a?.co2Kg)} stub={stub} />
         </section>
         <div className="order-1 min-w-0 space-y-3 lg:order-2">
-          <RouteMap orders={orders} hub={hub} baseline={bp} ai={ap} show={show} time={playback.time} riskFrom={show === "baseline" ? bp : ap} />
+          <RouteMap orders={orders} hub={hub} baseline={bp} ai={ap} show={show} time={playback.time} riskFrom={show === "baseline" ? bp : ap}
+            events={PRESETS.find((p) => p.id === preset)!.events} />
           <TimeScrubber {...playback} marker={ev ? { at: ev.startMin, label: EVENT_LABELS[ev.type].split(" (")[0] } : undefined} />
           <Legend />
         </div>
