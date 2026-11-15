@@ -17,6 +17,8 @@
 | Numbers frozen | Harsh | no |
 | Final PPTX/PDF + zip | Gagandeep, Krishna | no |
 
+Rehearsals done Sun: `npm run freeze -- --dry-run --allow-stub` works (blocked only on Atharva's eta_metrics.json and Karan's re-routing); final zip built, unzipped in a clean folder, `npm run check` 12/12 + build OK, deck 7 slides with notes.
+
 Blockers: teammates need to accept GitHub invites.
 
 Last update: Sun 15 Nov, Krishna.

@@ -40,13 +40,13 @@ One honest note: our ETA training data comes from India, so it proves the method
 Over to Krishna for the live demo.
 
 ## SLIDE 4 | Krishna | 120 | Live demo: same orders, shorter routes, and a jam handled in one click
-> Delivery: do the clicks while speaking. If anything freezes, say "let me show the recording" and play the video. Never debug live.
-Thanks Atharva. [CUE: open Command Center] This is our simulated day: about 300 orders, 12 vans, 8 motorbikes, one hub in Al Quoz. All data is simulated or assumed, and both plans use the same orders.
-[CUE: Route Optimizer, baseline view] This is the baseline: nearest neighbour, which is how many dispatchers plan today. [CUE: switch to AI view] Now the AI plan. Distance drops by {{km_pct}} per cent, cost per parcel by {{cost_pct}} per cent, and we need {{vans_fewer}} fewer vans.
-[CUE: GA convergence chart] The genetic algorithm improves the plan generation by generation.
-[CUE: Live Re-routing, add the 1 pm jam] Now the real test. A jam hits Sheikh Zayed Road at 1 pm. [PAUSE] Before re-routing, {{risk_before}} deliveries are at risk of missing their window. [CUE: click Re-route] After re-routing: {{risk_after}}.
-Three honest points. These results are simulated, the baseline is simple, and a dispatcher can always override the AI. We also used AI tools to help build this dashboard, and that is circled on the slide.
-Advait will explain what this means for the business.
+> Delivery: click while you talk. Live link: web-rws7.vercel.app. If anything freezes, say "let me show the recording" and play deliverables/demo_90s.mp4. Never debug live.
+Thanks Atharva. [CUE: open Command Center] This is one simulated working day at DubaiDash: 300 orders, 12 vans, 8 motorbikes and one hub in Al Quoz. Everything here is simulated or assumed, and the old plan and the AI plan get exactly the same orders.
+Amber is today's way of planning: send the driver to the nearest order that is ready. Teal is RouteMind. [CUE: press Play] Watch the vans leave the hub. The teal routes are tighter. Across the day the AI drives {{km_pct}} per cent fewer kilometres, cuts cost per parcel by {{cost_pct}} per cent, and needs {{vans_fewer}} fewer vans. On-time goes from {{ontime_base}} to {{ontime_ai}} per cent.
+[CUE: open Route Optimizer, press Run] Here a dispatcher can compare methods side by side. Clarke-Wright and 2-opt build the plan in under a second, and the table shows every van, its load and when it is back.
+[CUE: open Live Re-routing, add the 1 pm jam] Now the real test. At 1 pm Sheikh Zayed Road jams. [PAUSE] Before re-routing, {{risk_before}} deliveries are at risk of missing their window. [CUE: click Re-route] After one click: {{risk_after}}.
+Three honest points. The results are simulated, our baseline is simple, and a dispatcher can always override the AI. We also used AI tools to help build this dashboard, and that is circled on the slide.
+Advait will now show what this means for the business.
 
 ## SLIDE 5 | Advait | 75 | Better utilisation, less CO2, and fewer broken promises
 > Delivery: slow down on the numbers. Say "proxy" when you talk about customer satisfaction.
