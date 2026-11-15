@@ -1,0 +1,14 @@
+node_modules/
+.next/
+.vercel/
+.env*
+!.env.example
+__pycache__/
+.DS_Store
+dist/
+notebook/data/raw/
+web/test-results/
+web/playwright-report/
+*.log
+source_material/
+team/

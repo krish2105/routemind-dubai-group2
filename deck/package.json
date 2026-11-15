@@ -1,0 +1,11 @@
+{
+  "name": "routemind-deck",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Builds the 7-slide PPTX with speaker notes. Each slide is its own module, owned by one team member.",
+  "scripts": {
+    "build": "node build_deck.js",
+    "build:final": "node build_deck.js --strict"
+  },
+  "dependencies": { "pptxgenjs": "^4.0.1", "qrcode": "^1.5.4" }
+}

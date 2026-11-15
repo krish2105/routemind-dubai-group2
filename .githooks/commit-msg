@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Removes AI attribution lines from every commit message before the commit is created.
+f="$1"
+sed -i.bak -E '/^[[:space:]]*Co-Authored-By:/Id; /^[[:space:]]*Claude-Session:/Id; /Generated with \[?Claude/Id; /noreply@anthropic\.com/Id' "$f"
+rm -f "$f.bak"
+# strip trailing blank lines left behind
+sed -i.bak -e :a -e '/^\n*$/{$d;N;ba' -e '}' "$f" 2>/dev/null; rm -f "$f.bak"
+exit 0

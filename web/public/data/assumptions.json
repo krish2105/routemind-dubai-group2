@@ -1,0 +1,86 @@
+{
+  "version": "2026-11-15",
+  "note": "All values are ASSUMED model inputs for a fictional courier (DubaiDash Express), not statistics. Owner: Advait. Keep in sync with docs/06_assumptions_table.md.",
+  "currency": "AED",
+  "seed": 2611,
+  "operating_window": {
+    "start": "08:00",
+    "end": "20:00"
+  },
+  "vehicles": {
+    "van": {
+      "count": 12,
+      "capacity_parcels": 45,
+      "cost_per_km_aed": 0.85,
+      "co2_kg_per_km": 0.24,
+      "co2_kg_per_km_electric": 0.07,
+      "service_time_min": 4,
+      "max_duty_min": 540
+    },
+    "bike": {
+      "count": 8,
+      "capacity_parcels": 10,
+      "cost_per_km_aed": 0.35,
+      "co2_kg_per_km": 0.09,
+      "co2_kg_per_km_electric": 0.02,
+      "service_time_min": 3,
+      "max_duty_min": 540
+    }
+  },
+  "orders": {
+    "count": 300,
+    "time_window_min": 120,
+    "cod_share": 0.15,
+    "urgent_surge_orders": 25,
+    "urgent_share": 0.1,
+    "urgent_window_min": 60
+  },
+  "costs": {
+    "driver_cost_per_hour_aed": 28,
+    "failed_delivery_cost_aed": 12,
+    "sla_penalty_aed": 15
+  },
+  "failed_attempt": {
+    "base_probability": 0.08,
+    "sandstorm_extra": 0.04
+  },
+  "traffic_hour_multipliers": {
+    "08": 1.35,
+    "09": 1.25,
+    "10": 1.05,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.05,
+    "14": 1.0,
+    "15": 1.05,
+    "16": 1.2,
+    "17": 1.45,
+    "18": 1.45,
+    "19": 1.25
+  },
+  "event_multipliers": {
+    "sheikh_zayed_road_jam": 1.8,
+    "al_khail_road_jam": 1.6,
+    "sandstorm_citywide": 1.35,
+    "heavy_rain_citywide": 1.4
+  },
+  "fallback": {
+    "haversine_detour_factor": 1.35,
+    "average_speed_kmh_free_flow": 40,
+    "label": "Haversine x detour factor (used only if OSRM is unreachable)",
+    "bike_traffic_sensitivity": 0.6,
+    "note_bike": "Bikes feel traffic multipliers at 60% strength (assumed)"
+  },
+  "business_case": {
+    "pilot_investment_aed": 420000,
+    "monthly_running_cost_aed": 38000,
+    "parcels_per_day": 1500,
+    "working_days_per_year": 330,
+    "adoption_haircut": 0.6
+  },
+  "shifts": {
+    "note": "Two-shift model: half of each vehicle type starts 08:00, half 11:00; duty ends start + max_duty_min",
+    "early_start": "08:00",
+    "late_start": "11:00"
+  }
+}

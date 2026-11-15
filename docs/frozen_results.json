@@ -1,0 +1,22 @@
+{
+  "_comment": "Fill on Mon 18:00 after the final seeded run (Claude Code Phase 5). Values are strings or numbers. null = not yet frozen; the PDF builder then shows [token] placeholders.",
+  "frozen_at": null,
+  "seed": 2611,
+  "cost_pct": null,
+  "km_pct": null,
+  "vans_fewer": null,
+  "risk_before": null,
+  "risk_after": null,
+  "util_base": null,
+  "util_ai": null,
+  "co2_pct": null,
+  "ontime_base": null,
+  "ontime_ai": null,
+  "breaches_base": null,
+  "breaches_ai": null,
+  "eta_mae": null,
+  "eta_naive_mae": null,
+  "pilot_cost": 420000,
+  "payback_months": null,
+  "payback_half": null
+}

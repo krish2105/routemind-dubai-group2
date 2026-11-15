@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Blocks a push if any outgoing commit still carries AI attribution (trailer or author/committer identity).
+zero="0000000000000000000000000000000000000000"
+bad=0
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ "$local_sha" = "$zero" ] && continue
+  if [ "$remote_sha" = "$zero" ]; then range="$local_sha"; else range="$remote_sha..$local_sha"; fi
+  for c in $(git rev-list "$range" 2>/dev/null); do
+    msg=$(git log -1 --format=%B "$c")
+    ids=$(git log -1 --format='%an <%ae> %cn <%ce>' "$c")
+    if echo "$msg" | grep -qiE '^[[:space:]]*(Co-Authored-By:|Claude-Session:)|Generated with \[?Claude|noreply@anthropic\.com' || echo "$ids" | grep -qiE 'anthropic|claude'; then
+      echo "BLOCKED: commit $c has AI attribution (trailer or identity)."
+      echo "  Fix the last commit:  git commit --amend   (delete the Co-Authored-By / Claude lines)"
+      echo "  Several commits:      git rebase -i $remote_sha   then reword, or ask Krishna."
+      bad=1
+    fi
+  done
+done
+exit $bad

@@ -1,0 +1,46 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: web } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: web/package-lock.json }
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run test
+      - run: npm run build
+
+  deck:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: deck } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install --no-audit --no-fund
+      - run: node build_deck.js
+
+  clean-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: No AI attribution in commit messages or identities
+        run: |
+          range="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
+          [ "${{ github.event_name }}" = "push" ] && range="${{ github.event.before }}..${{ github.sha }}"
+          bad=0
+          for c in $(git rev-list "$range" 2>/dev/null); do
+            if git log -1 --format='%B' "$c" | grep -qiE '^[[:space:]]*(Co-Authored-By:|Claude-Session:)|Generated with \[?Claude|noreply@anthropic\.com' \
+               || git log -1 --format='%an %ae %cn %ce' "$c" | grep -qiE 'anthropic|claude'; then
+              echo "AI attribution found in $c"; bad=1
+            fi
+          done
+          exit $bad

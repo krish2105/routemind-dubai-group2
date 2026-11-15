@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* LIGHT MODE (default) "daylight dispatch": clean white/ice backgrounds, navy text, teal = AI, amber = baseline, red = SLA risk.
+   DARK MODE via the toggle (top right): <html data-theme="dark"> swaps the same tokens (see bottom of this file).
+   Use these tokens (text-fg, bg-paper, text-ai ...) instead of hard-coded colours so both themes work. */
+@theme {
+  --color-paper: #f5f8fc;
+  --color-paper-2: #eaf1f8;
+  --color-fg: #0b1b2e;
+  --color-ink-950: #0b1b2e;
+  --color-ink-900: #14283f;
+  --color-ink-800: #1f3a57;
+  --color-ink-700: #2d4b6b;
+  --color-ai: #0891b2;
+  --color-ai-deep: #0e7490;
+  --color-base: #d97706;
+  --color-risk: #dc2626;
+  --color-ok: #059669;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+html { color-scheme: light; --body-text: #334155; }
+body {
+  background: var(--color-paper);
+  color: var(--body-text);
+  transition: background-color 0.25s ease, color 0.25s ease;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+/* soft pastel backdrop used by the app shell */
+.backdrop {
+  background:
+    radial-gradient(60rem 30rem at 85% -10%, rgba(8, 145, 178, 0.10), transparent 60%),
+    radial-gradient(50rem 28rem at -10% 110%, rgba(217, 119, 6, 0.08), transparent 60%),
+    linear-gradient(var(--color-paper), var(--color-paper-2));
+}
+.glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.72));
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 34px -14px rgba(15, 40, 80, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.text-gradient {
+  background: linear-gradient(100deg, #0e7490 0%, #0891b2 50%, #0ea5a4 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ---------- DARK MODE ("night dispatch") ---------- */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --body-text: #cbd5e1;
+  --color-paper: #07111f;
+  --color-paper-2: #0b1b2e;
+  --color-fg: #e6eef7;
+  --color-ai: #22d3ee;
+  --color-ai-deep: #06b6d4;
+  --color-base: #f59e0b;
+  --color-risk: #f87171;
+  --color-ok: #34d399;
+  /* secondary text and hairlines flip so existing slate-* classes stay readable */
+  --color-slate-500: #94a3b8;
+  --color-slate-600: #a8b5c7;
+  --color-slate-700: #cbd5e1;
+  --color-slate-900: #e2e8f0;
+}
+html[data-theme="dark"] .backdrop {
+  background:
+    radial-gradient(60rem 30rem at 85% -10%, rgba(34, 211, 238, 0.12), transparent 60%),
+    radial-gradient(50rem 28rem at -10% 110%, rgba(245, 158, 11, 0.08), transparent 60%),
+    linear-gradient(var(--color-paper), var(--color-paper-2));
+}
+html[data-theme="dark"] .glass {
+  background: linear-gradient(180deg, rgba(20, 40, 63, 0.85), rgba(11, 27, 46, 0.7));
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow: 0 10px 34px -14px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+/* white surfaces become navy panels (text-white on the teal button is untouched) */
+html[data-theme="dark"] .bg-white { background-color: #14283f; }
+html[data-theme="dark"] .bg-white\/70 { background-color: rgba(11, 27, 46, 0.7); }
+html[data-theme="dark"] .hover\:bg-white:hover { background-color: #1f3a57; }
+html[data-theme="dark"] .text-gradient {
+  background-image: linear-gradient(100deg, #22d3ee 0%, #67e8f9 50%, #5eead4 100%);
+}
+html[data-theme="dark"] .bg-ai.text-white { color: #07111f; }
