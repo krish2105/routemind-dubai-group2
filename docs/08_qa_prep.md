@@ -38,3 +38,24 @@ Rule for answers: short, honest, one number if possible. If you do not know, say
 1. Say "let me show the recording" and play it (no apology, no debugging live).
 2. Use the screenshots on slide 4.
 3. Keep to the scripted numbers; they are the same.
+
+## D. Slide 2 questions (owner: Yash)
+
+| Question | Short answer |
+|---|---|
+| Is 53% a UAE number? | No. It is a worldwide figure from Statista (updated Feb 2024, R1). The page does not name the study, so we only use it as the global picture. |
+| Why use the AED 42.2B figure when other reports differ? | Reports count different things. Ours is from the Gulf Today / WAM report (EZDubai with Euromonitor, R2), so we always name the source. |
+| How often do deliveries fail? | Industry sources report about 8 to 20% fail on the first attempt globally (R3, low confidence, indicative only). Our model uses its own assumed rate (8%, +4 points in a sandstorm). |
+| Are the Sheikh Zayed Road jams real data? | No. Corridor jams, sandstorms and rain are what-if scenarios with assumed slow-down factors. We did not measure Dubai congestion. |
+| Why k-means for zones? How was k chosen? | It groups nearby orders into compact zones; k is picked automatically by the silhouette score (k = 3 to 10). The order nearest each zone centre is the micro-hub or locker candidate. |
+
+## E. Integration and risk questions (owner: Karan's slide, prepared by Yash)
+
+| Question | Short answer |
+|---|---|
+| What happens if the AI goes down mid-shift? | Drivers keep the last accepted plan already on their app; if there is none, dispatch uses the baseline plan, the same rule as today. Messages switch to templates. |
+| Does re-routing really help? | On the simulated default day, a 13:00 Sheikh Zayed Road jam: deliveries at risk go from {{risk_before}} to {{risk_after}} after re-routing, with no extra SLA breaches. Simulated, assumed data. |
+| Can the dispatcher overrule the AI? | Yes. Every suggestion is accept, edit or reject; rejections are logged for review. |
+| How do you handle UAE data protection? | UAE PDPL (Federal Decree-Law 45/2021) has applied since 2 Jan 2022 (R19). We minimise personal data and use consent. Executive-regulation status is still unclear (R20), so we would confirm with legal counsel. No claims about fines. |
+| What is the biggest risk? | Data quality and integration (risks 1 and 2 in the register). That is why phase 1 runs in advisory mode beside the dispatchers. |
+| Will you need new systems? | No. Phase 1 reads file or API exports from the existing TMS/WMS. |
