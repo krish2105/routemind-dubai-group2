@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { assumptions } from "@/lib/assumptions";
 import { assumptionRows, type AssumptionRow } from "./rows";
 
@@ -10,9 +10,19 @@ import { assumptionRows, type AssumptionRow } from "./rows";
  */
 export function AssumptionsButton({ className = "" }: { className?: string }) {
   const [open, setOpen] = useState(false);
+  const [duplicate, setDuplicate] = useState(false);
+  const ref = useRef<HTMLButtonElement>(null);
+  // The header and a page may both place the button: only the first one on the page stays visible.
+  useEffect(() => {
+    const all = document.querySelectorAll("[data-assumptions-button]");
+    setDuplicate(all.length > 1 && all[0] !== ref.current);
+  }, []);
+  if (duplicate) return null;
   return (
     <>
       <button
+        ref={ref}
+        data-assumptions-button=""
         type="button"
         onClick={() => setOpen(true)}
         className={`inline-flex items-center gap-1 rounded-full border border-base/40 bg-white px-2.5 py-0.5 text-[11px] font-medium tracking-wide text-base hover:bg-base/10 ${className}`}
