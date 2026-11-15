@@ -16,7 +16,14 @@ import type { Plan, Problem } from "@/lib/types";
 
 const page = PAGES.find((p) => p.href === "/customer")!;
 const areaOf = new Map(POINT_POOL.map((p) => [p.id, p.name]));
-const hhmm = (m: number) => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(Math.round(m % 60)).padStart(2, "0")}`;
+/** HH:MM on a 24 h clock; rounds whole minutes first so 59.6 never prints as ":60", and wraps past midnight. */
+const hhmm = (m: number) => {
+  const t = ((Math.round(m) % 1440) + 1440) % 1440;
+  return `${String(Math.floor(t / 60)).padStart(2, "0")}:${String(t % 60).padStart(2, "0")}`;
+};
+/** Delay slider range; a row's lateness is clamped into it so the request always validates. */
+const DELAY_MIN = 5;
+const DELAY_MAX = 120;
 const REASON_LABEL: Record<Reason, string> = {
   traffic: "Traffic", szr_jam: "Sheikh Zayed Road jam", al_khail_jam: "Al Khail Road jam", sandstorm: "Sandstorm",
   rain: "Heavy rain", high_volume: "High order volume", vehicle_issue: "Vehicle issue",
@@ -86,7 +93,7 @@ export default function CustomerPage() {
 
   function choose(r: RiskRow) {
     setSelected(r.orderId);
-    setDelayMin(r.late && r.slack !== undefined ? Math.max(5, Math.round(-r.slack)) : 20);
+    setDelayMin(r.late && r.slack !== undefined ? Math.min(DELAY_MAX, Math.max(DELAY_MIN, Math.round(-r.slack / 5) * 5)) : 20);
     setDrafts(null); setApproved(false); setEditing(false); setError("");
   }
 
@@ -205,7 +212,7 @@ export default function CustomerPage() {
                   </label>
                   <label className="flex items-center gap-3 text-slate-700">
                     <span className="w-20">Delay</span>
-                    <input type="range" min={5} max={120} step={5} value={delayMin} onChange={(e) => setDelayMin(Number(e.target.value))} className="flex-1 accent-[#0891b2]" aria-label="Delay in minutes" />
+                    <input type="range" min={DELAY_MIN} max={DELAY_MAX} step={5} value={delayMin} onChange={(e) => setDelayMin(Number(e.target.value))} className="flex-1 accent-[#0891b2]" aria-label="Delay in minutes" />
                     <span className="num w-16 text-right">{delayMin} min</span>
                   </label>
                   <button type="button" disabled={busy} onClick={draftDelay} className="rounded-lg bg-ai px-3 py-1.5 text-white disabled:opacity-50">{busy ? "Drafting…" : "Draft EN + AR message"}</button>
