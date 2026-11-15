@@ -9,3 +9,5 @@ Rules (slide 54 of the course brief): copy every prompt you type to Claude Code 
 | 2026-11-15 | QA / git | check the CI status on all the PRs | CI table for PRs #11 to #18: web, deck, clean-commits and Vercel all pass (one Vercel preview still deploying); all mergeable | no |
 | 2026-11-15 | team communication | give me the message to send in the group chat | group-chat update: PR list and merge order, re-routing demo number, fact-check flags for Harsh and Atharva, Slide 6 presenter question | no |
 | 2026-11-15 | GenAI disclosure | update the prompt log with these prompts | added these three rows to docs/prompt_logs/Yash.md | no |
+| 2026-11-15 | git / team | check if Krishna merged any PRs | status report: Krishna merged PRs #11 to #18 at 12:05 Dubai time; PR #21 makes Yash the Slide 6 presenter | no |
+| 2026-11-15 | GenAI disclosure | update the prompt log with these prompts | added these two rows to docs/prompt_logs/Yash.md | no |
