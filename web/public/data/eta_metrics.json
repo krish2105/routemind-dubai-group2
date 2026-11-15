@@ -1,0 +1,1257 @@
+{
+ "mae": 17.49,
+ "rmse": 22.33,
+ "r2": 0.816,
+ "naive_mae": 39.59,
+ "naive_rmse": 49.69,
+ "naive_r2": 0.088,
+ "n_train": 32122,
+ "n_test": 8031,
+ "trees": 209,
+ "split": "chronological: last 20% of orders by date/time are the test set",
+ "feature_importance": [
+  {
+   "name": "category",
+   "value": 0.304
+  },
+  {
+   "name": "Agent_Rating",
+   "value": 0.1679
+  },
+  {
+   "name": "weather",
+   "value": 0.1559
+  },
+  {
+   "name": "traffic",
+   "value": 0.1092
+  },
+  {
+   "name": "distance_km",
+   "value": 0.0992
+  },
+  {
+   "name": "Agent_Age",
+   "value": 0.0807
+  },
+  {
+   "name": "hour",
+   "value": 0.0456
+  },
+  {
+   "name": "vehicle",
+   "value": 0.026
+  },
+  {
+   "name": "area",
+   "value": 0.0099
+  },
+  {
+   "name": "weekday",
+   "value": 0.0017
+  }
+ ],
+ "pred_vs_actual": [
+  {
+   "actual": 180,
+   "predicted": 215.6
+  },
+  {
+   "actual": 85,
+   "predicted": 106.6
+  },
+  {
+   "actual": 150,
+   "predicted": 140.4
+  },
+  {
+   "actual": 200,
+   "predicted": 186.7
+  },
+  {
+   "actual": 165,
+   "predicted": 187.0
+  },
+  {
+   "actual": 39,
+   "predicted": 38.5
+  },
+  {
+   "actual": 205,
+   "predicted": 209.5
+  },
+  {
+   "actual": 80,
+   "predicted": 94.1
+  },
+  {
+   "actual": 80,
+   "predicted": 90.1
+  },
+  {
+   "actual": 125,
+   "predicted": 118.6
+  },
+  {
+   "actual": 190,
+   "predicted": 184.0
+  },
+  {
+   "actual": 50,
+   "predicted": 89.7
+  },
+  {
+   "actual": 55,
+   "predicted": 69.1
+  },
+  {
+   "actual": 85,
+   "predicted": 86.8
+  },
+  {
+   "actual": 90,
+   "predicted": 77.4
+  },
+  {
+   "actual": 50,
+   "predicted": 104.1
+  },
+  {
+   "actual": 85,
+   "predicted": 93.2
+  },
+  {
+   "actual": 145,
+   "predicted": 106.4
+  },
+  {
+   "actual": 100,
+   "predicted": 106.0
+  },
+  {
+   "actual": 70,
+   "predicted": 75.7
+  },
+  {
+   "actual": 105,
+   "predicted": 131.0
+  },
+  {
+   "actual": 110,
+   "predicted": 125.7
+  },
+  {
+   "actual": 130,
+   "predicted": 161.0
+  },
+  {
+   "actual": 150,
+   "predicted": 147.2
+  },
+  {
+   "actual": 210,
+   "predicted": 217.9
+  },
+  {
+   "actual": 150,
+   "predicted": 153.0
+  },
+  {
+   "actual": 95,
+   "predicted": 111.3
+  },
+  {
+   "actual": 115,
+   "predicted": 125.1
+  },
+  {
+   "actual": 145,
+   "predicted": 147.6
+  },
+  {
+   "actual": 155,
+   "predicted": 163.3
+  },
+  {
+   "actual": 165,
+   "predicted": 150.1
+  },
+  {
+   "actual": 130,
+   "predicted": 104.7
+  },
+  {
+   "actual": 165,
+   "predicted": 170.6
+  },
+  {
+   "actual": 80,
+   "predicted": 109.5
+  },
+  {
+   "actual": 135,
+   "predicted": 148.4
+  },
+  {
+   "actual": 130,
+   "predicted": 115.5
+  },
+  {
+   "actual": 125,
+   "predicted": 114.1
+  },
+  {
+   "actual": 90,
+   "predicted": 88.9
+  },
+  {
+   "actual": 18,
+   "predicted": 32.5
+  },
+  {
+   "actual": 135,
+   "predicted": 151.8
+  },
+  {
+   "actual": 170,
+   "predicted": 148.1
+  },
+  {
+   "actual": 145,
+   "predicted": 149.2
+  },
+  {
+   "actual": 65,
+   "predicted": 71.3
+  },
+  {
+   "actual": 85,
+   "predicted": 87.9
+  },
+  {
+   "actual": 27,
+   "predicted": 21.7
+  },
+  {
+   "actual": 120,
+   "predicted": 105.9
+  },
+  {
+   "actual": 110,
+   "predicted": 128.6
+  },
+  {
+   "actual": 65,
+   "predicted": 96.6
+  },
+  {
+   "actual": 135,
+   "predicted": 94.5
+  },
+  {
+   "actual": 220,
+   "predicted": 187.8
+  },
+  {
+   "actual": 140,
+   "predicted": 122.0
+  },
+  {
+   "actual": 130,
+   "predicted": 133.2
+  },
+  {
+   "actual": 115,
+   "predicted": 83.1
+  },
+  {
+   "actual": 80,
+   "predicted": 77.1
+  },
+  {
+   "actual": 170,
+   "predicted": 134.6
+  },
+  {
+   "actual": 29,
+   "predicted": 10.7
+  },
+  {
+   "actual": 80,
+   "predicted": 74.8
+  },
+  {
+   "actual": 130,
+   "predicted": 117.6
+  },
+  {
+   "actual": 175,
+   "predicted": 175.7
+  },
+  {
+   "actual": 175,
+   "predicted": 173.5
+  },
+  {
+   "actual": 115,
+   "predicted": 134.9
+  },
+  {
+   "actual": 120,
+   "predicted": 111.1
+  },
+  {
+   "actual": 80,
+   "predicted": 112.1
+  },
+  {
+   "actual": 135,
+   "predicted": 154.6
+  },
+  {
+   "actual": 180,
+   "predicted": 176.2
+  },
+  {
+   "actual": 150,
+   "predicted": 157.2
+  },
+  {
+   "actual": 115,
+   "predicted": 118.4
+  },
+  {
+   "actual": 35,
+   "predicted": 34.9
+  },
+  {
+   "actual": 80,
+   "predicted": 117.6
+  },
+  {
+   "actual": 190,
+   "predicted": 188.7
+  },
+  {
+   "actual": 230,
+   "predicted": 200.7
+  },
+  {
+   "actual": 235,
+   "predicted": 230.8
+  },
+  {
+   "actual": 145,
+   "predicted": 139.7
+  },
+  {
+   "actual": 145,
+   "predicted": 143.5
+  },
+  {
+   "actual": 155,
+   "predicted": 184.5
+  },
+  {
+   "actual": 15,
+   "predicted": 23.1
+  },
+  {
+   "actual": 180,
+   "predicted": 200.1
+  },
+  {
+   "actual": 195,
+   "predicted": 189.6
+  },
+  {
+   "actual": 105,
+   "predicted": 100.0
+  },
+  {
+   "actual": 175,
+   "predicted": 189.2
+  },
+  {
+   "actual": 80,
+   "predicted": 108.2
+  },
+  {
+   "actual": 130,
+   "predicted": 116.3
+  },
+  {
+   "actual": 60,
+   "predicted": 78.9
+  },
+  {
+   "actual": 140,
+   "predicted": 108.8
+  },
+  {
+   "actual": 120,
+   "predicted": 90.4
+  },
+  {
+   "actual": 170,
+   "predicted": 161.3
+  },
+  {
+   "actual": 135,
+   "predicted": 116.6
+  },
+  {
+   "actual": 105,
+   "predicted": 116.5
+  },
+  {
+   "actual": 100,
+   "predicted": 110.2
+  },
+  {
+   "actual": 145,
+   "predicted": 148.0
+  },
+  {
+   "actual": 125,
+   "predicted": 113.6
+  },
+  {
+   "actual": 75,
+   "predicted": 88.5
+  },
+  {
+   "actual": 120,
+   "predicted": 112.8
+  },
+  {
+   "actual": 100,
+   "predicted": 117.8
+  },
+  {
+   "actual": 65,
+   "predicted": 81.0
+  },
+  {
+   "actual": 95,
+   "predicted": 85.7
+  },
+  {
+   "actual": 20,
+   "predicted": 24.8
+  },
+  {
+   "actual": 95,
+   "predicted": 107.1
+  },
+  {
+   "actual": 75,
+   "predicted": 102.8
+  },
+  {
+   "actual": 90,
+   "predicted": 78.4
+  },
+  {
+   "actual": 85,
+   "predicted": 73.8
+  },
+  {
+   "actual": 75,
+   "predicted": 87.5
+  },
+  {
+   "actual": 120,
+   "predicted": 85.7
+  },
+  {
+   "actual": 115,
+   "predicted": 110.8
+  },
+  {
+   "actual": 100,
+   "predicted": 120.8
+  },
+  {
+   "actual": 95,
+   "predicted": 78.4
+  },
+  {
+   "actual": 95,
+   "predicted": 104.1
+  },
+  {
+   "actual": 145,
+   "predicted": 107.8
+  },
+  {
+   "actual": 105,
+   "predicted": 120.3
+  },
+  {
+   "actual": 110,
+   "predicted": 121.0
+  },
+  {
+   "actual": 120,
+   "predicted": 90.6
+  },
+  {
+   "actual": 80,
+   "predicted": 82.8
+  },
+  {
+   "actual": 60,
+   "predicted": 77.2
+  },
+  {
+   "actual": 165,
+   "predicted": 135.6
+  },
+  {
+   "actual": 85,
+   "predicted": 84.4
+  },
+  {
+   "actual": 130,
+   "predicted": 102.8
+  },
+  {
+   "actual": 80,
+   "predicted": 87.8
+  },
+  {
+   "actual": 105,
+   "predicted": 116.5
+  },
+  {
+   "actual": 125,
+   "predicted": 148.9
+  },
+  {
+   "actual": 105,
+   "predicted": 100.4
+  },
+  {
+   "actual": 130,
+   "predicted": 138.3
+  },
+  {
+   "actual": 75,
+   "predicted": 108.8
+  },
+  {
+   "actual": 115,
+   "predicted": 110.8
+  },
+  {
+   "actual": 90,
+   "predicted": 74.4
+  },
+  {
+   "actual": 165,
+   "predicted": 173.9
+  },
+  {
+   "actual": 26,
+   "predicted": 46.9
+  },
+  {
+   "actual": 155,
+   "predicted": 169.8
+  },
+  {
+   "actual": 195,
+   "predicted": 175.5
+  },
+  {
+   "actual": 115,
+   "predicted": 92.7
+  },
+  {
+   "actual": 150,
+   "predicted": 141.2
+  },
+  {
+   "actual": 135,
+   "predicted": 150.9
+  },
+  {
+   "actual": 90,
+   "predicted": 87.0
+  },
+  {
+   "actual": 110,
+   "predicted": 113.9
+  },
+  {
+   "actual": 105,
+   "predicted": 117.7
+  },
+  {
+   "actual": 120,
+   "predicted": 113.4
+  },
+  {
+   "actual": 125,
+   "predicted": 172.3
+  },
+  {
+   "actual": 50,
+   "predicted": 77.4
+  },
+  {
+   "actual": 135,
+   "predicted": 104.2
+  },
+  {
+   "actual": 75,
+   "predicted": 118.1
+  },
+  {
+   "actual": 100,
+   "predicted": 103.1
+  },
+  {
+   "actual": 170,
+   "predicted": 171.4
+  },
+  {
+   "actual": 115,
+   "predicted": 116.5
+  },
+  {
+   "actual": 165,
+   "predicted": 165.6
+  },
+  {
+   "actual": 145,
+   "predicted": 146.8
+  },
+  {
+   "actual": 105,
+   "predicted": 111.5
+  },
+  {
+   "actual": 90,
+   "predicted": 88.4
+  },
+  {
+   "actual": 90,
+   "predicted": 87.7
+  },
+  {
+   "actual": 75,
+   "predicted": 84.2
+  },
+  {
+   "actual": 120,
+   "predicted": 76.9
+  },
+  {
+   "actual": 185,
+   "predicted": 178.6
+  },
+  {
+   "actual": 170,
+   "predicted": 195.8
+  },
+  {
+   "actual": 75,
+   "predicted": 112.2
+  },
+  {
+   "actual": 105,
+   "predicted": 134.8
+  },
+  {
+   "actual": 215,
+   "predicted": 180.4
+  },
+  {
+   "actual": 135,
+   "predicted": 127.7
+  },
+  {
+   "actual": 215,
+   "predicted": 209.1
+  },
+  {
+   "actual": 195,
+   "predicted": 189.9
+  },
+  {
+   "actual": 75,
+   "predicted": 113.1
+  },
+  {
+   "actual": 75,
+   "predicted": 124.3
+  },
+  {
+   "actual": 130,
+   "predicted": 113.0
+  },
+  {
+   "actual": 175,
+   "predicted": 197.3
+  },
+  {
+   "actual": 140,
+   "predicted": 141.4
+  },
+  {
+   "actual": 220,
+   "predicted": 227.7
+  },
+  {
+   "actual": 115,
+   "predicted": 87.6
+  },
+  {
+   "actual": 95,
+   "predicted": 112.3
+  },
+  {
+   "actual": 115,
+   "predicted": 119.1
+  },
+  {
+   "actual": 100,
+   "predicted": 118.6
+  },
+  {
+   "actual": 24,
+   "predicted": 27.4
+  },
+  {
+   "actual": 180,
+   "predicted": 194.9
+  },
+  {
+   "actual": 125,
+   "predicted": 117.2
+  },
+  {
+   "actual": 95,
+   "predicted": 87.7
+  },
+  {
+   "actual": 155,
+   "predicted": 130.3
+  },
+  {
+   "actual": 145,
+   "predicted": 132.2
+  },
+  {
+   "actual": 85,
+   "predicted": 80.2
+  },
+  {
+   "actual": 95,
+   "predicted": 77.9
+  },
+  {
+   "actual": 105,
+   "predicted": 96.1
+  },
+  {
+   "actual": 145,
+   "predicted": 99.8
+  },
+  {
+   "actual": 95,
+   "predicted": 73.7
+  },
+  {
+   "actual": 17,
+   "predicted": 15.0
+  },
+  {
+   "actual": 75,
+   "predicted": 70.6
+  },
+  {
+   "actual": 165,
+   "predicted": 172.3
+  },
+  {
+   "actual": 135,
+   "predicted": 163.4
+  },
+  {
+   "actual": 145,
+   "predicted": 117.1
+  },
+  {
+   "actual": 130,
+   "predicted": 108.2
+  },
+  {
+   "actual": 23,
+   "predicted": 31.3
+  },
+  {
+   "actual": 135,
+   "predicted": 104.1
+  },
+  {
+   "actual": 75,
+   "predicted": 90.9
+  },
+  {
+   "actual": 75,
+   "predicted": 103.9
+  },
+  {
+   "actual": 90,
+   "predicted": 87.7
+  },
+  {
+   "actual": 80,
+   "predicted": 108.7
+  },
+  {
+   "actual": 65,
+   "predicted": 92.6
+  },
+  {
+   "actual": 105,
+   "predicted": 113.2
+  },
+  {
+   "actual": 55,
+   "predicted": 90.7
+  },
+  {
+   "actual": 100,
+   "predicted": 104.2
+  },
+  {
+   "actual": 245,
+   "predicted": 179.6
+  },
+  {
+   "actual": 215,
+   "predicted": 188.3
+  },
+  {
+   "actual": 145,
+   "predicted": 93.3
+  },
+  {
+   "actual": 155,
+   "predicted": 185.3
+  },
+  {
+   "actual": 105,
+   "predicted": 116.4
+  },
+  {
+   "actual": 135,
+   "predicted": 162.6
+  },
+  {
+   "actual": 175,
+   "predicted": 173.0
+  },
+  {
+   "actual": 125,
+   "predicted": 104.6
+  },
+  {
+   "actual": 130,
+   "predicted": 153.2
+  },
+  {
+   "actual": 105,
+   "predicted": 103.9
+  },
+  {
+   "actual": 130,
+   "predicted": 102.3
+  },
+  {
+   "actual": 120,
+   "predicted": 84.5
+  },
+  {
+   "actual": 80,
+   "predicted": 85.6
+  },
+  {
+   "actual": 70,
+   "predicted": 84.4
+  },
+  {
+   "actual": 210,
+   "predicted": 172.6
+  },
+  {
+   "actual": 95,
+   "predicted": 109.5
+  },
+  {
+   "actual": 175,
+   "predicted": 195.2
+  },
+  {
+   "actual": 95,
+   "predicted": 105.2
+  },
+  {
+   "actual": 125,
+   "predicted": 110.3
+  },
+  {
+   "actual": 155,
+   "predicted": 139.2
+  },
+  {
+   "actual": 245,
+   "predicted": 203.9
+  },
+  {
+   "actual": 195,
+   "predicted": 178.4
+  },
+  {
+   "actual": 50,
+   "predicted": 80.0
+  },
+  {
+   "actual": 225,
+   "predicted": 182.8
+  },
+  {
+   "actual": 150,
+   "predicted": 186.1
+  },
+  {
+   "actual": 90,
+   "predicted": 98.0
+  },
+  {
+   "actual": 125,
+   "predicted": 142.3
+  },
+  {
+   "actual": 180,
+   "predicted": 141.2
+  },
+  {
+   "actual": 41,
+   "predicted": 43.6
+  },
+  {
+   "actual": 175,
+   "predicted": 132.6
+  },
+  {
+   "actual": 265,
+   "predicted": 227.9
+  },
+  {
+   "actual": 245,
+   "predicted": 224.5
+  },
+  {
+   "actual": 160,
+   "predicted": 182.1
+  },
+  {
+   "actual": 145,
+   "predicted": 106.0
+  },
+  {
+   "actual": 130,
+   "predicted": 113.8
+  },
+  {
+   "actual": 85,
+   "predicted": 115.8
+  },
+  {
+   "actual": 80,
+   "predicted": 114.5
+  },
+  {
+   "actual": 12,
+   "predicted": 16.5
+  },
+  {
+   "actual": 115,
+   "predicted": 119.9
+  },
+  {
+   "actual": 120,
+   "predicted": 121.2
+  },
+  {
+   "actual": 105,
+   "predicted": 126.6
+  },
+  {
+   "actual": 55,
+   "predicted": 85.0
+  },
+  {
+   "actual": 165,
+   "predicted": 131.8
+  },
+  {
+   "actual": 90,
+   "predicted": 84.7
+  },
+  {
+   "actual": 100,
+   "predicted": 99.6
+  },
+  {
+   "actual": 165,
+   "predicted": 134.1
+  },
+  {
+   "actual": 80,
+   "predicted": 76.7
+  },
+  {
+   "actual": 55,
+   "predicted": 77.1
+  },
+  {
+   "actual": 90,
+   "predicted": 86.8
+  },
+  {
+   "actual": 80,
+   "predicted": 80.0
+  },
+  {
+   "actual": 80,
+   "predicted": 82.3
+  },
+  {
+   "actual": 115,
+   "predicted": 121.6
+  },
+  {
+   "actual": 90,
+   "predicted": 112.5
+  },
+  {
+   "actual": 115,
+   "predicted": 105.0
+  },
+  {
+   "actual": 50,
+   "predicted": 75.4
+  },
+  {
+   "actual": 100,
+   "predicted": 89.0
+  },
+  {
+   "actual": 115,
+   "predicted": 99.0
+  },
+  {
+   "actual": 60,
+   "predicted": 114.9
+  },
+  {
+   "actual": 85,
+   "predicted": 88.0
+  },
+  {
+   "actual": 80,
+   "predicted": 107.9
+  },
+  {
+   "actual": 120,
+   "predicted": 114.2
+  },
+  {
+   "actual": 155,
+   "predicted": 145.8
+  },
+  {
+   "actual": 100,
+   "predicted": 113.1
+  },
+  {
+   "actual": 155,
+   "predicted": 140.0
+  },
+  {
+   "actual": 115,
+   "predicted": 124.3
+  },
+  {
+   "actual": 235,
+   "predicted": 186.8
+  },
+  {
+   "actual": 155,
+   "predicted": 173.0
+  },
+  {
+   "actual": 155,
+   "predicted": 165.6
+  },
+  {
+   "actual": 170,
+   "predicted": 171.9
+  },
+  {
+   "actual": 100,
+   "predicted": 104.1
+  },
+  {
+   "actual": 125,
+   "predicted": 130.1
+  },
+  {
+   "actual": 235,
+   "predicted": 160.3
+  },
+  {
+   "actual": 75,
+   "predicted": 99.9
+  },
+  {
+   "actual": 100,
+   "predicted": 105.1
+  },
+  {
+   "actual": 150,
+   "predicted": 119.7
+  },
+  {
+   "actual": 130,
+   "predicted": 95.9
+  },
+  {
+   "actual": 85,
+   "predicted": 104.2
+  },
+  {
+   "actual": 110,
+   "predicted": 86.6
+  },
+  {
+   "actual": 105,
+   "predicted": 85.1
+  },
+  {
+   "actual": 95,
+   "predicted": 82.2
+  },
+  {
+   "actual": 85,
+   "predicted": 76.2
+  },
+  {
+   "actual": 75,
+   "predicted": 113.1
+  },
+  {
+   "actual": 55,
+   "predicted": 78.0
+  },
+  {
+   "actual": 190,
+   "predicted": 173.1
+  },
+  {
+   "actual": 100,
+   "predicted": 120.9
+  },
+  {
+   "actual": 125,
+   "predicted": 146.5
+  },
+  {
+   "actual": 150,
+   "predicted": 127.1
+  },
+  {
+   "actual": 31,
+   "predicted": 40.8
+  },
+  {
+   "actual": 85,
+   "predicted": 87.3
+  },
+  {
+   "actual": 115,
+   "predicted": 107.0
+  },
+  {
+   "actual": 100,
+   "predicted": 89.9
+  },
+  {
+   "actual": 29,
+   "predicted": 40.3
+  },
+  {
+   "actual": 105,
+   "predicted": 120.0
+  },
+  {
+   "actual": 200,
+   "predicted": 184.5
+  },
+  {
+   "actual": 160,
+   "predicted": 186.6
+  },
+  {
+   "actual": 135,
+   "predicted": 110.5
+  },
+  {
+   "actual": 195,
+   "predicted": 207.6
+  },
+  {
+   "actual": 125,
+   "predicted": 133.2
+  },
+  {
+   "actual": 155,
+   "predicted": 185.5
+  },
+  {
+   "actual": 220,
+   "predicted": 234.5
+  },
+  {
+   "actual": 150,
+   "predicted": 111.0
+  },
+  {
+   "actual": 215,
+   "predicted": 196.7
+  },
+  {
+   "actual": 120,
+   "predicted": 91.7
+  },
+  {
+   "actual": 65,
+   "predicted": 76.6
+  },
+  {
+   "actual": 60,
+   "predicted": 77.5
+  },
+  {
+   "actual": 70,
+   "predicted": 75.5
+  }
+ ],
+ "dataset_note": "Trained on Kaggle Amazon Delivery Dataset (MIT licence), deliveries in Indian cities, Feb-Apr 2022. Shows the method, not Dubai ground truth."
+}
