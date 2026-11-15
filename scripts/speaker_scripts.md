@@ -49,13 +49,13 @@ Three honest points. The results are simulated, our baseline is simple, and a di
 Advait will now show what this means for the business.
 
 ## SLIDE 5 | Advait | 75 | Better utilisation, less CO2, and fewer broken promises
-> Delivery: slow down on the numbers. Say "proxy" when you talk about customer satisfaction.
-Thanks Krishna. Let us see what the numbers mean for operations.
-Fleet utilisation rises from {{util_base}} to {{util_ai}} per cent, because fewer vans carry fuller loads. Carbon dioxide falls by {{co2_pct}} per cent, from fewer kilometres; with more electric vehicles it can fall further. For scale, UPS reports about 100,000 tonnes of CO2 avoided each year with its ORION routing system.
-For customers, on-time delivery rises from {{ontime_base}} to {{ontime_ai}} per cent, and service-level breaches fall from {{breaches_base}} to {{breaches_ai}}. We use on-time rate and breaches as proxies. We did not measure satisfaction directly.
-We also check fairness, by measuring workload across drivers, so the AI does not overload some people.
-The copilot writes delay messages in English and Arabic. New revenue options include parcel lockers, scheduled slots and premium urgent delivery.
-Karan will cover the challenges.
+> Delivery: slow down on the numbers. Say "proxy" when you talk about customer satisfaction. Point at the red circle when you mention the copilot.
+Thanks Krishna. So what changes on the ground, for the fleet and for our customers?
+First, the fleet. Capacity utilisation goes from {{util_base}} to {{util_ai}} per cent, because the same parcels fit into fewer, fuller vans. Fewer kilometres also means {{co2_pct}} per cent less CO2, using assumed emission factors. For scale, UPS reports about 100,000 tonnes of CO2 avoided each year with its ORION routing.
+Second, customers. On-time delivery rises from {{ontime_base}} to {{ontime_ai}} per cent, and SLA breaches drop from {{breaches_base}} to {{breaches_ai}}. These are proxies for satisfaction; we did not survey anyone.
+Third, drivers. We track workload fairness, so the AI does not overload a few people, and summer plans must keep the midday break for riders.
+[CUE: point to the red circle] Finally, the copilot drafts delay messages in English and Arabic. It is AI-drafted, and a dispatcher approves it before anything is sent.
+Karan will now cover the risks.
 
 ## SLIDE 6 | Karan Baid | 75 | Integration is the hard part, so we plan for it
 > Delivery: calm and practical. For PDPL say "we would confirm the details with legal counsel". Do not mention fines.
