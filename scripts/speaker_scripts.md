@@ -28,16 +28,16 @@ Yet most dispatchers still plan the routes once in the morning and hardly change
 Atharva will show you how our system works.
 
 ## SLIDE 3 | Atharva | 75 | One AI loop: predict, cluster, optimise, re-route, inform
-> Delivery: point to each of the five boxes on the slide as you name them. Say the India-data caveat clearly.
-Thanks Yash. RouteMind is one loop with five steps.
-One, predict: a gradient boosting model estimates travel time. On our test data its average error is {{eta_mae}} minutes, against {{eta_naive_mae}} minutes for a simple average.
-Two, cluster: k-means groups parcels into delivery zones, which helps us choose micro-hubs.
-Three, optimise: we start with the Clarke-Wright savings method and improve it with 2-opt. We also run a genetic algorithm that evolves better route orders.
-Four, re-route: when a jam or storm hits, we update travel times and move the affected stops to their cheapest new place.
-Five, inform: a GenAI copilot writes delay messages in English and Arabic.
-Reinforcement learning is our next step, and we show one learning curve in the notebook.
-One honest note: our ETA training data comes from India, so it proves the method, not Dubai truth.
-Over to Krishna for the live demo.
+> Delivery: point to each of the five boxes as you name them. Slow down on the two ETA numbers. Say the India caveat clearly.
+Thanks Yash. So how does RouteMind actually work? It is one loop with five steps.
+Step one, predict. A gradient boosting model learns how long a delivery takes from distance, time of day, traffic and weather. On deliveries it never saw, its average error is {{eta_mae}} minutes. A simple rule based only on distance misses by {{eta_naive_mae}} minutes.
+Step two, cluster. k-means groups the parcels into delivery zones, which tells us where micro-hubs and lockers make sense.
+Step three, optimise. Clarke-Wright savings builds the first routes and 2-opt cleans them up. A genetic algorithm then breeds and mutates route orders and keeps the best ones.
+Step four, re-route. When a jam or a storm hits, the plan is updated live.
+Step five, inform. A GenAI copilot tells customers about delays, in English and Arabic.
+Next on our list is reinforcement learning for urgent orders.
+One honest point: the ETA model learned from Indian delivery data. It proves the method, not Dubai numbers.
+Krishna will now show it live.
 
 ## SLIDE 4 | Krishna | 120 | Live demo: same orders, shorter routes, and a jam handled in one click
 > Delivery: click while you talk. Live link: web-rws7.vercel.app. If anything freezes, say "let me show the recording" and play deliverables/demo_90s.mp4. Never debug live.

@@ -9,4 +9,5 @@ Rules (slide 54 of the course brief): copy every prompt you type to Claude Code 
 | 2026-11-15 | engine (GA) | (no new prompt: GA built from the first prompt above) | `web/lib/engine/ga.ts` + `web/tests/ga.test.ts`, PR #10 | no |
 | 2026-11-15 | ETA model | Yes, start ETA | started the ETA notebook branch | no |
 | 2026-11-15 | ETA model | (answer to dataset question) "Allow kaggle CLI" | dataset downloaded with the Kaggle CLI; `notebook/routemind_models.ipynb`, `eta_model.json`, `eta_metrics.json`, parity fixtures | no |
+| 2026-11-15 | Slide 3 | Yes, do Slide 3 | `deck/slides/s3_atharva.js` (loop diagram, ETA card, caveat footnote), rewritten Slide 3 speaker script, rebuilt speaker PDFs | yes (loop diagram circled) |
 | 2026-11-15 | /eta page | Yes, build /eta | `web/lib/models/eta.ts` (tree evaluation, loadEta, delay risk), `web/tests/eta.test.ts`, `/eta` page | no |
