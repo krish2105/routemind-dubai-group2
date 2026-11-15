@@ -2,8 +2,11 @@
 
 | Item | Owner | State |
 |---|---|---|
-| Repo + Vercel | Krishna | not started |
-| Clarke-Wright + 2-opt | Krishna | stub |
+| Repo + Vercel | Krishna | repo live (main protected, CI green); Vercel deploy in progress |
+| Clarke-Wright + 2-opt | Krishna | done, merged (PR #1), 7 tests |
+| `/command` map + `/optimizer` | Krishna | done, merged (PR #2, #3) |
+| e2e smoke test, screenshots, 90 s video, Slide 4 | Krishna | draft done (re-capture Mon 18:30 from Vercel URL) |
+| Light/dark theme toggle | Krishna | done (light default) |
 | GA | Atharva | stub |
 | ETA model + `/eta` | Atharva | not started |
 | KPI engine, `/fleet`, `/customer`, copilot | Advait | v0 / placeholders |
@@ -14,4 +17,6 @@
 | Numbers frozen | Harsh | no |
 | Final PPTX/PDF + zip | Gagandeep, Krishna | no |
 
-Blockers: none yet.
+Blockers: Vercel URL (Krishna finishing setup); teammates need to accept GitHub invites.
+
+Last update: Sun 15 Nov, Krishna.
