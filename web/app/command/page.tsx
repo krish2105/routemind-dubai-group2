@@ -65,13 +65,8 @@ export default function CommandCenter() {
         </span>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-3">
-        <div className="min-w-0 space-y-3 lg:col-span-2">
-          <RouteMap orders={orders} hub={hub} baseline={bp} ai={ap} show={show} time={playback.time} riskFrom={show === "baseline" ? bp : ap} />
-          <TimeScrubber {...playback} marker={ev ? { at: ev.startMin, label: EVENT_LABELS[ev.type].split(" (")[0] } : undefined} />
-          <Legend />
-        </div>
-        <section className="grid min-w-0 content-start gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+      <div className="flex flex-col gap-5">
+        <section className="order-2 grid min-w-0 gap-4 sm:grid-cols-2 lg:order-1 lg:grid-cols-3">
           <KpiCard label="Cost per parcel" unit="AED" base={f(b?.costPerParcelAed, 2)} ai={f(a?.costPerParcelAed, 2)} deltaPct={d(b?.costPerParcelAed, a?.costPerParcelAed)} stub={stub} />
           <KpiCard label="Distance" unit="km" base={f(b?.km, 0)} ai={f(a?.km, 0)} deltaPct={d(b?.km, a?.km)} stub={stub} />
           <KpiCard label="Vehicles used" base={f(b?.vehiclesUsed, 0)} ai={f(a?.vehiclesUsed, 0)} deltaPct={d(b?.vehiclesUsed, a?.vehiclesUsed)} stub={stub} />
@@ -79,6 +74,11 @@ export default function CommandCenter() {
           <KpiCard label="SLA breaches" base={f(b?.slaBreaches, 0)} ai={f(a?.slaBreaches, 0)} deltaPct={d(b?.slaBreaches, a?.slaBreaches)} stub={stub} />
           <KpiCard label="CO2" unit="kg" base={f(b?.co2Kg, 0)} ai={f(a?.co2Kg, 0)} deltaPct={d(b?.co2Kg, a?.co2Kg)} stub={stub} />
         </section>
+        <div className="order-1 min-w-0 space-y-3 lg:order-2">
+          <RouteMap orders={orders} hub={hub} baseline={bp} ai={ap} show={show} time={playback.time} riskFrom={show === "baseline" ? bp : ap} />
+          <TimeScrubber {...playback} marker={ev ? { at: ev.startMin, label: EVENT_LABELS[ev.type].split(" (")[0] } : undefined} />
+          <Legend />
+        </div>
       </div>
 
       <Glass className="mt-6 p-5 text-sm text-slate-700">

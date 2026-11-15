@@ -32,10 +32,10 @@ module.exports.build = function (pres, ctx) {
   s.addText("LIVE EVENT: SHEIKH ZAYED ROAD JAM, 13:00", { x: x + 0.2, y: 3.75, w: w - 0.4, h: 0.3, fontFace: F.body, fontSize: 11, color: C.risk, charSpacing: 1, margin: 0, isTextBox: true });
   s.addText([{ text: "At-risk deliveries  ", options: { color: C.text, fontSize: 14 } }, { text: `${fz("risk_before")} → ${fz("risk_after")}`, options: { color: C.ai, bold: true, fontSize: 30 } }],
     { x: x + 0.2, y: 4.1, w: w - 0.4, h: 0.65, fontFace: F.head, margin: 0, valign: "middle", isTextBox: true });
-  s.addText("Before vs after one-click re-routing", { x: x + 0.2, y: 4.85, w: w - 0.4, h: 0.4, fontFace: F.body, fontSize: 12, color: C.muted, margin: 0, isTextBox: true });
+  s.addText("Before vs after one-click re-routing", { x: x + 0.2, y: 4.85, w: w - 0.4, h: 0.4, fontFace: F.body, fontSize: 14, color: C.muted, margin: 0, isTextBox: true });
 
   card(pres, s, x, 5.55, w, 1.0, { fill: C.panel2 });
-  s.addText("Simulated results. Baseline is an assumed nearest-neighbour method. A dispatcher can override any route.", { x: x + 0.2, y: 5.6, w: w - 0.4, h: 0.9, fontFace: F.body, fontSize: 12, color: C.text, margin: 0, valign: "middle", isTextBox: true });
+  s.addText("Simulated results. Baseline is an assumed nearest-neighbour method. A dispatcher can override any route.", { x: x + 0.2, y: 5.6, w: w - 0.4, h: 0.9, fontFace: F.body, fontSize: 14, color: C.text, margin: 0, valign: "middle", isTextBox: true });
   source(s, "Prototype built with AI assistance (Claude Code); prompts shared separately. All data synthetic or assumed.");
   s.addNotes(notesFor(4));
 };

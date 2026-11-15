@@ -10,7 +10,8 @@
     "test": "vitest run",
     "check": "npm run typecheck && npm run test && npm run build",
     "sync:frozen": "node scripts/sync-frozen.mjs",
-    "freeze": "tsx scripts/freeze.ts"
+    "freeze": "tsx scripts/freeze.ts",
+    "e2e": "playwright test demo"
   },
   "dependencies": {
     "@deck.gl/core": "^9.4.1",
@@ -40,6 +41,7 @@
     "zustand": "^5.1.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.1",
     "@types/three": "^0.187.0",
     "tsx": "^4.23.15",
     "vitest": "^5.1.0"
