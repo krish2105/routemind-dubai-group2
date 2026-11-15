@@ -55,9 +55,9 @@ Fleet utilisation rises from {{util_base}} to {{util_ai}} per cent, because fewe
 For customers, on-time delivery rises from {{ontime_base}} to {{ontime_ai}} per cent, and service-level breaches fall from {{breaches_base}} to {{breaches_ai}}. We use on-time rate and breaches as proxies. We did not measure satisfaction directly.
 We also check fairness, by measuring workload across drivers, so the AI does not overload some people.
 The copilot writes delay messages in English and Arabic. New revenue options include parcel lockers, scheduled slots and premium urgent delivery.
-Karan will cover the challenges.
+Yash will cover the challenges.
 
-## SLIDE 6 | Karan Baid | 75 | Integration is the hard part, so we plan for it
+## SLIDE 6 | Yash | 75 | Integration is the hard part, so we plan for it
 > Delivery: calm and practical. For PDPL say "we would confirm the details with legal counsel". Do not mention fines. Point at the four boxes at the bottom for the boardroom themes.
 Thanks Advait. An AI plan only helps if it fits the way the business already runs, so let me cover integration and risk.
 On integration, nothing is replaced on day one. RouteMind reads file or API exports from the transport and warehouse systems, adds traffic and weather feeds, and sends the stops to a driver app. Unclear addresses cause many failed drops, so we use Makani, Dubai's ten-digit entrance code, where we have it.
@@ -68,7 +68,7 @@ Harsh will present the plan and the business case.
 
 ## SLIDE 7 | Harsh | 75 | Recommendation: a 90-day pilot with clear go or no-go gates
 > Delivery: end with the ask, then pause and look at the audience before saying thank you.
-Thanks Karan. Our recommendation is a 90-day pilot at one hub, in three phases.
+Thanks Yash. Our recommendation is a 90-day pilot at one hub, in three phases.
 Phase one, weeks one to four: connect the data and run RouteMind in advisory mode beside the dispatchers. Phase two, weeks five to eight: dispatchers use it live for part of the fleet, with re-routing. Phase three, weeks nine to twelve: measure, compare and decide.
 The assumed pilot cost is {{pilot_cost}} dirhams. At our simulated savings, payback is about {{payback_months}} months. Even at half the savings, it is about {{payback_half}} months.
 McKinsey reports that AI in distribution can cut logistics costs by roughly 5 to 20 per cent. We compare our simulated result with that range, and we apply a haircut to be careful.
