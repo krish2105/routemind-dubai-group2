@@ -29,7 +29,8 @@ const ROUTES = {
   "/business-case": "Business Case",
   "/rl-lab": "RL Dispatch Lab",
 };
-const ERROR_MARKERS = ["Application error", "Internal Server Error", "This page could not be found", "Unhandled Runtime Error"];
+// "This page could not be found" is embedded in every page payload by Next.js, so a missing page is detected by its 404 status instead.
+const ERROR_MARKERS = ["Application error: a client-side exception", "Internal Server Error", "Unhandled Runtime Error"];
 
 let failed = 0;
 const t0 = Date.now();
