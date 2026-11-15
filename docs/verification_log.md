@@ -2,79 +2,97 @@
 
 Rule: only real command output goes here. "Passes" means it was run. Newest entries on top.
 
-## 2026-11-15 (Sun) · Yash · all Yash + Karan branches merged locally (scratch branch, not pushed)
+## 2026-11-15 (Sun, evening) · Yash · all Yash + Karan branches merged locally on top of main `76c65f9` (scratch branch, not pushed)
 
 Branches checked together: `feat/yash-setup`, `feat/yash-kmeans-charts`, `feat/yash-problem-page`, `feat/yash-zones-page`,
-`feat/yash-events-reroute`, `feat/yash-rerouting-page`, `feat/yash-integration-risk`, `feat/yash-slides-qa`, on top of `main` at `c17ea92`.
-All eight merged with no conflicts.
+`feat/yash-events-reroute`, `feat/yash-rerouting-page`, `feat/yash-integration-risk`, `feat/yash-slides-qa`.
+All were rebased onto the new main (GA, demo polish, Playwright) and merged with no conflicts
+(only the generated speaker PDFs conflicted during the rebase; rebuilt with `python tools/build_speaker_pdfs.py`).
 
 ### `cd web && npm run check` (typecheck + Vitest + next build)
 ```
- Test Files  4 passed (4)
-      Tests  35 passed (35)
-✓ Compiled successfully in 5.0s
-✓ Generating static pages using 13 workers (16/16) in 808ms
+ Test Files  5 passed (5)
+      Tests  41 passed (41)
+✓ Compiled successfully in 4.5s
 exit code 0
 ```
 
-### Vitest, verbose (35 tests)
+### Vitest, verbose (41 tests)
 ```
- ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > same seed gives the same assignment (deterministic) 12ms
- ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > every order is assigned exactly once to a valid zone, and all k zones are non-empty 22ms
- ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > silhouette is in [-1, 1] 8ms
- ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > auto-k returns k in 3..10 and picks the best silhouette it tried 23ms
+ ✓ tests/engine.test.ts > engine contracts (scaffold tests; owners add more) > same seed gives identical problems and KPIs 51ms
+ ✓ tests/engine.test.ts > engine contracts (scaffold tests; owners add more) > baseline serves each order at most once and respects capacity 12ms
+ ✓ tests/engine.test.ts > engine contracts (scaffold tests; owners add more) > order count matches the scenario and windows are inside operating hours 17ms
+ ✓ tests/engine.test.ts > engine contracts (scaffold tests; owners add more) > a jam event makes the same plan slower (events change travel time) 21ms
+ ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > same seed gives the same assignment (deterministic) 16ms
+ ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > every order is assigned exactly once to a valid zone, and all k zones are non-empty 18ms
+ ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > silhouette is in [-1, 1] 10ms
+ ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > auto-k returns k in 3..10 and picks the best silhouette it tried 12ms
  ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > each micro-hub is a real order inside its own zone (medoid nearest the centroid) 3ms
  ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > separates two obvious, hand-built clusters perfectly 1ms
  ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > silhouette matches a hand calculation on a 1-D example 0ms
- ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > zoneStats covers every order once and urgent shares are in [0, 1] 10ms
- ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > empty input does not crash 0ms
- ✓ tests/engine.test.ts > engine contracts (scaffold tests; owners add more) > same seed gives identical problems and KPIs 32ms
- ✓ tests/engine.test.ts > engine contracts (scaffold tests; owners add more) > baseline serves each order at most once and respects capacity 28ms
- ✓ tests/engine.test.ts > engine contracts (scaffold tests; owners add more) > order count matches the scenario and windows are inside operating hours 17ms
- ✓ tests/engine.test.ts > engine contracts (scaffold tests; owners add more) > a jam event makes the same plan slower (events change travel time) 15ms
- ✓ tests/engine.test.ts > engine contracts (scaffold tests; owners add more) > stub algorithms are flagged so the UI never shows fake AI results silently 1012ms
- ✓ tests/reroute.test.ts > events (assumed what-ifs) > DEMO_EVENT is the Sheikh Zayed Road jam at 13:00 for 120 min 3ms
+ ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > zoneStats covers every order once and urgent shares are in [0, 1] 5ms
+ ✓ tests/kmeans.test.ts > k-means zoning (owner: Yash) > empty input does not crash 1ms
+ ✓ tests/engine.test.ts > engine contracts (scaffold tests; owners add more) > stub algorithms are flagged so the UI never shows fake AI results silently 1079ms
+ ✓ tests/reroute.test.ts > events (assumed what-ifs) > DEMO_EVENT is the Sheikh Zayed Road jam at 13:00 for 120 min 1ms
  ✓ tests/reroute.test.ts > events (assumed what-ifs) > makeEvent accepts HH:MM or minutes and gives the same id 0ms
- ✓ tests/reroute.test.ts > events (assumed what-ifs) > multipliers come from assumptions.json; bikes feel 60% of the slow-down 2ms
+ ✓ tests/reroute.test.ts > events (assumed what-ifs) > multipliers come from assumptions.json; bikes feel 60% of the slow-down 0ms
  ✓ tests/reroute.test.ts > events (assumed what-ifs) > the jam slows a corridor leg only while it is active (hand-checked factor) 0ms
  ✓ tests/reroute.test.ts > events (assumed what-ifs) > mergeEvents drops duplicates by id 1ms
  ✓ tests/reroute.test.ts > reroute (live re-routing) > every order is served exactly once or listed unserved (nothing dropped silently) 0ms
- ✓ tests/reroute.test.ts > reroute (live re-routing) > frozen stops keep their vehicle and exact times 2ms
- ✓ tests/reroute.test.ts > reroute (live re-routing) > capacity is respected and no extra route goes over duty 0ms
- ✓ tests/reroute.test.ts > reroute (live re-routing) > is deterministic 101ms
+ ✓ tests/reroute.test.ts > reroute (live re-routing) > frozen stops keep their vehicle and exact times 4ms
+ ✓ tests/reroute.test.ts > reroute (live re-routing) > capacity is respected and no extra route goes over duty 1ms
+ ✓ tests/reroute.test.ts > reroute (live re-routing) > is deterministic 117ms
  ✓ tests/reroute.test.ts > reroute (live re-routing) > under the 13:00 SZR jam on the default seed: fewer at-risk deliveries and no more breaches 0ms
  ✓ tests/reroute.test.ts > reroute (live re-routing) > before = the morning plan re-timed (same stop order per vehicle) 0ms
- ✓ tests/reroute.test.ts > reroute (live re-routing) > urgent surge: new urgent orders are inserted, never dropped 82ms
+ ✓ tests/reroute.test.ts > reroute (live re-routing) > urgent surge: new urgent orders are inserted, never dropped 85ms
  ✓ tests/reroute.test.ts > reroute (live re-routing) > events that started earlier only act from now on (past legs are history) 0ms
- ✓ tests/reroute.test.ts > reroute (live re-routing) > before the day starts nothing is frozen; after the day ends nothing changes 1190ms
- ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > is a real solver, not the stub 2ms
- ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > serves every order once, respects capacity and duty hours (default seed) 3ms
- ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > is valid under the 13:00 Sheikh Zayed Road jam too 2ms
- ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > is deterministic: same seed, identical plan 958ms
- ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > beats the baseline on the default seed (km, cost per parcel, on-time, vehicles) 10ms
- ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > hand-check one route: distance, AED vehicle cost and CO2 match a manual calculation 2ms
+ ✓ tests/reroute.test.ts > reroute (live re-routing) > before the day starts nothing is frozen; after the day ends nothing changes 1397ms
+ ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > is a real solver, not the stub 1ms
+ ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > serves every order once, respects capacity and duty hours (default seed) 2ms
+ ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > is valid under the 13:00 Sheikh Zayed Road jam too 1ms
+ ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > is deterministic: same seed, identical plan 915ms
+ ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > beats the baseline on the default seed (km, cost per parcel, on-time, vehicles) 4ms
+ ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > hand-check one route: distance, AED vehicle cost and CO2 match a manual calculation 1ms
  ✓ tests/cw.test.ts > Clarke-Wright + 2-opt (AI plan) > runs fast enough for the browser worker 0ms
+ ✓ tests/ga.test.ts > Genetic algorithm > is real, not the stub, and fills convergence 2ms
+ ✓ tests/ga.test.ts > Genetic algorithm > serves every order exactly once, respects capacity and duty 1ms
+ ✓ tests/ga.test.ts > Genetic algorithm > convergence never goes up (elitism) 1ms
+ ✓ tests/ga.test.ts > Genetic algorithm > same seed gives the same plan 1863ms
+ ✓ tests/ga.test.ts > Genetic algorithm > costs no more than the baseline on the default seed 1ms
+ ✓ tests/ga.test.ts > Genetic algorithm > warm start is never worse than the plan passed in 1305ms
 ```
 
-### Route smoke test, production build (`npx next start -p 3001`, then `BASE_URL=http://localhost:3001 node tests/e2e/smoke.mjs`)
+### Playwright, all e2e specs (`npm run build`, then `npx playwright test`; local `next start` on :3210, Chrome)
 ```
-Smoke test against http://localhost:3001
-PASS  /               200     51 ms
-PASS  /command        200      5 ms
-PASS  /optimizer      200      5 ms
-PASS  /rerouting      200      6 ms
-PASS  /eta            200      4 ms
-PASS  /problem        200      4 ms
-PASS  /zones          200      6 ms
-PASS  /fleet          200      3 ms
-PASS  /customer       200      3 ms
-PASS  /integration    200      3 ms
-PASS  /business-case  200      3 ms
-PASS  /rl-lab         200      3 ms
-12/12 routes passed in 100 ms
+  -   1 tests\e2e\capture.spec.ts:21:1 › screenshots
+  -   2 tests\e2e\capture.spec.ts:54:1 › demo video (~90 s click path)
+  ok  4 tests\e2e\smoke.spec.ts:30:1 › landing page loads without console errors (1.6s)
+  ok  3 tests\e2e\demo.spec.ts:14:1 › landing page loads without console errors (2.0s)
+  ok  6 tests\e2e\smoke.spec.ts:40:3 › /command loads with title, SIMULATED badge and no console errors (3.4s)
+  ok  5 tests\e2e\rerouting.spec.ts:14:1 › /rerouting: SZR jam, Re-optimise, before/after, accept (7.3s)
+  ok  8 tests\e2e\smoke.spec.ts:40:3 › /optimizer loads with title, SIMULATED badge and no console errors (2.9s)
+  ok  7 tests\e2e\demo.spec.ts:22:1 › /command shows real baseline vs AI KPIs, the map and the jam scenario (8.0s)
+  ok 10 tests\e2e\smoke.spec.ts:40:3 › /rerouting loads with title, SIMULATED badge and no console errors (3.0s)
+  ok  9 tests\e2e\rerouting.spec.ts:29:1 › /rerouting: urgent surge inserts new orders (4.1s)
+  ok 11 tests\e2e\demo.spec.ts:37:1 › /optimizer runs the algorithms and fills the comparison (1.9s)
+  ok 12 tests\e2e\smoke.spec.ts:40:3 › /eta loads with title, SIMULATED badge and no console errors (2.8s)
+  ok 14 tests\e2e\smoke.spec.ts:40:3 › /problem loads with title, SIMULATED badge and no console errors (3.0s)
+  ok 15 tests\e2e\smoke.spec.ts:40:3 › /zones loads with title, SIMULATED badge and no console errors (3.2s)
+  ok 13 tests\e2e\demo.spec.ts:46:1 › every scenario re-runs the engine, and the SZR jam shows on the map at 13:30 (10.1s)
+  ok 16 tests\e2e\smoke.spec.ts:40:3 › /fleet loads with title, SIMULATED badge and no console errors (2.8s)
+  ok 17 tests\e2e\demo.spec.ts:65:1 › dark mode toggle works, persists after reload, and pages stay error-free (3.7s)
+  ok 18 tests\e2e\smoke.spec.ts:40:3 › /customer loads with title, SIMULATED badge and no console errors (2.9s)
+  ok 19 tests\e2e\demo.spec.ts:84:1 › a run can be cancelled and the next run still works (2.2s)
+  ok 20 tests\e2e\smoke.spec.ts:40:3 › /integration loads with title, SIMULATED badge and no console errors (3.0s)
+  ok 21 tests\e2e\smoke.spec.ts:40:3 › /business-case loads with title, SIMULATED badge and no console errors (2.8s)
+  ok 22 tests\e2e\smoke.spec.ts:40:3 › /rl-lab loads with title, SIMULATED badge and no console errors (2.8s)
+  ok 23 tests\e2e\smoke.spec.ts:51:1 › an unknown route returns 404 (322ms)
+  2 skipped
+  21 passed (39.7s)
 ```
-Defect found in my own test and fixed: the first run reported 12/12 FAIL because Next.js embeds "This page could not be found"
-in every page payload. A missing page is now detected by its HTTP 404 status (checked: `/does-not-exist` returns 404).
+The 2 skipped tests are Krishna's capture specs (they only run with `SHOTS=1`).
+My smoke spec replaced an earlier no-dependency script. That first version reported every route as failed because Next.js embeds the
+"This page could not be found" text in every page; a missing page is now checked by its HTTP 404 status.
 
 ### Browser checks (in-app browser, production build on :3001)
 | Route | Console errors | Notes |
@@ -86,10 +104,12 @@ in every page payload. A missing page is now detected by its HTTP 404 status (ch
 Other routes (Krishna, Gagandeep, Atharva, Advait, Harsh) passed the HTTP smoke test only; their console check is for after merge on Vercel.
 
 ### Re-routing numbers (default seed 2611, AI plan = Clarke-Wright + 2-opt, re-route at 13:00)
-`npm run freeze -- --dry-run --allow-stub` (writes nothing; GA is still a stub so `--allow-stub` is needed):
+`npm run freeze -- --dry-run` (writes nothing; GA is real now, the cheaper AI plan is still cw2opt):
 ```
   "risk_before": 23,
   "risk_after": 10,
+    "ai_algorithm": "cw2opt",
+- public/data/eta_metrics.json missing (Atharva exports it from the notebook)
 ```
 Other events (probe run in Vitest, same plan; at risk = remaining stops late or < 15 min slack, plus unplaced orders):
 
@@ -143,5 +163,5 @@ Slides 2 and 6 use only R1, R2, R13, R14 and R19 (all verified). R5 and R7 must 
 (R7 is on Harsh's slide 7 and in Q&A answer A1: flagged to Harsh).
 
 ## Still to run (Karan's QA schedule, now Yash)
-- [ ] After each merge from Mon 12:00: `BASE_URL=<vercel-url> node web/tests/e2e/smoke.mjs` and a console check on desktop and phone.
+- [ ] After each merge from Mon 12:00: `cd web && BASE_URL=<vercel-url> npx playwright test smoke rerouting` and a phone check.
 - [ ] Mon 22:00 and Tue 07:30: run `docs/11_submission_checklist.md`.
