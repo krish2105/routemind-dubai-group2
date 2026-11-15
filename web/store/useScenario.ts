@@ -16,6 +16,8 @@ import type { OptimizerApi } from "@/workers/optimizer.worker";
  *   - run(algorithms?)    : solves in the Web Worker (default ["baseline", "cw2opt"]); results are replaced
  *                           when the scenario changed since the last run, otherwise merged
  *   - setScenario(partial), toggleEvent(event), reset()
+ *   - cancel()            : stops a long run at once (terminates the worker; the next run() starts a fresh one).
+ *                           status goes back to "idle" with cancelled = true; previous results are kept
  *   - orderOverrides      : optional { time_window_min, urgent_share } used by the /optimizer order generator;
  *                           setOrderOverrides(partial); cleared by reset()
  * Baseline and AI always use the identical seeded orders.
@@ -35,6 +37,9 @@ interface State {
   orders: Order[];
   hub: Point | null;
   status: "idle" | "running" | "error";
+  /** true when the last run was stopped with cancel() */
+  cancelled: boolean;
+  cancel: () => void;
   progress?: { algorithm: AlgorithmId; index: number; total: number };
   error?: string;
   /** JSON of the scenario used for `results` (to know when results are stale) */
@@ -47,13 +52,20 @@ interface State {
   run: (algorithms?: AlgorithmId[]) => Promise<void>;
 }
 
+let worker: Worker | null = null;
 let remote: Comlink.Remote<OptimizerApi> | null = null;
 function getRemote() {
   if (!remote) {
-    const worker = new Worker(new URL("../workers/optimizer.worker.ts", import.meta.url), { type: "module" });
+    worker = new Worker(new URL("../workers/optimizer.worker.ts", import.meta.url), { type: "module" });
     remote = Comlink.wrap<OptimizerApi>(worker);
   }
   return remote;
+}
+/** Hard stop: the solver is synchronous inside the worker, so the only instant cancel is to terminate it. */
+function killWorker() {
+  worker?.terminate();
+  worker = null;
+  remote = null;
 }
 
 let runId = 0;
@@ -64,6 +76,13 @@ export const useScenario = create<State>((set, get) => ({
   orders: [],
   hub: null,
   status: "idle",
+  cancelled: false,
+  cancel: () => {
+    if (get().status !== "running") return;
+    runId++; // the pending promise is ignored when (if ever) it settles
+    killWorker();
+    set({ status: "idle", progress: undefined, cancelled: true });
+  },
   orderOverrides: {},
   setOrderOverrides: (o) => set({ orderOverrides: { ...get().orderOverrides, ...o } }),
   setScenario: (s) => set({ scenario: { ...get().scenario, ...s } }),
@@ -78,7 +97,7 @@ export const useScenario = create<State>((set, get) => ({
     const scenario = get().scenario;
     const a = withOverrides(get().orderOverrides);
     const key = JSON.stringify([scenario, get().orderOverrides]);
-    set({ status: "running", error: undefined, progress: undefined });
+    set({ status: "running", error: undefined, progress: undefined, cancelled: false });
     try {
       const out = await getRemote().run(a, scenario, algorithms, Comlink.proxy((progress: { algorithm: AlgorithmId; index: number; total: number }) => {
         if (id === runId) set({ progress });
