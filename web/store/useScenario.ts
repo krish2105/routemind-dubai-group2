@@ -16,8 +16,17 @@ import type { OptimizerApi } from "@/workers/optimizer.worker";
  *   - run(algorithms?)    : solves in the Web Worker (default ["baseline", "cw2opt"]); results are replaced
  *                           when the scenario changed since the last run, otherwise merged
  *   - setScenario(partial), toggleEvent(event), reset()
+ *   - orderOverrides      : optional { time_window_min, urgent_share } used by the /optimizer order generator;
+ *                           setOrderOverrides(partial); cleared by reset()
  * Baseline and AI always use the identical seeded orders.
  */
+export interface OrderOverrides { time_window_min?: number; urgent_share?: number }
+
+/** Assumptions with the order-generator overrides applied (all values stay ASSUMED). */
+export function withOverrides(o: OrderOverrides) {
+  return { ...assumptions, orders: { ...assumptions.orders, ...o } };
+}
+
 type Results = Partial<Record<AlgorithmId, { plan: Plan; kpis: Kpis }>>;
 
 interface State {
@@ -30,6 +39,8 @@ interface State {
   error?: string;
   /** JSON of the scenario used for `results` (to know when results are stale) */
   resultsFor?: string;
+  orderOverrides: OrderOverrides;
+  setOrderOverrides: (o: OrderOverrides) => void;
   setScenario: (s: Partial<Scenario>) => void;
   toggleEvent: (e: TrafficEvent) => void;
   reset: () => void;
@@ -53,20 +64,23 @@ export const useScenario = create<State>((set, get) => ({
   orders: [],
   hub: null,
   status: "idle",
+  orderOverrides: {},
+  setOrderOverrides: (o) => set({ orderOverrides: { ...get().orderOverrides, ...o } }),
   setScenario: (s) => set({ scenario: { ...get().scenario, ...s } }),
   toggleEvent: (e) => {
     const cur = get().scenario.events;
     const has = cur.some((x) => x.id === e.id);
     set({ scenario: { ...get().scenario, events: has ? cur.filter((x) => x.id !== e.id) : [...cur, e] } });
   },
-  reset: () => set({ scenario: defaultScenario(assumptions), results: {}, resultsFor: undefined }),
+  reset: () => set({ scenario: defaultScenario(assumptions), orderOverrides: {}, results: {}, resultsFor: undefined }),
   run: async (algorithms = ["baseline", "cw2opt"]) => {
     const id = ++runId;
     const scenario = get().scenario;
-    const key = JSON.stringify(scenario);
+    const a = withOverrides(get().orderOverrides);
+    const key = JSON.stringify([scenario, get().orderOverrides]);
     set({ status: "running", error: undefined, progress: undefined });
     try {
-      const out = await getRemote().run(assumptions, scenario, algorithms, Comlink.proxy((progress: { algorithm: AlgorithmId; index: number; total: number }) => {
+      const out = await getRemote().run(a, scenario, algorithms, Comlink.proxy((progress: { algorithm: AlgorithmId; index: number; total: number }) => {
         if (id === runId) set({ progress });
       }));
       if (id !== runId) return; // a newer run started; drop this one

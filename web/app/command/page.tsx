@@ -30,15 +30,16 @@ const PRESETS: { id: string; label: string; events: TrafficEvent[] }[] = [
 type Show = "baseline" | "ai" | "both";
 
 export default function CommandCenter() {
-  const { results, orders, hub, status, progress, run, setScenario } = useScenario();
+  const { results, orders, hub, status, progress, run, setScenario, reset } = useScenario();
   const [preset, setPreset] = useState("normal");
   const [show, setShow] = useState<Show>("both");
   const playback = usePlayback(20);
 
   useEffect(() => {
+    reset(); // the demo always uses the default seeded day (seed 2611, 300 orders, 12 vans + 8 bikes)
     setScenario({ events: PRESETS.find((p) => p.id === preset)!.events });
     void run(["baseline", "cw2opt"]);
-  }, [preset, setScenario, run]);
+  }, [preset, setScenario, run, reset]);
 
   const bp = results.baseline?.plan;
   const ap = results.cw2opt?.plan;
@@ -65,12 +66,12 @@ export default function CommandCenter() {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-3">
-        <div className="space-y-3 lg:col-span-2">
+        <div className="min-w-0 space-y-3 lg:col-span-2">
           <RouteMap orders={orders} hub={hub} baseline={bp} ai={ap} show={show} time={playback.time} riskFrom={show === "baseline" ? bp : ap} />
           <TimeScrubber {...playback} marker={ev ? { at: ev.startMin, label: EVENT_LABELS[ev.type].split(" (")[0] } : undefined} />
           <Legend />
         </div>
-        <section className="grid content-start gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+        <section className="grid min-w-0 content-start gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
           <KpiCard label="Cost per parcel" unit="AED" base={f(b?.costPerParcelAed, 2)} ai={f(a?.costPerParcelAed, 2)} deltaPct={d(b?.costPerParcelAed, a?.costPerParcelAed)} stub={stub} />
           <KpiCard label="Distance" unit="km" base={f(b?.km, 0)} ai={f(a?.km, 0)} deltaPct={d(b?.km, a?.km)} stub={stub} />
           <KpiCard label="Vehicles used" base={f(b?.vehiclesUsed, 0)} ai={f(a?.vehiclesUsed, 0)} deltaPct={d(b?.vehiclesUsed, a?.vehiclesUsed)} stub={stub} />
