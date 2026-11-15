@@ -21,7 +21,7 @@ const ALGOS: { id: AlgorithmId; label: string; note: string }[] = [
 const label = (id: AlgorithmId) => ALGOS.find((a) => a.id === id)!.label;
 
 export default function OptimizerPage() {
-  const { scenario, setScenario, orderOverrides, setOrderOverrides, results, orders, status, progress, run, reset, resultsFor } = useScenario();
+  const { scenario, setScenario, orderOverrides, setOrderOverrides, results, orders, status, progress, run, reset, resultsFor, cancel, cancelled } = useScenario();
   const [algos, setAlgos] = useState<AlgorithmId[]>(["baseline", "cw2opt"]);
   const [view, setView] = useState<AlgorithmId>("cw2opt");
   const windowMin = orderOverrides.time_window_min ?? assumptions.orders.time_window_min;
@@ -83,11 +83,16 @@ export default function OptimizerPage() {
               className="rounded-xl bg-ai px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-110 disabled:opacity-50">
               {status === "running" ? "Running…" : "Run"}
             </button>
+            {status === "running" && (
+              <button type="button" onClick={cancel}
+                className="rounded-xl border border-risk/50 px-4 py-2.5 text-sm font-medium text-risk transition hover:bg-risk/10">Cancel</button>
+            )}
             <button type="button" onClick={reset} className="rounded-xl border border-slate-900/15 px-4 py-2.5 text-sm text-fg hover:bg-slate-900/5">Reset to default day</button>
           </div>
           <p className="text-xs text-slate-500" aria-live="polite">
             {status === "running" && progress ? `Running ${label(progress.algorithm)} (${progress.index + 1}/${progress.total}) in a Web Worker…`
               : status === "error" ? "Engine error, see console."
+              : cancelled ? "Cancelled. Previous results are kept; press Run to try again."
               : stale ? "Settings changed: press Run to update." : "All algorithms see the identical seeded orders."}
           </p>
         </Glass>
