@@ -1,6 +1,6 @@
 # Submission Checklist (Tue 17 Nov 2026)
 
-## Repo and deployment (Karan checks Mon 22:00 and Tue 07:30)
+## Repo and deployment (Yash checks Mon 22:00 and Tue 07:30)
 - [ ] Vercel production URL loads `/`, `/command`, `/optimizer`, `/rerouting`, `/eta` on laptop and phone, no console errors; URL is in the PPT
 - [ ] `main` contains merged PRs from all 7 members (`python3 tools/contribution_report.py`)
 - [ ] No AI attribution in history: `git log --format=%B | grep -iE 'co-authored|claude|anthropic|generated with'` prints nothing; GitHub shows only the 7 members as contributors

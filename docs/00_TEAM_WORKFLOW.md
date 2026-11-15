@@ -11,7 +11,7 @@ Goal: a **best-prototype** submission where every member visibly owns a real par
 | **Yash** (problem + zones) | 2 | `/problem`, `/zones`, `lib/engine/kmeans.ts`, `components/charts/` (GA convergence, comparison bars) | `deck/slides/s2_yash.js`, fact-check of research rows R1, R2, Dubai pain points |
 | **Atharva** (ML) | 3 | `notebook/routemind_models.ipynb`, `lib/models/eta.ts`, `/eta`, `lib/engine/ga.ts` | `deck/slides/s3_atharva.js`, `public/data/eta_model.json` and `eta_metrics.json` |
 | **Advait** (operations) | 5 | `lib/engine/kpi.ts`, `/fleet`, `/customer`, `app/api/copilot/` | `data_seed/assumptions.json` + `docs/06`, `deck/slides/s5_advait.js` |
-| **Karan Baid** (integration + QA) | 6 | `lib/engine/reroute.ts`, `events.ts`, `/rerouting`, `/integration`, `tests/e2e/` | `docs/09_risk_register.md`, `docs/verification_log.md`, `deck/slides/s6_karan.js` |
+| **Yash** (integration + QA; took over from Karan Baid, who left on 15 Nov) | 6 | `lib/engine/reroute.ts`, `events.ts`, `/rerouting`, `/integration`, `tests/e2e/` | `docs/09_risk_register.md`, `docs/verification_log.md`, `deck/slides/s6_karan.js` |
 | **Harsh** (business case) | 7 | `lib/roi.ts`, `/business-case`, `/rl-lab`, `notebook/rl_dispatch.ipynb`, `scripts/freeze.ts` | `docs/10_roi_model.md`, number cross-check, `deck/slides/s7_harsh.js` |
 
 Shared files (`lib/types.ts`, `lib/pages.ts`, `package.json`, `tsconfig.json`, `next.config.ts`, `lib/engine/problem.ts`, `schedule.ts`, `baseline.ts`, `solve.ts`) are **contracts**. Change one only with the `contract-change` label on your PR, a message in the group chat, and Krishna's approval. Adding a dependency counts as a contract change (ask first). `lib/pages.ts`: edit only your own entries.
@@ -35,7 +35,7 @@ Shared files (`lib/types.ts`, `lib/pages.ts`, `package.json`, `tsconfig.json`, `
 | When | Milestone | Who |
 |---|---|---|
 | Sun 15 Nov 17:00 | Repo exists, all 7 cloned, `setup_git` done, first tiny PR merged (your name in `docs/contributions/<Name>.md`) | everyone |
-| Sun 15 Nov 22:00 | Engine v1 PRs: `clarkeWright`, `ga`, `kpi`, `kmeans`, `reroute`, `events` | Krishna, Atharva, Advait, Yash, Karan |
+| Sun 15 Nov 22:00 | Engine v1 PRs: `clarkeWright`, `ga`, `kpi`, `kmeans`, `reroute`, `events` | Krishna, Atharva, Advait, Yash |
 | Mon 16 Nov 10:00 | ETA model JSON merged; `/problem`, `/eta` pages in | Atharva, Yash |
 | Mon 14:00 | **Decision gate:** `/command`, `/optimizer`, `/rerouting`, `/eta` work on the Vercel URL. If not, cut Tier 3 (order in `docs/02`) | Krishna calls it |
 | Mon 16:00 | Tier 3 pages merged (`/fleet`, `/customer`, `/integration`, `/business-case`, `/zones`, `/rl-lab`); copilot works with and without key | owners |
@@ -43,8 +43,8 @@ Shared files (`lib/types.ts`, `lib/pages.ts`, `package.json`, `tsconfig.json`, `
 | Mon 18:00 | **Numbers frozen.** Rebuild speaker PDFs and deck: `npm run build:final` | Gagandeep |
 | Mon 18:30 | Screenshots + 90 s recording (Krishna), final PPTX + PDF (Gagandeep) | Krishna, Gagandeep |
 | Mon 20:00 | Rehearsal 1 with timer (call), 22:00 Rehearsal 2 | everyone |
-| Mon 22:00 | Final zip + prompt log + contribution report; Karan runs the checklist | Krishna, Karan |
-| Tue 07:30 | Final check on laptop and phone, backup PDF on USB | Karan, Krishna |
+| Mon 22:00 | Final zip + prompt log + contribution report; Yash runs the checklist | Krishna, Yash |
+| Tue 07:30 | Final check on laptop and phone, backup PDF on USB | Yash, Krishna |
 | Tue 09:30 | Present. Upload to Blackboard before 23:59 | all |
 
 ## 4. Repo setup (Krishna, 10 minutes, once)

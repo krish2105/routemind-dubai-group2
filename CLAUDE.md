@@ -28,7 +28,7 @@ Next.js (App Router) + TypeScript strict + Tailwind + Framer Motion + MapLibre G
 - Status: `docs/status.md` (update at the end of every phase)
 
 ## Team (7 slides)
-Gagandeep S1, Yash S2, Atharva S3, Krishna S4 (demo), Advait S5, Karan Baid S6, Harsh S7.
+Gagandeep S1, Yash S2, Atharva S3, Krishna S4 (demo), Advait S5, Yash S6 (Karan Baid left on 15 Nov 2026), Harsh S7.
 
 ## Style
 Simple English. Short replies. Tables where useful. No new scope after Phase 2.
