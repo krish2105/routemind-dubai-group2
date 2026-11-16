@@ -6,7 +6,6 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Glass } from "@/components/ui/Glass";
 import { Badge } from "@/components/ui/Badge";
 import { KpiCard } from "@/components/ui/KpiCard";
-import { AssumptionsButton } from "@/components/assumptions/AssumptionsDrawer";
 import { PAGES } from "@/lib/pages";
 import { buildProblem } from "@/lib/engine/problem";
 import { computeKpis, explainKpi, fuelLitres, pctChange, vehicleKpis } from "@/lib/engine/kpi";
@@ -58,7 +57,6 @@ export default function FleetPage() {
     <AppShell>
       <PageHeader page={page} />
       <div className="mb-5 flex flex-wrap items-center gap-3 text-sm text-slate-600">
-        <AssumptionsButton />
         <span aria-live="polite">
           {status === "running" ? "Optimising in a Web Worker…" : `Baseline vs AI (Clarke-Wright + 2-opt) on the same ${problem.orders.length} seeded orders (seed ${scenario.seed}).`}
         </span>

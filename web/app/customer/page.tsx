@@ -5,7 +5,6 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Glass } from "@/components/ui/Glass";
 import { Badge } from "@/components/ui/Badge";
 import { KpiCard } from "@/components/ui/KpiCard";
-import { AssumptionsButton } from "@/components/assumptions/AssumptionsDrawer";
 import { PAGES } from "@/lib/pages";
 import { buildProblem } from "@/lib/engine/problem";
 import { POINT_POOL } from "@/lib/engine/points";
@@ -139,7 +138,6 @@ export default function CustomerPage() {
     <AppShell>
       <PageHeader page={page} />
       <div className="mb-5 flex flex-wrap items-center gap-3 text-sm text-slate-600">
-        <AssumptionsButton />
         <span aria-live="polite">{status === "running" ? "Optimising in a Web Worker…" : `Same ${problem.orders.length} seeded orders (seed ${scenario.seed}) for baseline and AI.`}</span>
       </div>
 
