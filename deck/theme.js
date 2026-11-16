@@ -28,11 +28,22 @@ function card(pres, slide, x, y, w, h, opts = {}) {
   slide.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w, h, rectRadius: 0.12, fill: { color: opts.fill || C.panel }, line: { color: opts.line || C.line, width: 0.75 } });
 }
 
-/** Big number tile: label on top, number, small caption. */
+/**
+ * Font size (pt) so a one-line number fits its box: at most 40 pt, smaller for long values such as "71.4% → 84.2%"
+ * (PowerPoint does not shrink text on its own until someone edits the box, so we size it here).
+ */
+function fitSize(value, wIn, hIn, max = 40) {
+  const byHeight = Math.floor(hIn * 72 * 0.8);
+  const byWidth = Math.floor((wIn * 72) / (Math.max(String(value).length, 1) * 0.56));
+  return Math.max(18, Math.min(max, byHeight, byWidth));
+}
+
+/** Big number tile: label on top, number (auto-sized to stay on one line), small caption. */
 function stat(pres, slide, x, y, w, h, label, value, color, caption) {
   card(pres, slide, x, y, w, h);
   slide.addText(label.toUpperCase(), { x: x + 0.2, y: y + 0.15, w: w - 0.4, h: 0.3, fontFace: F.body, fontSize: 11, color: C.muted, margin: 0, charSpacing: 2, isTextBox: true });
-  slide.addText(value, { x: x + 0.2, y: y + 0.45, w: w - 0.4, h: h - 0.95, fontFace: F.head, fontSize: 40, bold: true, color, margin: 0, valign: "middle", isTextBox: true });
+  const vw = w - 0.4, vh = h - 0.95;
+  slide.addText(value, { x: x + 0.2, y: y + 0.45, w: vw, h: vh, fontFace: F.head, fontSize: fitSize(value, vw, vh), bold: true, color, margin: 0, valign: "middle", wrap: false, isTextBox: true });
   if (caption) slide.addText(caption, { x: x + 0.2, y: y + h - 0.45, w: w - 0.4, h: 0.3, fontFace: F.body, fontSize: 11, color: C.muted, margin: 0, isTextBox: true });
 }
 

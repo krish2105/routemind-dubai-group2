@@ -222,3 +222,8 @@ Build: `npm run build` + `next start` (production) on branch `feat/gagandeep-qua
 - `/command` TBT varies 1.4 to 4.3 s between runs. Most of it is "Unattributable" plus the map chunk (maplibre + deck.gl), probably WebGL start-up in headless Chrome with no GPU. Not reproduced on a real GPU laptop yet. Accessibility 96: the remaining failure is the Assumptions button (`text-base` amber 11 px on white, owner Advait); `text-base-deep` fixes it.
 - Console: all 12 routes opened in the production build at 1350x940. `read_console_messages` showed no errors and no warnings.
 - 390 px: all 12 routes had `scrollWidth = 390` (no horizontal scroll), checked in the dev server earlier the same day (PR #36).
+
+## 2026-11-16 (Mon, 10:30) · Gagandeep · deck dry run before the freeze
+`cd deck && node build_deck.js` on main `b54f82b`: 7 slides; `--strict` correctly refuses (16 numbers null). Opened in PowerPoint (COM export of every slide): notes on all 7 slides (822 to 1576 characters), no text under 10 pt.
+Layout test with **placeholder numbers** (temporary local edit of `docs/frozen_results.json`, restored, `git diff` clean, not committed): Slide 5 KPI tiles overflowed ("71.4% → 84.2%" wrapped to two lines over the labels). Fixed in `deck/theme.js` `stat()`: the value font size now fits the box (max 40 pt, one line). Re-test: no overflow on slides 1 to 7 (slide 7 benchmark text 3 pt over its width, not visible).
+Open items for owners: Slide 4 screenshot must be re-captured after the freeze so its numbers match the frozen ones (Krishna).
