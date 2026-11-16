@@ -22,6 +22,8 @@ import type { Assumptions } from "@/lib/types";
 export const HORIZON_MONTHS = 36;
 /** docs/10: sensitivity cells above this payback are flagged red (also the payback target behind the cost gate). */
 export const PAYBACK_TARGET_MONTHS = 24;
+/** Length of the pilot before roll-out (90 days). Payback is counted from roll-out, so add this for "from approval". */
+export const PILOT_MONTHS = 3;
 /** McKinsey: AI in distribution can cut logistics costs by roughly 5 to 20 % (research brief R7). Sanity range only. */
 export const BENCHMARK_PCT: readonly [number, number] = [5, 20];
 
@@ -52,7 +54,7 @@ export type RoiParam =
   | "monthlyRunningCost" | "pilotInvestment" | "workingDaysPerYear";
 
 export const PARAM_LABEL: Record<RoiParam, string> = {
-  adoptionHaircut: "Adoption (share of simulated saving kept)",
+  adoptionHaircut: "Share of simulated saving kept",
   parcelsPerDay: "Parcels per day",
   savingFactor: "Saving factor (stress test)",
   costPerKmFactor: "Cost per km (vs assumed)",
@@ -170,6 +172,19 @@ export function roi(a: Assumptions, costBase: number, costAi: number, savingFact
 
 export const withParam = (inputs: RoiInputs, param: RoiParam, value: number): RoiInputs => ({ ...inputs, [param]: value });
 
+/**
+ * Most the company can lose if it stops at the Day-90 gate: the pilot build plus running cost during the pilot.
+ * (Pilot-zone savings during those 90 days are ignored on purpose: they are small and unproven.)
+ */
+export function pilotExposure(i: Pick<RoiInputs, "pilotInvestment" | "monthlyRunningCost">): number {
+  return Math.max(0, finite(i.pilotInvestment)) + PILOT_MONTHS * Math.max(0, finite(i.monthlyRunningCost));
+}
+
+/** Payback counted from the approval date: 90-day pilot + payback after roll-out (null = no payback). */
+export function paybackFromApproval(r: Pick<RoiResult, "paybackMonths">): number | null {
+  return r.paybackMonths === null ? null : r.paybackMonths + PILOT_MONTHS;
+}
+
 /* ---------------- assumed ranges (read from the provenance block of assumptions.json) ---------------- */
 
 const PROVENANCE_KEY: Partial<Record<RoiParam, string>> = {
@@ -274,6 +289,17 @@ export const GRID_AXES: Record<"adoptionHaircut" | "savingFactor" | "costPerKmFa
   parcelsPerDay: [1000, 1500, 2000, 2500, 3000],
 };
 
+/**
+ * Inputs shown in the tornado: only real assumptions with a documented range. The saving factor is a stress-test overlay
+ * on top of the share kept (it would double-count adoption), so it is shown separately as "payback at half the savings".
+ */
+export const TORNADO_PARAMS: RoiParam[] = ["parcelsPerDay", "adoptionHaircut", "pilotInvestment", "monthlyRunningCost", "costPerKmFactor", "workingDaysPerYear"];
+
+export function tornadoRanges(a: Assumptions): Partial<Record<RoiParam, [number, number]>> {
+  const all = assumedRanges(a);
+  return Object.fromEntries(TORNADO_PARAMS.map((p) => [p, all[p]]));
+}
+
 export interface TornadoRow {
   param: RoiParam;
   low: number;
@@ -329,10 +355,11 @@ export function breakEvenSaving(inputs: RoiInputs, targetMonths = PAYBACK_TARGET
 
 /* ---------------- formatting (pages and slide use the same rules) ---------------- */
 
-/** "6.4 months", "under 1 month" or "no payback". */
+/** "6.4 months", "under 1 month", "beyond 36 months" (decimals there are noise) or "no payback". */
 export function formatPayback(m: number | null, digits = 1): string {
   if (m === null || !Number.isFinite(m)) return "no payback";
   if (m < 1) return "under 1 month";
+  if (m > HORIZON_MONTHS) return `beyond ${HORIZON_MONTHS} months`;
   return `${m.toFixed(digits)} months`;
 }
 

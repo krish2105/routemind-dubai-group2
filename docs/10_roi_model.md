@@ -31,6 +31,10 @@ net_12m, net_36m       = cumulative_cash(12), cumulative_cash(36)
 `payback_half` = the same formulas with `saving_factor = 0.5`.
 With the cost-per-km factor `f`, each cost per parcel becomes `cost + (f - 1) * km_cost` (only the km part moves).
 
+**Wording:** the haircut is the *share of the simulated saving we keep* (0.6 = we count 60 %). Say "payback 6.4 months counting 60 % of the simulated saving", never "at simulated savings".
+
+**Payback clock and exposure.** Payback is counted from **roll-out** after the 90-day pilot; from approval add 3 months (`payback_from_approval`). The pilot alone does not pay back (one zone has too little volume to cover the running cost); it buys evidence. If the board stops at the Day-90 gate the most it loses is `pilot_exposure` = pilot investment + 3 x monthly running cost. Scale-up cost beyond the running cost is not modelled (assumed: the pilot build is reused).
+
 **Simple payback, on purpose.** Full network volume from month 1, no ramp-up, no discounting, no tax. That is what the page and the slide say. The haircut and the half-savings stress test are the safety margin, and the pilot measures the real numbers before any scale-up.
 
 ## Scenarios (three cards on the page)
@@ -43,7 +47,8 @@ Only the two least certain drivers move, one step each way; costs stay as assume
 
 ## Sensitivity
 - **Heat grid** (page): payback months for rows = adoption 40, 50, 60, 70, 80, 100 % (or saving factor 0.5 / 0.75 / 1.0, or cost per km 70 to 140 %) and columns = parcels per day 1,000 to 3,000. Cells above **24 months** are red, "no payback" is red.
-- **Tornado** (page): payback at the low and high end of every input's assumed range, one input at a time, biggest swing first.
+- **Tornado** (page): payback at the low and high end of every input's assumed range, one input at a time, biggest swing first. The saving factor is left out (it is a stress test on top of the share kept and would double-count it); it appears as "payback at half the savings".
+- Paybacks above 36 months are shown as "beyond 36 months" (the decimal is noise there).
 
 ## Cost gate for Day 90 (go/no-go)
 Inverting the payback formula gives the **real** saving per parcel the pilot must show for a 24-month payback at the assumed volume and running cost:

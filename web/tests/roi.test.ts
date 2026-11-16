@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { assumptions } from "@/lib/assumptions";
 import {
-  GRID_AXES, HORIZON_MONTHS, assumedRanges, breakEvenSaving, computeRoi, formatAed, formatPayback, parseRange,
-  roi, roiInputs, scenarios, sensitivityGrid, tornado, withParam, type RoiInputs,
+  GRID_AXES, HORIZON_MONTHS, TORNADO_PARAMS, assumedRanges, breakEvenSaving, computeRoi, formatAed, formatPayback, parseRange,
+  paybackFromApproval, pilotExposure, roi, roiInputs, scenarios, sensitivityGrid, tornado, tornadoRanges, withParam, type RoiInputs,
 } from "@/lib/roi";
 
 /** Hand-checkable inputs (round numbers, not the frozen run). */
@@ -144,9 +144,22 @@ describe("ROI model (owner: Harsh, docs/10_roi_model.md)", () => {
     expect(parseRange("n/a")).toBeNull();
     expect(formatPayback(6.44)).toBe("6.4 months");
     expect(formatPayback(0.5)).toBe("under 1 month");
+    expect(formatPayback(53.1)).toBe("beyond 36 months");
     expect(formatAed(420_000)).toBe("AED 420,000");
     expect(formatAed(-420_000, true)).toBe("-AED 420k");
     expect(formatAed(2_667_000, true)).toBe("AED 2.7M");
+  });
+
+  it("caps the exposure at the pilot build plus 90 days of running cost, and counts payback from approval", () => {
+    expect(pilotExposure(HAND)).toBe(420_000 + 3 * 38_000);
+    expect(paybackFromApproval(computeRoi(HAND))!).toBeCloseTo(4.898 + 3, 3);
+    expect(paybackFromApproval({ paybackMonths: null })).toBeNull();
+  });
+
+  it("keeps the saving-factor stress test out of the tornado (it would double-count adoption)", () => {
+    const r = tornadoRanges(assumptions);
+    expect(Object.keys(r).sort()).toEqual([...TORNADO_PARAMS].sort());
+    expect(r.savingFactor).toBeUndefined();
   });
 
   it("uses the assumptions.json business case when building inputs", () => {
