@@ -205,3 +205,20 @@ Slides 2 and 6 use only R1, R2, R13, R14 and R19 (all verified). R5 and R7 must 
 ## Still to run (Karan's QA schedule, now Yash)
 - [ ] After each merge from Mon 12:00: `cd web && BASE_URL=<vercel-url> npx playwright test smoke rerouting` and a phone check.
 - [ ] Mon 22:00 and Tue 07:30: run `docs/11_submission_checklist.md`.
+
+## 2026-11-16 (Mon) · Gagandeep · Lighthouse and console pass (task 4.3)
+Build: `npm run build` + `next start` (production) on branch `feat/gagandeep-quality` (my PRs #33, #34, #36, #38 stacked on main `b6c5471`; base commit `250d184`). Lighthouse 12, `--preset=desktop`, headless Chrome, localhost.
+
+| Page | Run | Performance | Accessibility | Best practices | LCP | TBT | CLS |
+|---|---|---|---|---|---|---|---|
+| `/` | 1 | 98 | 100 | 100 | | | |
+| `/` | 2 (after fixes) | 95 | 100 | 100 | 0.7 s | 180 ms | 0 |
+| `/command` | 1 | 47 | 96 | 100 | 1.4 s | 1,950 ms | 0.264 |
+| `/command` | 2 (after my fixes) | 49 | 96 | 100 | 1.4 s | 1,380 ms | 0.264 |
+| `/command` | 3 (local test of Krishna's one-line fix, reverted) | 59 | 96 | 100 | 1.0 s | 4,340 ms | 0 |
+
+- Fixed in my files: `bg-ai text-white` buttons failed AA contrast, so they now use the deep teal (`globals.css`); after the fix the Play button and scenario pills no longer fail. `KpiCard` keeps its delta line height before results arrive (prevents a shift on slower runs).
+- `/command` CLS 0.264: measured in the browser with a layout-shift observer at 615 ms. The status text next to the scenario pills wraps to a second line while "Optimising in a Web Worker…" shows, then the shorter "Same 300 seeded orders…" text fits on one line and the KPI grid and map jump up 32 px. Giving that span `basis-full` (its own line) gave CLS 0 in run 3. Owner: Krishna (`app/command/page.tsx`).
+- `/command` TBT varies 1.4 to 4.3 s between runs. Most of it is "Unattributable" plus the map chunk (maplibre + deck.gl), probably WebGL start-up in headless Chrome with no GPU. Not reproduced on a real GPU laptop yet. Accessibility 96: the remaining failure is the Assumptions button (`text-base` amber 11 px on white, owner Advait); `text-base-deep` fixes it.
+- Console: all 12 routes opened in the production build at 1350x940. `read_console_messages` showed no errors and no warnings.
+- 390 px: all 12 routes had `scrollWidth = 390` (no horizontal scroll), checked in the dev server earlier the same day (PR #36).

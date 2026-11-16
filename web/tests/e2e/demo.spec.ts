@@ -109,3 +109,13 @@ test("copilot drafts EN + AR for the most-late order without an API key", async 
   await expect(page.getByText(/مرحباً/)).toBeVisible();
   expect(errors).toEqual([]);
 });
+
+test("dark mode: landing buttons have readable (dark) backgrounds", async ({ page }) => {
+  await page.goto("/");
+  await page.evaluate(() => { localStorage.setItem("rm-theme", "dark"); });
+  await page.reload();
+  const bg = await page.getByRole("link", { name: /business case/i }).first().evaluate((el) => getComputedStyle(el).backgroundColor);
+  // must not be a light/white surface in dark mode
+  const [r, g, b] = (bg.match(/\d+(\.\d+)?/g) ?? []).map(Number);
+  expect(r + g + b).toBeLessThan(200);
+});

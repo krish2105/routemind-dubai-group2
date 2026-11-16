@@ -14,6 +14,8 @@
   --color-ai: #0891b2;
   --color-ai-deep: #0e7490;
   --color-base: #d97706;
+  /* darker amber for small text and for white-on-amber pills (AA contrast); use text-base-deep / bg-base-deep */
+  --color-base-deep: #b45309;
   --color-risk: #dc2626;
   --color-ok: #059669;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -41,6 +43,19 @@ body {
   backdrop-filter: blur(14px);
   box-shadow: 0 10px 34px -14px rgba(15, 40, 80, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
+/* loading placeholder shimmer (components/ui/Skeleton.tsx) */
+.skeleton {
+  background: linear-gradient(90deg, rgba(15, 40, 80, 0.06) 25%, rgba(15, 40, 80, 0.11) 50%, rgba(15, 40, 80, 0.06) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+@keyframes skeleton-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
+
+/* text on a filled accent (bg-ai-deep, bg-base-deep): white in light mode, navy in dark mode */
+.on-accent { color: #ffffff; }
+/* white text on the light teal fails AA (3.7:1); any `bg-ai text-white` button uses the deeper teal (5.4:1) in light mode */
+html:not([data-theme="dark"]) .bg-ai.text-white { background-color: var(--color-ai-deep); }
 .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
 .text-gradient {
   background: linear-gradient(100deg, #0e7490 0%, #0891b2 50%, #0ea5a4 100%);
@@ -57,6 +72,7 @@ html[data-theme="dark"] {
   --color-ai: #22d3ee;
   --color-ai-deep: #06b6d4;
   --color-base: #f59e0b;
+  --color-base-deep: #f59e0b;
   --color-risk: #f87171;
   --color-ok: #34d399;
   /* secondary text and hairlines flip so existing slate-* classes stay readable */
@@ -79,8 +95,17 @@ html[data-theme="dark"] .glass {
 /* white surfaces become navy panels (text-white on the teal button is untouched) */
 html[data-theme="dark"] .bg-white { background-color: #14283f; }
 html[data-theme="dark"] .bg-white\/70 { background-color: rgba(11, 27, 46, 0.7); }
+html[data-theme="dark"] .bg-white\/80 { background-color: rgba(11, 27, 46, 0.8); }
+html[data-theme="dark"] .bg-white\/90 { background-color: rgba(11, 27, 46, 0.9); }
 html[data-theme="dark"] .hover\:bg-white:hover { background-color: #1f3a57; }
 html[data-theme="dark"] .text-gradient {
   background-image: linear-gradient(100deg, #22d3ee 0%, #67e8f9 50%, #5eead4 100%);
 }
 html[data-theme="dark"] .bg-ai.text-white { color: #07111f; }
+html[data-theme="dark"] .on-accent { color: #07111f; }
+html[data-theme="dark"] .skeleton { background-image: linear-gradient(90deg, rgba(148, 163, 184, 0.10) 25%, rgba(148, 163, 184, 0.18) 50%, rgba(148, 163, 184, 0.10) 75%); }
+
+/* respect reduced motion for CSS transitions too (Framer Motion handles its own via MotionConfig) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

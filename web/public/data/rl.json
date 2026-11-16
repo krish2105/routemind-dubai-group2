@@ -1,0 +1,402 @@
+{
+  "_comment": "Illustrative, small simulation. Written by notebook/rl_dispatch.ipynb (Restart & Run All). Fictional company, assumed costs. Not part of docs/frozen_results.json and not quoted on any slide as a result.",
+  "generated_by": "notebook/rl_dispatch.ipynb",
+  "assumptions_version": "2026-11-15",
+  "setup": {
+    "pool": {
+      "van": 2,
+      "bike": 3
+    },
+    "urgent_orders_per_day": 30,
+    "surge_day_share": 0.25,
+    "surge_orders": 25,
+    "window_min": 60,
+    "defer_min": 10,
+    "max_defers": 3,
+    "force_slack_min": 15,
+    "radius_km": 15,
+    "states": 108,
+    "actions": [
+      "van",
+      "bike",
+      "defer"
+    ],
+    "alpha": 0.05,
+    "epsilon": [
+      1.0,
+      0.05
+    ],
+    "train_days": [
+      1,
+      3000
+    ],
+    "validation_days": [
+      5001,
+      5030
+    ],
+    "test_days": [
+      10001,
+      10200
+    ],
+    "agent_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "costs": {
+      "van_aed_per_km": 0.85,
+      "bike_aed_per_km": 0.35,
+      "driver_aed_per_hour": 28,
+      "sla_penalty_aed": 15
+    }
+  },
+  "learning_curve": [
+    {
+      "episode": 1,
+      "q_median": 53.25,
+      "q_min": 48.17,
+      "q_max": 57.15
+    },
+    {
+      "episode": 100,
+      "q_median": 44.41,
+      "q_min": 42.52,
+      "q_max": 44.64
+    },
+    {
+      "episode": 200,
+      "q_median": 42.78,
+      "q_min": 42.49,
+      "q_max": 43.54
+    },
+    {
+      "episode": 300,
+      "q_median": 40.35,
+      "q_min": 38.35,
+      "q_max": 41.95
+    },
+    {
+      "episode": 400,
+      "q_median": 39.29,
+      "q_min": 38.54,
+      "q_max": 40.72
+    },
+    {
+      "episode": 500,
+      "q_median": 39.05,
+      "q_min": 38.91,
+      "q_max": 39.97
+    },
+    {
+      "episode": 600,
+      "q_median": 38.56,
+      "q_min": 38.28,
+      "q_max": 39.24
+    },
+    {
+      "episode": 700,
+      "q_median": 37.6,
+      "q_min": 36.98,
+      "q_max": 37.94
+    },
+    {
+      "episode": 800,
+      "q_median": 38.06,
+      "q_min": 37.17,
+      "q_max": 38.72
+    },
+    {
+      "episode": 900,
+      "q_median": 37.53,
+      "q_min": 37.25,
+      "q_max": 38.14
+    },
+    {
+      "episode": 1000,
+      "q_median": 37.48,
+      "q_min": 37.13,
+      "q_max": 37.76
+    },
+    {
+      "episode": 1100,
+      "q_median": 37.24,
+      "q_min": 37.02,
+      "q_max": 38.36
+    },
+    {
+      "episode": 1200,
+      "q_median": 37.08,
+      "q_min": 36.9,
+      "q_max": 39.03
+    },
+    {
+      "episode": 1300,
+      "q_median": 37.0,
+      "q_min": 36.85,
+      "q_max": 37.45
+    },
+    {
+      "episode": 1400,
+      "q_median": 37.09,
+      "q_min": 36.71,
+      "q_max": 37.35
+    },
+    {
+      "episode": 1500,
+      "q_median": 36.95,
+      "q_min": 36.54,
+      "q_max": 38.71
+    },
+    {
+      "episode": 1600,
+      "q_median": 36.91,
+      "q_min": 36.88,
+      "q_max": 37.08
+    },
+    {
+      "episode": 1700,
+      "q_median": 36.2,
+      "q_min": 35.91,
+      "q_max": 36.73
+    },
+    {
+      "episode": 1800,
+      "q_median": 36.3,
+      "q_min": 35.94,
+      "q_max": 36.56
+    },
+    {
+      "episode": 1900,
+      "q_median": 35.94,
+      "q_min": 35.83,
+      "q_max": 36.55
+    },
+    {
+      "episode": 2000,
+      "q_median": 36.07,
+      "q_min": 35.83,
+      "q_max": 36.23
+    },
+    {
+      "episode": 2100,
+      "q_median": 35.99,
+      "q_min": 35.83,
+      "q_max": 36.66
+    },
+    {
+      "episode": 2200,
+      "q_median": 36.2,
+      "q_min": 35.88,
+      "q_max": 36.82
+    },
+    {
+      "episode": 2300,
+      "q_median": 35.93,
+      "q_min": 35.72,
+      "q_max": 36.51
+    },
+    {
+      "episode": 2400,
+      "q_median": 36.22,
+      "q_min": 35.73,
+      "q_max": 36.3
+    },
+    {
+      "episode": 2500,
+      "q_median": 36.29,
+      "q_min": 35.8,
+      "q_max": 36.76
+    },
+    {
+      "episode": 2600,
+      "q_median": 35.81,
+      "q_min": 35.67,
+      "q_max": 36.29
+    },
+    {
+      "episode": 2700,
+      "q_median": 35.77,
+      "q_min": 35.49,
+      "q_max": 37.72
+    },
+    {
+      "episode": 2800,
+      "q_median": 35.92,
+      "q_min": 35.77,
+      "q_max": 36.62
+    },
+    {
+      "episode": 2900,
+      "q_median": 36.2,
+      "q_min": 35.82,
+      "q_max": 36.22
+    },
+    {
+      "episode": 3000,
+      "q_median": 35.81,
+      "q_min": 35.53,
+      "q_max": 36.29
+    }
+  ],
+  "reference": {
+    "greedy_validation": 37.83,
+    "myopic_validation": 35.21
+  },
+  "test": {
+    "greedy": {
+      "cost_per_order": 38.26,
+      "ci95": [
+        37.38,
+        39.16
+      ],
+      "on_time_pct": 72.1,
+      "van_share_pct": 36.5,
+      "defers_per_order": 0.0,
+      "km_per_order": 24.98,
+      "split_per_order": {
+        "km_cost": 13.21,
+        "drv_cost": 20.86,
+        "sla_cost": 4.19
+      }
+    },
+    "myopic": {
+      "cost_per_order": 35.45,
+      "ci95": [
+        34.69,
+        36.19
+      ],
+      "on_time_pct": 71.0,
+      "van_share_pct": 18.4,
+      "defers_per_order": 0.0,
+      "km_per_order": 24.97,
+      "split_per_order": {
+        "km_cost": 10.52,
+        "drv_cost": 20.58,
+        "sla_cost": 4.36
+      }
+    },
+    "random": {
+      "cost_per_order": 42.61,
+      "ci95": [
+        41.86,
+        43.36
+      ],
+      "on_time_pct": 58.5,
+      "van_share_pct": 50.1,
+      "defers_per_order": 0.48,
+      "km_per_order": 25.05,
+      "split_per_order": {
+        "km_cost": 15.14,
+        "drv_cost": 21.24,
+        "sla_cost": 6.23
+      }
+    },
+    "q_learning": {
+      "cost_per_order": 35.71,
+      "ci95": [
+        34.99,
+        36.46
+      ],
+      "on_time_pct": 67.5,
+      "van_share_pct": 16.9,
+      "defers_per_order": 0.49,
+      "km_per_order": 25.39,
+      "split_per_order": {
+        "km_cost": 9.96,
+        "drv_cost": 20.87,
+        "sla_cost": 4.88
+      }
+    }
+  },
+  "q_learning_runs_test": [
+    35.64,
+    35.64,
+    35.71,
+    35.79,
+    36.0
+  ],
+  "paired": {
+    "greedy": {
+      "mean_diff_aed": -2.55,
+      "ci95": [
+        -2.82,
+        -2.28
+      ],
+      "days_cheaper_pct": 88.5
+    },
+    "myopic": {
+      "mean_diff_aed": 0.26,
+      "ci95": [
+        0.11,
+        0.41
+      ],
+      "days_cheaper_pct": 40.0
+    }
+  },
+  "policy": [
+    {
+      "slack": "25-45 min",
+      "bike": "bike free now",
+      "visits": 7387,
+      "share_pct": {
+        "van": 21.4,
+        "bike": 14.4,
+        "defer": 64.2
+      }
+    },
+    {
+      "slack": "25-45 min",
+      "bike": "bike free within 10 min",
+      "visits": 2469,
+      "share_pct": {
+        "van": 23.6,
+        "bike": 50.5,
+        "defer": 25.9
+      }
+    },
+    {
+      "slack": "25-45 min",
+      "bike": "no bike within 10 min",
+      "visits": 20128,
+      "share_pct": {
+        "van": 3.5,
+        "bike": 23.1,
+        "defer": 73.4
+      }
+    },
+    {
+      "slack": "> 45 min",
+      "bike": "bike free now",
+      "visits": 76276,
+      "share_pct": {
+        "van": 6.0,
+        "bike": 94.0,
+        "defer": 0.0
+      }
+    },
+    {
+      "slack": "> 45 min",
+      "bike": "bike free within 10 min",
+      "visits": 11411,
+      "share_pct": {
+        "van": 2.8,
+        "bike": 74.7,
+        "defer": 22.5
+      }
+    },
+    {
+      "slack": "> 45 min",
+      "bike": "no bike within 10 min",
+      "visits": 57649,
+      "share_pct": {
+        "van": 27.4,
+        "bike": 21.2,
+        "defer": 51.4
+      }
+    }
+  ],
+  "verdict_code": "beats_greedy_only",
+  "verdict": "On 200 held-out simulated days, Q-learning costs 35.71 AED per urgent order vs 38.26 for nearest-vehicle greedy (cheaper, 95% CI of the difference -2.82 to -2.28) and 35.45 for a simple cost-aware rule (more expensive, CI +0.11 to +0.41). It mostly rediscovers the cost-aware rule (send a bike unless it would be late) and does not beat it: sequential learning adds little at this scale."
+}
