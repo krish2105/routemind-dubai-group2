@@ -85,12 +85,15 @@ if (Math.abs(costPct - ((costBase - costAi) / costBase) * 100) > 0.1) problems.p
 function dubaiNow(): string {
   return new Date(Date.now() + 4 * 3600_000).toISOString().replace(/\.\d+Z$/, "+04:00");
 }
+const git = (cmd: string) => execSync(cmd, { cwd: resolve(__dirname, "../.."), stdio: ["ignore", "pipe", "ignore"] }).toString().trim();
 function commit(): string {
   try {
-    const sha = execSync("git rev-parse --short HEAD", { stdio: ["ignore", "pipe", "ignore"] }).toString().trim();
-    const dirty = execSync("git status --porcelain", { stdio: ["ignore", "pipe", "ignore"] }).toString().trim() ? "+dirty" : "";
-    return sha + dirty;
+    return git("git rev-parse HEAD") + (git("git status --porcelain") ? "+dirty" : "");
   } catch { return "unknown"; }
+}
+/** Uncommitted changes in anything that feeds the numbers make a freeze unreproducible: refuse (real run only). */
+function engineDirty(): string {
+  try { return git("git status --porcelain -- web/lib web/scripts web/public/data data_seed"); } catch { return ""; }
 }
 
 const frozen = {
@@ -161,6 +164,10 @@ const claims: [boolean, string][] = [
   [f.ontime_ai >= f.ontime_base, "ontime_ai must be >= ontime_base"],
   [f.util_ai >= f.util_base, "util_ai must be >= util_base (slides say lift utilisation)"],
   [eta === null || eta.mae < eta.naive_mae, "ETA model must beat the naive rule"],
+  // Slide 7 claims in words
+  [f.saving_pct_kept >= 5 && f.saving_pct_kept <= 20, "saving_pct_kept must sit inside the 5 to 20% McKinsey range (Slide 7 says 'inside that range')"],
+  [f.payback_half === null || f.payback_half > PAYBACK_TARGET_MONTHS, "payback_half must be above 24 months (Slide 7 says 'too slow, so we gate')"],
+  [f.payback_months !== null && f.payback_months < PAYBACK_TARGET_MONTHS, "payback_months must be under 24 months"],
 ];
 for (const [ok, msg] of claims) if (!ok) problems.push(`direction check failed: ${msg}`);
 
@@ -173,6 +180,10 @@ console.log(`\nchecks: ${claims.filter(([ok]) => ok).length}/${claims.length} di
 if (problems.length) {
   console.error("\nPROBLEMS:\n- " + problems.join("\n- "));
   if (!allowStub) { console.error("\nNothing written."); process.exit(1); }
+}
+if (!dry && !allowStub && engineDirty()) {
+  console.error("\nUncommitted changes in web/lib, web/scripts, web/public/data or data_seed: commit or stash them, then freeze from a clean origin/main checkout.\n" + engineDirty() + "\nNothing written.");
+  process.exit(1);
 }
 if (!dry && !allowStub) {
   const json = JSON.stringify(frozen, null, 2) + "\n";

@@ -6,16 +6,32 @@ Rule for answers: short, honest, one number if possible. If you do not know, say
 
 | # | Question | Short answer |
 |---|---|---|
-| 1 | Is your baseline realistic? | It is an assumed nearest-neighbour method that mimics manual morning planning. A stronger baseline would shrink the saving, which is why we compare against the 5 to 20% McKinsey range (R7) and say the result is simulated. |
-| 2 | Are these savings real? | They are simulated on seeded, assumed data. They show the decision logic works. The 90-day pilot exists to measure real savings before scaling. |
-| 3 | What does it cost and when does it pay back? | Assumed pilot AED {{pilot_cost}}; payback {{payback_months}} months at demo savings, {{payback_half}} months at half the savings. |
+| 1 | Is your baseline realistic? | It is an assumed nearest-neighbour method that mimics manual morning planning, so the simulated {{cost_pct}}% cut is optimistic. That is why we count only {{share_kept_pct}}% of it ({{saving_pct_kept}}% of cost per parcel), which sits inside the 5 to 20% cut in logistics costs McKinsey reports for AI in distribution (R7, checked 16 Nov), and why the pilot measures against a control zone. |
+| 2 | Are these savings real? | They are simulated on seeded, assumed data. They show the decision logic works. They become cash only through fewer vans and shifts or growth without new hires. The 90-day pilot exists to measure real savings before scaling. |
+| 3 | What does it cost and when does it pay back? | Assumed pilot AED {{pilot_cost}}, all-in for 90 days; then AED 38,000 a month to run. Counting {{share_kept_pct}}% of the simulated saving, payback is {{payback_months}} months after roll-out ({{payback_from_approval}} months from approval); at half the saving {{payback_half}} months, which is why we gate. |
 | 4 | What if the AI is wrong? | A dispatcher can override any route, and the manual plan is the fallback. We track on-time rate and breaches as go/no-go gates. |
 | 5 | How does it connect to our systems? | Start with file or API exports from the TMS/WMS, add a driver app and traffic/weather feeds, use Makani for address accuracy (R13). Integrate step by step. |
 | 6 | How do you protect customer data? | Minimise personal data, use consent, follow UAE PDPL (in force since 2 Jan 2022, R19); no personal data in the demo. We would confirm executive-regulation status with counsel. |
 | 7 | Will drivers accept it? | Co-design with drivers, keep workload fair (we measure it), respect heat rules (R14), and keep a human override. |
 | 8 | What is your edge over existing route tools? | One loop: ETA prediction, live re-routing on events, and customer messaging, built around Dubai conditions. |
 | 9 | How does this cut carbon? | Fewer km means less fuel and CO2; an EV-share option shows more. UPS reports about 100,000 t of CO2 avoided a year with ORION (R4). Our CO2 factors are assumed. |
-| 10 | What happens next if we approve? | A 90-day pilot at one hub with go/no-go gates on cost per parcel, on-time rate, driver adoption and zero privacy incidents; then scale. |
+| 10 | What happens next if we approve? | A 90-day pilot at one hub: connect the data (days 0 to 30), shadow the dispatchers (days 31 to 60), live on one zone next to a control zone (days 61 to 90). We scale only if all five gates pass: cost per parcel down at least {{gate_cost_pct}}%, km down, on-time up, at least 70% of AI routes used (proposed target), zero safety or privacy incidents. |
+
+## F. Business case follow-ups (owner: Harsh)
+Numbers: read them from the filled `docs/results_template.md` after the freeze (the double-brace names below are the keys in `docs/frozen_results.json`).
+
+| Question | Short answer |
+|---|---|
+| Does the pilot itself pay back? | No, and it is not meant to. One zone has too little volume to cover the running cost. The pilot buys evidence; payback starts at roll-out ({{parcels_per_day}} parcels a day, assumed). |
+| What is the most we can lose? | The all-in pilot budget, AED {{pilot_cost}}, if the Day-90 gate says stop. Scale-up waits for the gate. |
+| Why does half the saving take {{payback_half}} months, not double {{payback_months}}? | The AED 38,000 monthly running cost is fixed. Halve the gross saving and the net monthly benefit falls by much more than half. That is why the cost gate is a real cut of at least {{gate_cost_pct}}%, not "any improvement". |
+| What has to be true for this to work? | A real cut in cost per parcel of at least {{gate_cost_pct}}% at the planned volume gives payback within 24 months. Below that, we stop. |
+| Worst case? | Conservative scenario (40% of the saving kept, 1,000 parcels a day): payback beyond 36 months. That is the case the gate catches. |
+| Your cost cut and your rounded costs differ by a tenth of a point? | {{cost_pct}}% is on unrounded engine costs; from the rounded AED {{cost_base_aed}} and {{cost_ai_aed}} you get a tenth less. Payback is computed from the rounded costs so anyone can recheck it. |
+| NPV or discounting? | Simple payback, no discount rate assumed. At a few months it barely matters; at two or three years it would, which is another reason for the gate. |
+| How do you know the saving is the AI and not the season? | A control zone keeps today's planning in the same weeks; the pilot (Dec to Feb) likely overlaps Ramadan, so we compare like with like. |
+| What does the scale-up cost? | Not in this case (assumed: the pilot build is reused). We bring a costed scale-up plan to the gate review with real data. |
+| Does reinforcement learning beat your rules? | Not yet. In our small simulation it beat nearest-vehicle dispatch by about AED 2.55 per urgent order but was slightly worse than a simple cost-aware rule, because it optimises the same per-order cost with less information. Learning how one dispatch affects the next orders is the next step, and it needs pilot data (`/rl-lab`). |
 
 ## B. Likely peer and lecturer (viva) questions
 

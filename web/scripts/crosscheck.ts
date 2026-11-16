@@ -21,6 +21,8 @@ const args = process.argv.slice(2);
 const frozenPath = args.includes("--frozen") ? resolve(process.cwd(), args[args.indexOf("--frozen") + 1]) : resolve(ROOT, "docs/frozen_results.json");
 const frozen = JSON.parse(readFileSync(frozenPath, "utf8")) as Record<string, unknown>;
 const assumptionsRaw = JSON.parse(readFileSync(resolve(ROOT, "data_seed/assumptions.json"), "utf8"));
+const webAssumptions = JSON.parse(readFileSync(resolve(ROOT, "web/public/data/assumptions.json"), "utf8"));
+const assumptionsInSync = JSON.stringify(assumptionsRaw) === JSON.stringify(webAssumptions);
 const brief = readFileSync(resolve(ROOT, "docs/04_research_brief.md"), "utf8");
 const verification = readFileSync(resolve(ROOT, "docs/verification_log.md"), "utf8");
 
@@ -166,6 +168,7 @@ const tokens = new Set(hits.filter((h) => h.kind === "TOKEN").map((h) => h.text)
 console.log(`\nTokens used and present (${tokens.size}): ${[...tokens].sort().join(", ")}`);
 const unused = Object.keys(frozen).filter((k) => !k.startsWith("_") && !["frozen_at", "seed"].includes(k) && !tokens.has(k));
 console.log(`Frozen keys not used by slides, scripts or Q&A (fine if used by pages): ${unused.join(", ") || "none"}`);
-const fail = count("MISSING") + count("NULL") + count("BYPASS");
+if (!assumptionsInSync) console.log("\nPROBLEM: data_seed/assumptions.json and web/public/data/assumptions.json differ (the freeze reads the web copy).");
+const fail = count("MISSING") + count("NULL") + count("BYPASS") + count("UNVERIFIED") + (assumptionsInSync ? 0 : 1);
 console.log(fail ? `\nRESULT: ${fail} problem(s) to fix.` : "\nRESULT: every token resolves and no frozen result is typed by hand.");
 process.exit(fail ? 1 : 0);
