@@ -16,6 +16,7 @@
     "force_slack_min": 15,
     "radius_km": 15,
     "states": 108,
+    "reachable_states": 72,
     "actions": [
       "van",
       "bike",
@@ -259,7 +260,9 @@
         "km_cost": 13.21,
         "drv_cost": 20.86,
         "sla_cost": 4.19
-      }
+      },
+      "on_time_normal_pct": 90.3,
+      "on_time_surge_pct": 36.8
     },
     "myopic": {
       "cost_per_order": 35.45,
@@ -275,7 +278,9 @@
         "km_cost": 10.52,
         "drv_cost": 20.58,
         "sla_cost": 4.36
-      }
+      },
+      "on_time_normal_pct": 85.3,
+      "on_time_surge_pct": 43.2
     },
     "random": {
       "cost_per_order": 42.61,
@@ -291,7 +296,9 @@
         "km_cost": 15.14,
         "drv_cost": 21.24,
         "sla_cost": 6.23
-      }
+      },
+      "on_time_normal_pct": 71.3,
+      "on_time_surge_pct": 33.6
     },
     "q_learning": {
       "cost_per_order": 35.71,
@@ -307,7 +314,27 @@
         "km_cost": 9.96,
         "drv_cost": 20.87,
         "sla_cost": 4.88
-      }
+      },
+      "on_time_normal_pct": 80.7,
+      "on_time_surge_pct": 42.0
+    },
+    "q_no_wait": {
+      "cost_per_order": 35.84,
+      "ci95": [
+        35.1,
+        36.6
+      ],
+      "on_time_pct": 67.5,
+      "van_share_pct": 18.1,
+      "defers_per_order": 0.0,
+      "km_per_order": 25.37,
+      "split_per_order": {
+        "km_cost": 10.09,
+        "drv_cost": 20.88,
+        "sla_cost": 4.88
+      },
+      "on_time_normal_pct": 80.9,
+      "on_time_surge_pct": 41.7
     }
   },
   "q_learning_runs_test": [
@@ -397,6 +424,9 @@
       }
     }
   ],
+  "policy_note": "indicative: in many states the action values are within 1 to 3 AED of each other (near-ties)",
+  "waiting_worth_aed": 0.13,
+  "surge_test_days": 44,
   "verdict_code": "beats_greedy_only",
-  "verdict": "On 200 held-out simulated days, Q-learning costs 35.71 AED per urgent order vs 38.26 for nearest-vehicle greedy (cheaper, 95% CI of the difference -2.82 to -2.28) and 35.45 for a simple cost-aware rule (more expensive, CI +0.11 to +0.41). It mostly rediscovers the cost-aware rule (send a bike unless it would be late) and does not beat it: sequential learning adds little at this scale."
+  "verdict": "On 200 held-out simulated days, Q-learning costs 35.71 AED per urgent order vs 38.26 for nearest-vehicle greedy (cheaper, 95% CI of the difference -2.82 to -2.28) and 35.45 for a simple cost-aware rule (more expensive, CI +0.11 to +0.41). It learns roughly the cost-aware rule (send a motorbike unless it would be late) but cannot beat it: with per-order rewards it optimises the same cost as the rule with less information (4 buckets instead of exact arrival times). The knock-on effect of one dispatch on later orders is not modelled yet."
 }
