@@ -2,6 +2,33 @@
 
 Rule: only real command output goes here. "Passes" means it was run. Newest entries on top.
 
+## 2026-11-16 (Mon, after the freeze) · Harsh · real freeze verified, cross-check on the frozen file, results sheet
+
+Krishna ran the real freeze (#48, `frozen_at` 2026-11-16T10:17:03+04:00, `ai_algorithm` cw2opt) with the extended `freeze.ts` from #46.
+
+### Real freeze vs my dry run (python check on `origin/main`)
+```
+token differences vs my dry run: none
+docs and web copies identical: True
+nulls: []
+```
+
+### `cd web && npx tsx scripts/crosscheck.ts` (on docs/frozen_results.json)
+```
+220 numbers and tokens scanned · MISSING 0 · NULL 0 · BYPASS 0 · UNVERIFIED 0 · REVIEW 3 · ASSUMED 23 · SOURCED 53 · TOKEN 85 · TIMING 56
+RESULT: every token resolves and no frozen result is typed by hand.
+```
+The 3 REVIEW items are the "at least 70% of AI routes used" gate on Slide 7 and in Q&A A10: a proposed target (not in assumptions.json), labelled "proposed target" on the slide and on `/business-case`.
+
+### Other checks on the frozen numbers
+- `npx vitest run tests/roi.test.ts` → `Tests 15 passed (15)`: the frozen-reproduction test now runs (payback 6.4, half 30.9, annual net 782,000, cost gate 7.6 recomputed from the frozen 2-decimal costs).
+- `npx tsx scripts/fill-results.ts --write` → `docs/results_template.md` filled from the frozen file; it first re-ran the seeded engine and confirmed it reproduces `cost_pct`, `km_pct` and `ontime_ai`.
+- `cd deck && node build_deck.js --strict` → `wrote ... (7 slides)` (no missing numbers). PPTX not committed (Gagandeep assembles the final deck).
+- `python3 tools/build_speaker_pdfs.py` → slide 7 Harsh 156 words 1:17 vs 1:15 ok (only my PDF and the combined PDF committed).
+- `/business-case` (local dev server, 1440x900): reads the frozen costs, shows "matches Slide 7", payback 6.4, net/year AED 782k.
+
+Still open for owners: the Slide 4 screenshot shows the SZR-jam scenario (see the entry below); recapture on "Normal day" (Krishna).
+
 ## 2026-11-16 (Mon, 10:10) · Harsh · freeze dry run, number cross-check, R7 checked by hand
 
 Branch `feat/harsh-freeze` (extended `web/scripts/freeze.ts` + new `web/scripts/crosscheck.ts`). **Dry run only: nothing frozen yet** (real run Mon 17:00 with Krishna and Advait).
@@ -29,10 +56,10 @@ RESULT: every token resolves and no frozen result is typed by hand.
 ```
 The 6 UNVERIFIED hits were all the McKinsey "5 to 20%" (R7) on Slide 7, the Slide 7 script and Q&A A1. Resolved below by a manual check.
 
-### Research row checked by hand
+### Research row checked in a browser
 | Row | Result | What the source says |
 |---|---|---|
-| R7 | verified by hand (Harsh, 16 Nov 2026, in-app browser; the automated fetch had timed out) | McKinsey Distribution blog, 15 Nov 2024 (Oca, Panikkar, Sampat, Brown): embedding AI in operations can cut distributors' logistics costs by 5 to 20% (with inventory and procurement ranges alongside). The link now redirects to `/industries/industrials/our-insights/distribution-blog/...`. Say "distributors' logistics costs". |
+| R7 | verified (16 Nov 2026, page opened in the Claude Code in-app browser during Harsh's session; the automated fetch had timed out. Yash: please update row 7 in `docs/04` section 7a) | McKinsey Distribution blog, 15 Nov 2024 (Oca, Panikkar, Sampat, Brown): embedding AI in operations can cut distributors' logistics costs by 5 to 20% (with inventory and procurement ranges alongside). The link now redirects to `/industries/industrials/our-insights/distribution-blog/...`. Say "distributors' logistics costs". |
 
 ### Mismatches for owners (not edited by me)
 | Where | Owner | Finding | Suggested fix |
