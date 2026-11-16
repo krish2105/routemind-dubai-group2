@@ -14,9 +14,9 @@
 | ROI, `/business-case`, `/rl-lab`, freeze script | Harsh | done (PR #37, #42, #43, #44, #46) |
 | Landing + design system, Slide 1 | Gagandeep | done (PR #33 to #40) |
 | Numbers frozen | Harsh + Krishna | **done** Mon 16 Nov 10:17 Dubai (PR #48): 9/9 direction checks, 0 nulls, crosscheck clean |
-| Slide 7 deck + script | Harsh | open |
-| Final PPTX/PDF | Gagandeep | open (after the slide/script work) |
-| Final zip + Blackboard | Krishna | open (rehearsed; upload before 23:59) |
+| Slide 7 deck + script | Harsh | done (PR #51) |
+| Final PPTX/PDF | Gagandeep | **done** (PR #52): 7 slides + notes, frozen numbers |
+| Final zip + Blackboard | Krishna | zip built and tested Mon 10:45 (`dist/`); **Blackboard upload by Krishna before 23:59** |
 
 ## Decision gate (Mon 16 Nov)
 All pages (`/command`, `/optimizer`, `/rerouting`, `/eta`, `/fleet`, `/customer`, `/integration`, `/business-case`, `/zones`, `/problem`, `/rl-lab`) are real and pass the live smoke test. **Nothing cut.**
