@@ -10,8 +10,8 @@ All inputs are **assumed** (see `06_assumptions_table.md`, "Business case inputs
 | `cost_base` = baseline cost per parcel (AED) | from the frozen run | simulated (engine) |
 | `cost_ai` = AI cost per parcel (AED) | from the frozen run | simulated (engine) |
 | km part of each cost per parcel (AED) | from the frozen run | simulated (`costBreakdown` in `kpi.ts`), only for the cost-per-km what-if |
-| `pilot_investment` | AED 420,000 | assumed (range 300,000 to 600,000) |
-| `monthly_running_cost` | AED 38,000 | assumed (range 25,000 to 60,000) |
+| `pilot_investment` | AED 420,000 | assumed (range 300,000 to 600,000); all-in 90-day pilot budget |
+| `monthly_running_cost` | AED 38,000 | assumed (range 25,000 to 60,000); from roll-out |
 | `parcels_per_day` (scaled network) | 1,500 | assumed (range 1,000 to 3,000) |
 | `working_days_per_year` | 330 | assumed (range 300 to 350) |
 | `haircut` = adoption haircut | 0.6 | assumed (range 0.4 to 0.8): real savings are assumed lower than simulated savings |
@@ -33,7 +33,7 @@ With the cost-per-km factor `f`, each cost per parcel becomes `cost + (f - 1) * 
 
 **Wording:** the haircut is the *share of the simulated saving we keep* (0.6 = we count 60 %). Say "payback 6.4 months counting 60 % of the simulated saving", never "at simulated savings".
 
-**Payback clock and exposure.** Payback is counted from **roll-out** after the 90-day pilot; from approval add 3 months (`payback_from_approval`). The pilot alone does not pay back (one zone has too little volume to cover the running cost); it buys evidence. If the board stops at the Day-90 gate the most it loses is `pilot_exposure` = pilot investment + 3 x monthly running cost. Scale-up cost beyond the running cost is not modelled (assumed: the pilot build is reused).
+**Payback clock and exposure.** Payback is counted from **roll-out** after the 90-day pilot; from approval add 3 months (`payback_from_approval`). The pilot alone does not pay back (one zone has too little volume to cover the running cost); it buys evidence. The AED 420,000 pilot investment is the **all-in** 90-day budget (build, integration, training and running the pilot zone); the AED 38,000 a month starts at roll-out. So one basis holds everywhere: if the board stops at the Day-90 gate the most it loses is `pilot_exposure` = the pilot investment, and the same figure is month 0 of the cash chart and the numerator of payback. Scale-up cost beyond the running cost is not modelled (assumed: the pilot build is reused).
 
 **Simple payback, on purpose.** Full network volume from month 1, no ramp-up, no discounting, no tax. That is what the page and the slide say. The haircut and the half-savings stress test are the safety margin, and the pilot measures the real numbers before any scale-up.
 
