@@ -41,6 +41,12 @@ test("screenshots", async ({ page }) => {
         if (el) window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 16);
       });
     }
+    if (url === "/rerouting") {
+      const go = page.getByRole("button", { name: "3 · Re-optimise" });
+      await go.waitFor({ timeout: 30_000 });
+      await go.click();
+      await page.getByRole("button", { name: "Accept" }).waitFor({ timeout: 60_000 }); // results are in
+    }
     if (url === "/optimizer") {
       await page.getByRole("checkbox").nth(2).check(); // GA too
       await page.getByRole("button", { name: "Run" }).click();
@@ -78,7 +84,10 @@ test("demo video (~90 s click path)", async ({ browser }) => {
   await page.mouse.wheel(0, 700);
   await page.waitForTimeout(8000);
   await page.goto("/rerouting");
-  await settle(page, 12_000);
+  await settle(page, 4000);
+  await page.getByRole("button", { name: "3 · Re-optimise" }).click();
+  await page.getByRole("button", { name: "Accept" }).waitFor({ timeout: 60_000 });
+  await page.waitForTimeout(8000); // at-risk before -> after on screen
   const video = page.video();
   await ctx.close();
   if (video) {
