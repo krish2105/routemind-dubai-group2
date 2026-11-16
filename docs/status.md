@@ -10,7 +10,7 @@
 | GA, ETA model, `/eta`, Slide 3 | Atharva | done (PR #10, #19, #20, #22) |
 | KPI engine, `/fleet`, `/customer`, copilot EN/AR, Slide 5 | Advait | done (PR #25 to #30) |
 | k-means, `/problem`, `/zones`, charts, Slide 2 | Yash | done (PR #12, #14, #15, #18) |
-| Re-routing, `/rerouting`, `/integration`, QA, Slide 6 | Yash (Karan left 15 Nov) | done (PR #13, #16, #17, #18) |
+| Re-routing, `/rerouting`, `/integration`, QA, Slide 6 | Built by Yash while Karan was away; **Karan presents Slide 6** | done (PR #13, #16, #17, #18) |
 | ROI, `/business-case`, `/rl-lab`, freeze script | Harsh | done (PR #37, #42, #43, #44, #46) |
 | Landing + design system, Slide 1 | Gagandeep | done (PR #33 to #40) |
 | Numbers frozen | Harsh + Krishna | **done** Mon 16 Nov 10:17 Dubai (PR #48): 9/9 direction checks, 0 nulls, crosscheck clean |
@@ -24,6 +24,6 @@ All pages (`/command`, `/optimizer`, `/rerouting`, `/eta`, `/fleet`, `/customer`
 ## Frozen headline numbers (simulated, assumed data)
 Cost per parcel -23.5% (AED 17.79 to 13.62), km -12.2%, 2 fewer vans, at-risk in the 13:00 SZR jam 23 to 10, on-time 83.7% to 98.3%, SLA breaches 49 to 5, ETA MAE 17.5 vs 39.6 min naive, pilot AED 420,000, payback 6.4 months (30.9 at half the savings).
 
-Team change: Karan Baid left on 15 Nov; Yash presents Slide 6.
+Team change: Karan Baid was away 15 to 16 Nov and is back; he presents Slide 6 again (Yash presents Slide 2 only). Yash is credited for building the Slide 6 content.
 
 Last update: Mon 16 Nov, Krishna.

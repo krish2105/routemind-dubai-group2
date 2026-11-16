@@ -145,7 +145,7 @@ tools/            Repo setup, speaker PDFs, submission zip, prompt log and contr
 | 3 | Atharva | ETA model (notebook + browser), `/eta`, genetic algorithm |
 | 4 | Krishna Mathur | Repo, CI and Vercel; Clarke-Wright + 2-opt optimiser; `/command` and `/optimizer`; demo video; integration |
 | 5 | Advait | KPI engine, `/fleet`, `/customer`, GenAI copilot (EN/AR), assumptions |
-| 6 | Yash | Live re-routing, `/rerouting`, `/integration`, risk register, QA (took over after a member left) |
+| 6 | Karan Baid (presents) | Presents integration and risk. The re-routing engine, `/rerouting`, `/integration`, risk register and QA were built by Yash while Karan was away |
 | 7 | Harsh | ROI model, `/business-case`, RL lab, number freeze |
 
 Contribution notes: [`docs/contributions/`](docs/contributions/) · report from git history: [`docs/contribution_report.md`](docs/contribution_report.md).

@@ -10,7 +10,7 @@ Everyone works in Claude Code on **their own** task. One shared GitHub repo, `ma
 | Atharva | 3 | `prompts/members/03_Atharva.md` | ETA model + `/eta`, genetic algorithm |
 | Krishna | 4 | `prompts/members/04_Krishna.md` | repo + Vercel, Clarke-Wright + 2-opt, `/command` map, `/optimizer`, demo, final zip |
 | Advait | 5 | `prompts/members/05_Advait.md` | KPI engine, `/fleet`, `/customer` + GenAI copilot (EN/AR), assumptions |
-| Yash (took over from Karan Baid, who left on 15 Nov) | 6 | `prompts/members/06_Karan.md` | live re-routing, `/rerouting`, `/integration`, risk register, QA |
+| Karan Baid (back 16 Nov; Slide 6 content built by Yash while he was away) | 6 | `prompts/members/06_Karan.md` | live re-routing, `/rerouting`, `/integration`, risk register, QA |
 | Harsh | 7 | `prompts/members/07_Harsh.md` | ROI + `/business-case`, RL lab, **number freeze**, closing slide |
 
 ## Step 1: Krishna creates the repo (Sunday, 20 minutes)

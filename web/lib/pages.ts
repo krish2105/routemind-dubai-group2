@@ -39,7 +39,7 @@ export const PAGES: PageInfo[] = [
   { href: "/customer", title: "Customer & SLA", short: "Customer", owner: "Advait", slide: 5, tier: 3, question: "Q7",
     meaning: "On-time rate and breaches are our proxies for customer satisfaction.",
     todo: ["On-time %, breaches", "Copilot: English and Arabic delay messages", "Dispatcher shift summary"] },
-  { href: "/integration", title: "Integration & Risk", short: "Integration", owner: "Yash", slide: 6, tier: 3, question: "Q5",
+  { href: "/integration", title: "Integration & Risk", short: "Integration", owner: "Karan", slide: 6, tier: 3, question: "Q5",
     meaning: "AI only pays off if it plugs into existing systems with a safe fallback.",
     todo: ["Architecture view (TMS/WMS, driver app, APIs, Makani)", "Risk to fallback table", "Human-override flow"] },
   { href: "/business-case", title: "Business Case & Pilot", short: "Business case", owner: "Harsh", slide: 7, tier: 3, question: "Slide 7",
