@@ -66,11 +66,12 @@ For workers, the scheduler respects the UAE midday break from 15 June to 15 Sept
 For the business, zone lockers and paid slots open new revenue, and robots and EV charging can plug in later.
 Harsh will present the plan and the business case.
 
-## SLIDE 7 | Harsh | 75 | Recommendation: a 90-day pilot with clear go or no-go gates
-> Delivery: end with the ask, then pause and look at the audience before saying thank you.
-Thanks Yash. Our recommendation is a 90-day pilot at one hub, in three phases.
-Phase one, weeks one to four: connect the data and run RouteMind in advisory mode beside the dispatchers. Phase two, weeks five to eight: dispatchers use it live for part of the fleet, with re-routing. Phase three, weeks nine to twelve: measure, compare and decide.
-The assumed pilot cost is {{pilot_cost}} dirhams. At our simulated savings, payback is about {{payback_months}} months. Even at half the savings, it is about {{payback_half}} months.
-McKinsey reports that AI in distribution can cut logistics costs by roughly 5 to 20 per cent. We compare our simulated result with that range, and we apply a haircut to be careful.
-We set go or no-go gates: cost per parcel, on-time rate, driver adoption, and zero privacy incidents.
-Our ask today: approve the pilot. [PAUSE] Thank you. We are happy to take your questions.
+## SLIDE 7 | Harsh | 75 | A capped pilot tests the payback before we scale
+> Delivery: slow and calm on the three numbers. Point at the roadmap on the CUE, at the gate tile on "gate". End with the ask, hold eye contact through the pause, then the closing line.
+Thanks Yash. Here is how we prove it, at low risk.
+One decision today: a 90-day pilot at one hub, {{pilot_cost}} dirhams, all-in.
+[CUE: point to the roadmap] We connect the data, run RouteMind in shadow mode beside our dispatchers, then live on one zone.
+Counting only {{share_kept_pct}} per cent of the simulated saving, payback is about {{payback_months}} months after roll-out. At half the saving it is {{payback_half}} months. Too slow, so we gate the money.
+On day 90 we scale only if real cost per parcel is down at least {{gate_cost_pct}} per cent, service is better, dispatchers use the routes, and there are no safety or privacy incidents. If not, we stop, and the pilot is all we lose.
+So please approve the pilot, name a sponsor, and keep the first of March for the gate review. [PAUSE]
+Next time Sheikh Zayed Road jams at noon, our van has already re-routed, and the customer heard it from us first. Thank you.
