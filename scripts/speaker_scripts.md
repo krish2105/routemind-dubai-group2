@@ -14,8 +14,8 @@ Total target: 9:15 of speaking, leaving 45 seconds for handovers inside the 10 m
 > Delivery: smile, slow start, look at the audience. Hand over by name to Yash.
 Good morning everyone. [PAUSE] Imagine you order a parcel in Dubai at nine in the morning, promised by two in the afternoon. By noon, a jam on Sheikh Zayed Road or a sandstorm has changed everything, and nobody tells you.
 Last-mile delivery is the most expensive part of the journey. Statista reports it at about 53 per cent of total shipping cost, worldwide.
-Our group asked one question: can AI fix this? Our answer is RouteMind Dubai. It is one AI loop that predicts delays, plans the routes, re-plans live, and informs the customer.
-On a simulated courier day, it cuts cost per parcel by {{cost_pct}} per cent and needs {{vans_fewer}} fewer vans. We will show how, what it means for the business, and the 90-day pilot we recommend.
+Our answer is RouteMind Dubai. It is one AI loop that predicts delays, plans the routes, re-plans live, and informs the customer.
+On a simulated courier day, it cuts cost per parcel by {{cost_pct}} per cent and needs {{vans_fewer}} fewer vans. Today we ask you to approve a 90-day pilot. We will show you why.
 Over to Yash for the problem.
 
 ## SLIDE 2 | Yash | 75 | Costs are rising in a fast-growing, hard-to-deliver market
