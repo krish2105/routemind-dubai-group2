@@ -10,16 +10,19 @@ import { Glass } from "@/components/ui/Glass";
  */
 
 /** Numbered section heading, same pattern as the /problem page. */
-export function Section({ n, title, kicker, children, id }: { n: number; title: string; kicker: string; children: ReactNode; id?: string }) {
+export function Section({ n, title, kicker, children, id, aside }: { n: number; title: string; kicker?: string; children: ReactNode; id?: string; aside?: ReactNode }) {
   return (
-    <section className="mb-10" aria-labelledby={id}>
+    <section className="mb-8" aria-labelledby={id}>
       <Reveal>
-        <div className="mb-4 flex items-baseline gap-3">
-          <span className="num text-sm text-ai">0{n}</span>
-          <div>
-            <h2 id={id} className="text-xl font-semibold tracking-tight text-fg sm:text-2xl">{title}</h2>
-            <p className="text-sm text-slate-500">{kicker}</p>
+        <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+          <div className="flex items-baseline gap-3">
+            <span className="num text-sm text-ai">0{n}</span>
+            <div>
+              <h2 id={id} className="text-xl font-semibold tracking-tight text-fg sm:text-2xl">{title}</h2>
+              {kicker && <p className="text-sm text-slate-500">{kicker}</p>}
+            </div>
           </div>
+          {aside}
         </div>
       </Reveal>
       {children}

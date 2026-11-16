@@ -27,10 +27,10 @@ export interface GateNumbers {
 export function gateRows(g: GateNumbers) {
   const n = (v: number | null, d = 1) => (v === null ? "…" : pct(v, d));
   return [
-    { gate: "Cost per parcel", rule: `down at least ${n(g.costGatePct)}`, why: `the real cut that still pays back within 24 months at ${g.parcelsPerDay.toLocaleString("en-US")} parcels a day${g.costShareOfSimulated === null ? "" : ` (${pct(g.costShareOfSimulated * 100)} of the simulated cut)`}`, sim: `simulated: down ${n(g.simCostPct)}`, kind: "model" },
+    { gate: "Cost per parcel", rule: `down at least ${n(g.costGatePct)}`, why: `the real cut that still pays back within 24 months at ${g.parcelsPerDay.toLocaleString("en-US")} parcels a day (recomputed with the volume seen in the pilot)${g.costShareOfSimulated === null ? "" : ` (${pct(g.costShareOfSimulated * 100)} of the simulated cut)`}`, sim: `simulated: down ${n(g.simCostPct)}`, kind: "model" },
     { gate: "km per parcel", rule: "down vs the control zone", why: "fewer km is where the cost and CO2 saving comes from", sim: `simulated: down ${n(g.simKmPct)}`, kind: "direction" },
     { gate: "On-time rate", rule: "up vs the control zone", why: "customers must not pay for the saving", sim: `simulated: ${n(g.onTimeBase)} → ${n(g.onTimeAi)}`, kind: "direction" },
-    { gate: "Dispatcher acceptance", rule: "at least 70% of AI routes used", why: "adoption is the biggest risk; overrides are logged and reviewed", sim: "target (assumed)", kind: "assumed" },
+    { gate: "Dispatcher acceptance", rule: "at least 70% of AI routes used", why: "adoption is the biggest risk; overrides are logged and reviewed", sim: "proposed target, sponsor confirms on Day 0", kind: "assumed" },
     { gate: "Safety and privacy", rule: "zero incidents", why: "heat rule respected (R14), personal data minimised (UAE PDPL, R19)", sim: "hard stop", kind: "hard" },
   ] as const;
 }
@@ -77,9 +77,19 @@ export function PilotRoadmap({ gates, pilot, exposure }: { gates: GateNumbers; p
       </ol>
 
       {/* gates */}
-      <Glass className="overflow-x-auto p-5">
+      <Glass className="p-5">
         <h3 className="text-sm font-semibold uppercase tracking-widest text-slate-500">Go/no-go gates at Day 90 (all five must pass to scale)</h3>
-        <table className="mt-3 w-full min-w-[620px] text-left text-sm">
+        <ul className="mt-3 space-y-3 md:hidden">
+          {rows.map((r) => (
+            <li key={r.gate} className="rounded-xl border border-slate-900/10 bg-white/60 p-3 text-sm">
+              <div className="font-medium text-fg"><span aria-hidden className="mr-1.5 inline-block h-2.5 w-2.5 rounded-full border-2 border-ai align-middle" />{r.gate}</div>
+              <div className="num mt-1 text-ai">{r.rule}</div>
+              <div className="mt-1 text-xs text-slate-600">{r.why}</div>
+              <div className="num mt-1 text-[11px] text-slate-500">{r.sim}</div>
+            </li>
+          ))}
+        </ul>
+        <table className="mt-3 hidden w-full text-left text-sm md:table">
           <thead className="text-[11px] uppercase tracking-wider text-slate-500">
             <tr><th className="py-1 pr-3 font-medium">Gate</th><th className="pr-3 font-medium">Pass if</th><th className="pr-3 font-medium">Why this threshold</th><th className="font-medium">Reference</th></tr>
           </thead>
@@ -103,7 +113,7 @@ export function PilotRoadmap({ gates, pilot, exposure }: { gates: GateNumbers; p
           <div className="max-w-2xl">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-ai">The decision we ask for today</h3>
             <ol className="mt-3 space-y-1.5 text-sm text-slate-700">
-              <li><span className="num mr-2 text-ai">1</span><strong className="text-fg">Approve the 90-day pilot</strong> at one hub: <span className="num">{aed(pilot)}</span> build, integration and training (assumed).</li>
+              <li><span className="num mr-2 text-ai">1</span><strong className="text-fg">Approve the 90-day pilot</strong> at one hub: <span className="num">{aed(pilot)}</span> all-in (build, integration, training, running; assumed).</li>
               <li><span className="num mr-2 text-ai">2</span><strong className="text-fg">Name an executive sponsor</strong>: we suggest the COO, who owns dispatch.</li>
               <li><span className="num mr-2 text-ai">3</span><strong className="text-fg">Open the data</strong>: TMS/WMS exports and one pilot zone plus one control zone.</li>
               <li><span className="num mr-2 text-ai">4</span><strong className="text-fg">Book the gate review</strong>: proposed start 1 Dec 2026, Day-90 review 1 Mar 2027.</li>
@@ -112,7 +122,7 @@ export function PilotRoadmap({ gates, pilot, exposure }: { gates: GateNumbers; p
           <div className="rounded-2xl bg-paper-2 p-4 text-sm">
             <div className="text-[11px] uppercase tracking-widest text-slate-500">Most you can lose</div>
             <div className="num mt-1 text-2xl font-semibold text-fg">{aed(exposure)}</div>
-            <div className="mt-1 max-w-56 text-xs text-slate-500">pilot build + 90 days of running cost, if the gate says stop. Scaling waits for the gate.</div>
+            <div className="mt-1 max-w-56 text-xs text-slate-500">the all-in pilot budget, if the gate says stop. Scaling waits for the gate.</div>
           </div>
         </div>
       </Glass>

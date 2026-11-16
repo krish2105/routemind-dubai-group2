@@ -254,7 +254,7 @@ export function scenarioDefs(a: Assumptions): ScenarioDef[] {
   const b = a.business_case;
   return [
     { id: "conservative", label: "Conservative", note: "low adoption, lower volume", overrides: { adoptionHaircut: adLo, parcelsPerDay: b.parcels_per_day - SCENARIO_VOLUME_STEP } },
-    { id: "base", label: "Base", note: "assumptions.json defaults", overrides: {} },
+    { id: "base", label: "Base", note: "assumed defaults · Slide 7", overrides: {} },
     { id: "optimistic", label: "Optimistic", note: "high adoption, higher volume", overrides: { adoptionHaircut: adHi, parcelsPerDay: b.parcels_per_day + SCENARIO_VOLUME_STEP } },
   ];
 }
