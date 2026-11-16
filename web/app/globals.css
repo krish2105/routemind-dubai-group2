@@ -54,6 +54,8 @@ body {
 
 /* text on a filled accent (bg-ai-deep, bg-base-deep): white in light mode, navy in dark mode */
 .on-accent { color: #ffffff; }
+/* white text on the light teal fails AA (3.7:1); any `bg-ai text-white` button uses the deeper teal (5.4:1) in light mode */
+html:not([data-theme="dark"]) .bg-ai.text-white { background-color: var(--color-ai-deep); }
 .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
 .text-gradient {
   background: linear-gradient(100deg, #0e7490 0%, #0891b2 50%, #0ea5a4 100%);
