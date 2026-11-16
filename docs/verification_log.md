@@ -2,6 +2,46 @@
 
 Rule: only real command output goes here. "Passes" means it was run. Newest entries on top.
 
+## 2026-11-16 (Mon, 10:10) · Harsh · freeze dry run, number cross-check, R7 checked by hand
+
+Branch `feat/harsh-freeze` (extended `web/scripts/freeze.ts` + new `web/scripts/crosscheck.ts`). **Dry run only: nothing frozen yet** (real run Mon 17:00 with Krishna and Advait).
+
+### `cd web && npm run freeze -- --dry-run` (key lines)
+```
+  "cost_pct": 23.5,  "km_pct": 12.2,  "vans_fewer": 2,  "risk_before": 23,  "risk_after": 10,
+  "rr_breaches_before": 4,  "rr_breaches_after": 4,  "util_base": 77.9,  "util_ai": 92.8,  "co2_pct": 13.5,
+  "ontime_base": 83.7,  "ontime_ai": 98.3,  "breaches_base": 49,  "breaches_ai": 5,
+  "eta_mae": 17.5,  "eta_naive_mae": 39.6,  "eta_gain_pct": 55.8,
+  "pilot_cost": 420000,  "cost_base_aed": 17.79,  "cost_ai_aed": 13.62,  "saving_pct_kept": 14.1,
+  "payback_months": 6.4,  "payback_half": 30.9,  "payback_from_approval": 9.4,  "annual_net_saving": 782000,
+  "net_36m": 1927000,  "gate_cost_pct": 7.6,  "ai_algorithm": "cw2opt",  "ga_total_cost": 4150 (CW 4085)
+checks: 9/9 direction claims hold; 0 null tokens; AI plan cw2opt (GA total 4150 AED vs CW 4085 AED)
+Dry run: nothing written.
+```
+New in the freeze: refuses unless the AI plan is cw2opt (the pages show cw2opt), counts `vans_fewer` by vehicle type (baseline 12 vans + 2 bikes, AI 10 vans + 2 bikes), checks every direction the slides state in words, refuses on any null token, writes both copies and compares them, `frozen_at` in Dubai time, commit hash in `_meta`.
+`payback_half` is 30.9 (not 30.8 as in earlier dry runs) because ROI tokens are now computed from the frozen 2-decimal costs (17.79, 13.62), so a calculator, `/business-case` and Slide 7 agree. `cost_pct` stays on unrounded costs (23.5, same as the live demo); the freeze checks the two stay within 0.1 point.
+
+### `cd web && npx tsx scripts/crosscheck.ts --frozen <dry-run json>`
+```
+167 numbers and tokens scanned · MISSING 0 · NULL 0 · BYPASS 0 · UNVERIFIED 6 · REVIEW 0 · ASSUMED 16 · SOURCED 48 · TOKEN 59 · TIMING 38
+Tokens used and present (17): breaches_ai, breaches_base, co2_pct, cost_pct, eta_mae, eta_naive_mae, km_pct, ontime_ai, ontime_base, payback_half, payback_months, pilot_cost, risk_after, risk_before, util_ai, util_base, vans_fewer
+RESULT: every token resolves and no frozen result is typed by hand.
+```
+The 6 UNVERIFIED hits were all the McKinsey "5 to 20%" (R7) on Slide 7, the Slide 7 script and Q&A A1. Resolved below by a manual check.
+
+### Research row checked by hand
+| Row | Result | What the source says |
+|---|---|---|
+| R7 | verified by hand (Harsh, 16 Nov 2026, in-app browser; the automated fetch had timed out) | McKinsey Distribution blog, 15 Nov 2024 (Oca, Panikkar, Sampat, Brown): embedding AI in operations can cut distributors' logistics costs by 5 to 20% (with inventory and procurement ranges alongside). The link now redirects to `/industries/industrials/our-insights/distribution-blog/...`. Say "distributors' logistics costs". |
+
+### Mismatches for owners (not edited by me)
+| Where | Owner | Finding | Suggested fix |
+|---|---|---|---|
+| `deliverables/screenshots/01_command.png` (used on Slide 4) | Krishna | Screenshot shows the **SZR jam 13:00** scenario: cost −22.5%, km −8.9%, on-time 83.3 → 99.3, breaches 50 → 2. Slide 4 text uses the normal-day frozen numbers (23.5%, 12.2%, 83.7 → 98.3, 49 → 5). | Recapture on "Normal day" after the freeze (capture spec) or caption the shot "SZR jam scenario". |
+| `docs/08_qa_prep.md` A3, E1 | Harsh / Yash | `{{tokens}}` in the Q&A sheet are not filled by any tool. | Use the filled `docs/results_template.md` as the Q&A number sheet after the freeze. |
+| `deck/slides/s3_atharva.js:40` | Atharva | "% lower error" is computed from rounded tokens (56%); `/eta` shows 55.8%. Same after rounding, so not wrong. | Optional: use the new frozen token `eta_gain_pct` (55.8). |
+| `data_seed/assumptions.json` provenance of `business_case.pilot_investment_aed` | Advait | Business case treats the AED 420,000 pilot as the all-in 90-day budget (build, integration, training, running the pilot zone). | Add "all-in" to the reason text. |
+
 ## 2026-11-15 (Sun, evening) · Yash · all Yash + Karan branches merged locally on top of main `76c65f9` (scratch branch, not pushed)
 
 Branches checked together: `feat/yash-setup`, `feat/yash-kmeans-charts`, `feat/yash-problem-page`, `feat/yash-zones-page`,

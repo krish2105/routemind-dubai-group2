@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { assumptions } from "@/lib/assumptions";
+import frozen from "@/public/data/frozen_results.json";
 import {
   GRID_AXES, HORIZON_MONTHS, TORNADO_PARAMS, assumedRanges, breakEvenSaving, computeRoi, formatAed, formatPayback, parseRange,
   paybackFromApproval, pilotExposure, roi, roiInputs, scenarios, sensitivityGrid, tornado, tornadoRanges, withParam, type RoiInputs,
@@ -169,5 +170,15 @@ describe("ROI model (owner: Harsh, docs/10_roi_model.md)", () => {
     expect(i.adoptionHaircut).toBe(assumptions.business_case.adoption_haircut);
     expect(i.savingFactor).toBe(1);
     expect(i.costPerKmFactor).toBe(1);
+  });
+
+  const F = frozen as unknown as Record<string, number | null>;
+  it.skipIf(typeof F.cost_base_aed !== "number")("reproduces the frozen Slide 7 numbers from the frozen costs (page = slide = calculator)", () => {
+    const i = roiInputs(assumptions, F.cost_base_aed!, F.cost_ai_aed!, { kmCostBase: F.km_cost_base_aed!, kmCostAi: F.km_cost_ai_aed! });
+    const r1 = (x: number | null) => (x === null ? null : Math.round(x * 10) / 10);
+    expect(r1(computeRoi(i).paybackMonths)).toBe(F.payback_months);
+    expect(r1(computeRoi({ ...i, savingFactor: 0.5 }).paybackMonths)).toBe(F.payback_half);
+    expect(Math.round(computeRoi(i).annualNet / 1000) * 1000).toBe(F.annual_net_saving);
+    expect(r1(breakEvenSaving(i, 24).pctOfBaseCost)).toBe(F.gate_cost_pct);
   });
 });
