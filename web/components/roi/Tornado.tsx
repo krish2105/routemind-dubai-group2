@@ -50,7 +50,7 @@ export function Tornado({ inputs, ranges }: { inputs: RoiInputs; ranges: Partial
           );
         })}
       </ul>
-      <p className="mt-3 text-[11px] text-slate-500">Bar = payback range in months (0 to 36) when one input moves across its assumed range. Black tick = your what-if ({months(base)} mo). The stress test is left out: it sits on top of the share kept.</p>
+      <p className="mt-3 text-[11px] text-slate-500">Bar = payback range in months (0 to 36) when one input moves across its assumed range. Tick = current setting ({months(base)} mo). The stress test is left out: it sits on top of the share kept.</p>
     </div>
   );
 }

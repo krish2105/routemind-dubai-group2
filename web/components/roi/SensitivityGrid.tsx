@@ -31,13 +31,13 @@ export function SensitivityGrid({ inputs, disableKm = false }: { inputs: RoiInpu
   const opt = ROW_OPTIONS.find((o) => o.param === rowParam)!;
   return (
     <div className="min-w-0">
-      <div role="radiogroup" aria-label="Row variable" className="mb-3 inline-flex rounded-full border border-slate-900/10 bg-white/70 p-0.5 text-xs">
+      <div role="radiogroup" aria-label="Row variable" className="mb-3 inline-flex max-w-full flex-wrap rounded-full border border-slate-900/10 bg-white/70 p-0.5 text-xs">
         {ROW_OPTIONS.map((o) => {
           const off = o.param === "costPerKmFactor" && disableKm;
           return (
             <button key={o.param} type="button" role="radio" aria-checked={rowParam === o.param} disabled={off} onClick={() => setRowParam(o.param)}
               className={`rounded-full px-3 py-1 transition ${rowParam === o.param ? "bg-ai text-white" : "text-slate-500 hover:text-fg"} disabled:opacity-40`}>
-              {o.label}
+              <span className="sm:hidden">{o.short}</span><span className="hidden sm:inline">{o.label}</span>
             </button>
           );
         })}
@@ -47,7 +47,7 @@ export function SensitivityGrid({ inputs, disableKm = false }: { inputs: RoiInpu
           <caption className="mb-1 text-left text-xs text-slate-500">Payback in months after roll-out. Rows: {opt.label.toLowerCase()}; columns: parcels per day.</caption>
           <thead>
             <tr>
-              <th scope="col" className="text-left text-[11px] font-medium uppercase tracking-wider text-slate-500">{opt.short} \ parcels/day</th>
+              <th scope="col" className="text-left text-[11px] font-medium uppercase tracking-wider text-slate-500">{opt.short} ↓ · parcels/day →</th>
               {grid.cols.values.map((c) => (
                 <th key={c} scope="col" className={`text-[11px] font-medium ${near(c, inputs.parcelsPerDay) ? "text-ai" : "text-slate-500"}`}>{int(c)}</th>
               ))}

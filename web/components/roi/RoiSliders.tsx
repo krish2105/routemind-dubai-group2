@@ -65,7 +65,7 @@ export function RoiSliders({ specs, value, defaults, onChange, disabled = [] }: 
               onChange={(e) => onChange(s.key, Number(e.target.value))}
               className="mt-1.5 w-full accent-[var(--color-ai)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-ai)]"
             />
-            <p className="text-[11px] text-slate-500">{off ? "needs the km cost split (after the freeze)" : s.hint} <span className="text-base">· assumed</span></p>
+            <p className="text-[11px] text-slate-500">{off ? "needs the km cost split (after the freeze)" : s.hint} <span className="text-slate-500">· assumed</span></p>
           </div>
         );
       })}

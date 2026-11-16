@@ -36,7 +36,9 @@ export interface RoiInputs {
   kmCostBase?: number;
   /** AED per parcel that comes from km (part of costAi). */
   kmCostAi?: number;
+  /** all-in 90-day pilot budget (build, integration, training, running the pilot zone) */
   pilotInvestment: number;
+  /** cloud, APIs and support from roll-out onwards */
   monthlyRunningCost: number;
   parcelsPerDay: number;
   workingDaysPerYear: number;
@@ -173,11 +175,12 @@ export function roi(a: Assumptions, costBase: number, costAi: number, savingFact
 export const withParam = (inputs: RoiInputs, param: RoiParam, value: number): RoiInputs => ({ ...inputs, [param]: value });
 
 /**
- * Most the company can lose if it stops at the Day-90 gate: the pilot build plus running cost during the pilot.
- * (Pilot-zone savings during those 90 days are ignored on purpose: they are small and unproven.)
+ * Most the company can lose if it stops at the Day-90 gate. The pilot investment is the ALL-IN 90-day budget
+ * (build, integration, training and running the pilot zone); the monthly running cost starts at roll-out.
+ * One basis everywhere: payback, the cash chart (month 0) and the exposure all use the same AED figure.
  */
-export function pilotExposure(i: Pick<RoiInputs, "pilotInvestment" | "monthlyRunningCost">): number {
-  return Math.max(0, finite(i.pilotInvestment)) + PILOT_MONTHS * Math.max(0, finite(i.monthlyRunningCost));
+export function pilotExposure(i: Pick<RoiInputs, "pilotInvestment">): number {
+  return Math.max(0, finite(i.pilotInvestment));
 }
 
 /** Payback counted from the approval date: 90-day pilot + payback after roll-out (null = no payback). */
@@ -251,7 +254,7 @@ export function scenarioDefs(a: Assumptions): ScenarioDef[] {
   const b = a.business_case;
   return [
     { id: "conservative", label: "Conservative", note: "low adoption, lower volume", overrides: { adoptionHaircut: adLo, parcelsPerDay: b.parcels_per_day - SCENARIO_VOLUME_STEP } },
-    { id: "base", label: "Base", note: "assumptions.json defaults", overrides: {} },
+    { id: "base", label: "Base", note: "assumed defaults · Slide 7", overrides: {} },
     { id: "optimistic", label: "Optimistic", note: "high adoption, higher volume", overrides: { adoptionHaircut: adHi, parcelsPerDay: b.parcels_per_day + SCENARIO_VOLUME_STEP } },
   ];
 }

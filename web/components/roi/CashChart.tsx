@@ -10,7 +10,7 @@ import { aedShort, months, shortNum } from "./fmt";
  * Teal area = current what-if; thin slate dashes = conservative / optimistic; amber dashed zero line = do nothing (baseline).
  * Slider-driven, so no chart animation (it would replay on every tick).
  */
-export function CashChart({ current, conservative, optimistic, height = 300 }: { current: RoiResult; conservative: RoiResult; optimistic: RoiResult; height?: number }) {
+export function CashChart({ current, conservative, optimistic, height = 300, seriesLabel = "your what-if" }: { current: RoiResult; conservative: RoiResult; optimistic: RoiResult; height?: number; seriesLabel?: string }) {
   const gid = useId().replace(/:/g, "");
   const rows = useMemo(() => current.cumulative.map((v, m) => ({ m, current: v, conservative: conservative.cumulative[m], optimistic: optimistic.cumulative[m] })),
     [current, conservative, optimistic]);
@@ -19,7 +19,7 @@ export function CashChart({ current, conservative, optimistic, height = 300 }: {
   return (
     <div>
       <div className="mb-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500">
-        <span className="flex items-center gap-1.5"><span className="h-2.5 w-4 rounded-sm bg-ai/60" />your what-if</span>
+        <span className="flex items-center gap-1.5"><span className="h-2.5 w-4 rounded-sm bg-ai/60" />{seriesLabel}</span>
         <span className="flex items-center gap-1.5"><span className="w-4 border-t-2 border-dashed border-slate-400" />conservative / optimistic</span>
         <span className="flex items-center gap-1.5"><span className="w-4 border-t-2 border-dashed border-base" />do nothing (today&apos;s planning) = AED 0</span>
       </div>
@@ -35,10 +35,10 @@ export function CashChart({ current, conservative, optimistic, height = 300 }: {
             </defs>
             <CartesianGrid stroke="currentColor" strokeOpacity={0.1} vertical={false} />
             <XAxis dataKey="m" type="number" domain={[0, 36]} ticks={[0, 3, 6, 9, 12, 18, 24, 30, 36]} {...axis}
-              label={{ value: "months after roll-out (the 90-day pilot comes before month 0)", position: "insideBottom", offset: -10, fontSize: 11, fill: "currentColor" }} />
+              label={{ value: "months after roll-out", position: "insideBottom", offset: -10, fontSize: 11, fill: "currentColor" }} />
             <YAxis {...axis} width={58} tickFormatter={(v: number) => shortNum(v)} />
             <Tooltip {...TOOLTIP_STYLE} labelFormatter={(m) => `Month ${m}`}
-              formatter={(v, name) => [aedShort(Number(v)), name === "current" ? "your what-if" : String(name)]} />
+              formatter={(v, name) => [aedShort(Number(v)), name === "current" ? seriesLabel : String(name)]} />
             <ReferenceLine y={0} stroke={SERIES.base} strokeDasharray="5 4" />
             {pb !== null && pb <= 36 && (
               <ReferenceLine x={pb} stroke={SERIES.ai} strokeDasharray="3 3"

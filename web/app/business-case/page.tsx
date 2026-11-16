@@ -62,26 +62,25 @@ export default function BusinessCasePage() {
     <AppShell>
       <PageHeader page={page} />
 
-      {/* provenance line */}
-      <div className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-600" aria-live="polite">
-        {base?.source === "frozen" && <Chip tone="ai">frozen numbers · docs/frozen_results.json</Chip>}
-        {base?.source === "live" && <Chip tone="risk">live engine run · not frozen yet</Chip>}
-        {!base && <span>{status === "error" ? `Engine run failed: ${error}` : "Running baseline and AI on the seeded day in a Web Worker…"}</span>}
-        {base && (
-          <span>
-            Costs per parcel simulated on seed {assumptions.seed} (300 orders): baseline <span className="num text-base">AED {base.costBase.toFixed(2)}</span>, AI ({ALGO[base.algorithm] ?? base.algorithm}) <span className="num text-ai">AED {base.costAi.toFixed(2)}</span>. Every business input is assumed.
-          </span>
-        )}
-        {base?.source === "live" && !isDefault && (
-          <button type="button" onClick={resetToDefaultDay} className="rounded-full border border-ai/40 px-2.5 py-0.5 text-xs text-ai hover:bg-ai/10">Use the default seeded day</button>
-        )}
-      </div>
-
       {/* 01 THE ANSWER */}
-      <Section n={1} title="The answer" kicker={`Simple payback after roll-out, counting ${pct(B.adoption_haircut * 100)} of the simulated saving (assumed).`}>
+      <Section n={1} title="The answer" aside={
+        <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600" aria-live="polite">
+          {base?.source === "frozen" && <Chip tone="ai">frozen numbers · matches docs/frozen_results.json</Chip>}
+          {base?.source === "live" && <Chip>live engine run · not frozen yet</Chip>}
+          {!base && <span>{status === "error" ? `Engine run failed: ${error}` : "Running baseline and AI on the seeded day in a Web Worker…"}</span>}
+          {base && (
+            <span>
+              Cost per parcel, seed {assumptions.seed}: baseline <span className="num text-base">AED {base.costBase.toFixed(2)}</span> → AI <span className="num text-ai">AED {base.costAi.toFixed(2)}</span> (simulated)
+            </span>
+          )}
+          {base?.source === "live" && !isDefault && (
+            <button type="button" onClick={resetToDefaultDay} className="rounded-full border border-ai/40 px-2.5 py-0.5 text-ai hover:bg-ai/10">Use the default seeded day</button>
+          )}
+        </div>
+      }>
         <div className="grid gap-4 lg:grid-cols-[1.3fr_1fr_1fr]">
           <Glass className="relative overflow-hidden p-5">
-            <div className="text-xs uppercase tracking-widest text-slate-500">Payback {atDefaults ? "(base case)" : "(your what-if)"}</div>
+            <div className="text-xs uppercase tracking-widest text-slate-500">Payback after roll-out {atDefaults ? "· base case" : "· your what-if"}</div>
             <div className="mt-2 flex items-baseline gap-2">
               {view ? (
                 view.cur.paybackMonths === null ? (
@@ -94,7 +93,7 @@ export default function BusinessCasePage() {
               ) : (
                 <span className="num h-14 w-40 rounded-lg bg-slate-900/5 motion-safe:animate-pulse" aria-hidden />
               )}
-              <span className="text-lg text-slate-500">months</span>
+              {view?.cur.paybackMonths != null && <span className="text-lg text-slate-500">months</span>}
             </div>
             {view && <LiveText text={`Payback ${view.cur.paybackMonths === null ? "never" : `${months(view.cur.paybackMonths)} months`} after roll-out at these settings.`} />}
             <div className="mt-3 flex flex-wrap gap-2 text-xs">
@@ -103,11 +102,11 @@ export default function BusinessCasePage() {
               {matchesSlide && <Chip tone="ai">matches Slide 7</Chip>}
               {!atDefaults && <Chip tone="ai">what-if</Chip>}
             </div>
-            <p className="mt-3 text-xs text-slate-500">Clock starts at roll-out ({B.parcels_per_day.toLocaleString("en-US")} parcels a day from month 1), no ramp-up, no discounting, no tax. The pilot itself does not pay back: it buys the evidence.</p>
+            <p className="mt-2 text-xs text-slate-500">Counting {pct(what.adoptionHaircut * 100)} of the simulated saving (assumed); simple payback, see method below.</p>
           </Glass>
 
           <StatTile label="Investment (assumed)" value={view ? aed(view.inputs.pilotInvestment) : "…"}
-            caption={view ? <>90-day pilot build, integration, training · plus <span className="num">{aed(view.inputs.monthlyRunningCost)}</span> a month to run</> : undefined}>
+            caption={view ? <>all-in 90-day pilot (build, integration, training, running) · then <span className="num">{aed(view.inputs.monthlyRunningCost)}</span> a month from roll-out</> : undefined}>
             {view && (
               <div className="mt-3 border-t border-slate-900/5 pt-3 text-xs text-slate-600">
                 Most you can lose if the Day-90 gate says stop: <span className="num font-medium text-fg">{aed(pilotExposure(view.inputs))}</span>
@@ -127,7 +126,7 @@ export default function BusinessCasePage() {
       </Section>
 
       {/* 02 TEST THE ASSUMPTIONS */}
-      <Section n={2} title="Test the assumptions" kicker="Move any assumed input; payback, cash and the grid below update at once.">
+      <Section n={2} title="Test the assumptions" aside={<span className="text-xs text-slate-500">Move any assumed input: payback, cash and the grid update at once.</span>}>
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <Glass className="p-5">
             <div className="mb-3 flex items-center justify-between gap-2">
@@ -138,11 +137,11 @@ export default function BusinessCasePage() {
             <RoiSliders specs={SPECS} value={what} defaults={DEFAULTS} onChange={set} disabled={noKm ? ["costPerKmFactor"] : []} />
           </Glass>
           <Glass className="min-w-0 p-5">
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-slate-500">Cumulative net cash, 36 months</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-slate-500">Cumulative net cash, 36 months (AED)</h3>
             {view ? (
-              <CashChart current={view.cur} conservative={view.sc[0].result} optimistic={view.sc[2].result} />
+              <CashChart current={view.cur} conservative={view.sc[0].result} optimistic={view.sc[2].result} height={220} seriesLabel={atDefaults ? "base case" : "your what-if"} />
             ) : (
-              <div className="mt-3 h-[300px] rounded-xl bg-slate-900/5 motion-safe:animate-pulse" aria-hidden />
+              <div className="mt-3 h-[220px] rounded-xl bg-slate-900/5 motion-safe:animate-pulse" aria-hidden />
             )}
             {view && (
               <dl className="num mt-3 grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
@@ -179,7 +178,7 @@ export default function BusinessCasePage() {
       <Section n={4} id="pilot" title="The 90-day pilot and the decision" kicker="Pilot, then a go/no-go gate, then scale. The board risks the pilot, not the roll-out.">
         <PilotRoadmap
           pilot={view?.inputs.pilotInvestment ?? B.pilot_investment_aed}
-          exposure={pilotExposure(view?.inputs ?? { pilotInvestment: B.pilot_investment_aed, monthlyRunningCost: B.monthly_running_cost_aed })}
+          exposure={pilotExposure(view?.inputs ?? { pilotInvestment: B.pilot_investment_aed })}
           gates={{
             costGatePct: view?.gate.pctOfBaseCost ?? null,
             costShareOfSimulated: view?.gate.shareOfSimulated ?? null,
@@ -197,11 +196,13 @@ export default function BusinessCasePage() {
         <h3 className="text-sm font-semibold uppercase tracking-widest text-slate-500">How the numbers are built</h3>
         <ul className="mt-2 list-disc space-y-1 pl-5">
           <li>Saving per parcel = (baseline − AI cost per parcel) × share kept × stress test. Monthly saving = saving × parcels a day × {B.working_days_per_year} / 12 days. Payback = pilot investment ÷ (monthly saving − running cost). Code: <code className="text-xs">web/lib/roi.ts</code>, tests: <code className="text-xs">web/tests/roi.test.ts</code>.</li>
-          {view && (
-            <li>Sanity check: the simulated cut is {pct(view.ref.simulatedSavingPct, 1)} because our baseline (nearest neighbour) is simple. We count {pct(B.adoption_haircut * 100)}, so {pct(view.ref.effectiveSavingPct, 1)} of cost per parcel, which is {view.ref.benchmark === "within" ? "inside" : view.ref.benchmark} the {BENCHMARK_PCT[0]} to {BENCHMARK_PCT[1]}% range McKinsey reports for AI in distribution (research brief R7).</li>
-          )}
-          <li>Costs per parcel cover km, driver hours, expected failed attempts and SLA penalties on one simulated day at one hub (kpi.ts). The {B.parcels_per_day.toLocaleString("en-US")} parcels a day is an assumed network volume after roll-out; scale-up cost beyond the running cost is not modelled.</li>
-          <li>Ranges for the sliders, grid and tornado come from the provenance block of assumptions.json; the 70% acceptance target is an assumed policy value.</li>
+          {view && base && (<>
+            <li>Costs per parcel cover km, driver hours, expected failed attempts and SLA penalties; baseline AED {base.costBase.toFixed(2)} and AI ({ALGO[base.algorithm] ?? base.algorithm}) AED {base.costAi.toFixed(2)} on seed {assumptions.seed}, 300 orders.</li>
+          <li>Sanity check: the simulated cut is {pct(base.costPct ?? view.ref.simulatedSavingPct, 1)} because our baseline (nearest neighbour) is simple. We count {pct(B.adoption_haircut * 100)}, so {pct(view.ref.effectiveSavingPct, 1)} of cost per parcel, which is {view.ref.benchmark === "within" ? "inside" : view.ref.benchmark} the {BENCHMARK_PCT[0]} to {BENCHMARK_PCT[1]}% range McKinsey reports for AI in distribution (research brief R7).</li>
+          </>)}
+          <li>Simple payback: clock starts at roll-out ({B.parcels_per_day.toLocaleString("en-US")} parcels a day from month 1), no ramp-up, no discounting, no tax. Add the 90-day pilot for the time from approval. The pilot itself buys evidence, not payback.</li>
+          <li>The costs come from one simulated day at one hub (kpi.ts). The {B.parcels_per_day.toLocaleString("en-US")} parcels a day is an assumed network volume after roll-out; the pilot budget is all-in; scale-up cost beyond the running cost is not modelled.</li>
+          <li>Ranges for the sliders, grid and tornado come from the provenance block of assumptions.json; the 70% acceptance target is a proposed value for the sponsor to confirm on Day 0 (assumed).</li>
         </ul>
       </Glass>
 
@@ -209,7 +210,7 @@ export default function BusinessCasePage() {
         <p className="text-sm text-slate-600">
           <span className="font-medium text-ai">What this means for operations:</span> the decision today is small and capped: a 90-day pilot at one hub. Dispatchers
           keep control throughout, and the network changes only if the pilot shows a real cost cut of at least {view ? pct(view.gate.pctOfBaseCost, 1) : "the gate value"} with on-time
-          and km moving the right way. If it does not, we stop and the loss is capped at {aed(pilotExposure(view?.inputs ?? { pilotInvestment: B.pilot_investment_aed, monthlyRunningCost: B.monthly_running_cost_aed }))}.
+          and km moving the right way. If it does not, we stop and the loss is capped at {aed(pilotExposure(view?.inputs ?? { pilotInvestment: B.pilot_investment_aed }))}.
         </p>
       </Glass>
       <p className="text-xs text-slate-500">DubaiDash Express is fictional. All business inputs are assumed (Assumptions button above); all costs per parcel are simulated by the engine. Nothing here is a forecast.</p>

@@ -150,8 +150,9 @@ describe("ROI model (owner: Harsh, docs/10_roi_model.md)", () => {
     expect(formatAed(2_667_000, true)).toBe("AED 2.7M");
   });
 
-  it("caps the exposure at the pilot build plus 90 days of running cost, and counts payback from approval", () => {
-    expect(pilotExposure(HAND)).toBe(420_000 + 3 * 38_000);
+  it("caps the exposure at the all-in pilot budget (same basis as payback), and counts payback from approval", () => {
+    expect(pilotExposure(HAND)).toBe(420_000);
+    expect(computeRoi(HAND).cumulative[0]).toBe(-pilotExposure(HAND));
     expect(paybackFromApproval(computeRoi(HAND))!).toBeCloseTo(4.898 + 3, 3);
     expect(paybackFromApproval({ paybackMonths: null })).toBeNull();
   });
