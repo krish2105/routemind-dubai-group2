@@ -1,4 +1,4 @@
-// SLIDE 6 | Owner: Karan Baid's slide (built by Yash after Karan left) | Integration, risks with fallbacks, human override,
+// SLIDE 6 | Presenter: Karan Baid (slide content built by Yash while Karan was away) | Integration, risks with fallbacks, human override,
 // and the four C-suite themes: business model, tech investment, ecosystem integration, operational risk.
 // Facts: R13 (Makani), R14 (midday break), R19 (UAE PDPL; no fine claims). Body text >= 14 pt; footnote 10 pt.
 const { C, F, MX, owner, card, genaiCircle, genaiLegend, source, title } = require("../theme");
@@ -8,7 +8,7 @@ const { notesFor } = require("../lib/notes");
 module.exports.build = function (pres) {
   const s = pres.addSlide({ masterName: "NIGHT" });
   title(s, "Integration is the real risk, and we have a fallback for each");
-  owner(s, "Slide 6 | Integration and risk");
+  owner(s, "Slide 6 | Karan");
 
   // LEFT: integration map, RouteMind in the centre (lines first so the boxes cover them)
   card(pres, s, MX, 1.75, 5.6, 3.5);

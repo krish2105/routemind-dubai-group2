@@ -50,7 +50,7 @@ Titles state the finding. Values in `{{double braces}}` come only from `docs/fro
 - New revenue options: paid delivery slots, parcel lockers
 **Qs:** Q4, Q6, Q7. **GenAI:** circle the customer message example.
 
-## Slide 6: Yash (1:15; Karan Baid left the group)
+## Slide 6: Karan (1:15; content built by Yash while Karan was away)
 **Title:** Integration is the real risk, and we have a fallback for each
 - Integration map: TMS/WMS, driver app, traffic and weather APIs, Makani (R13), e-commerce platforms
 - Risk to fallback table (4 rows): data quality, driver adoption, privacy (UAE PDPL, R19), model failure

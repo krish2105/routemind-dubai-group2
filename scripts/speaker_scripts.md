@@ -55,9 +55,9 @@ First, the fleet. Capacity utilisation goes from {{util_base}} to {{util_ai}} pe
 Second, customers. On-time delivery rises from {{ontime_base}} to {{ontime_ai}} per cent, and SLA breaches drop from {{breaches_base}} to {{breaches_ai}}. These are proxies for satisfaction; we did not survey anyone.
 Third, drivers. We track workload fairness, so the AI does not overload a few people, and summer plans must keep the midday break for riders.
 [CUE: point to the red circle] Finally, the copilot drafts delay messages in English and Arabic. It is AI-drafted, and a dispatcher approves it before anything is sent.
-Yash will now cover the risks.
+Karan will now cover the risks.
 
-## SLIDE 6 | Yash | 75 | Integration is the hard part, so we plan for it
+## SLIDE 6 | Karan Baid | 75 | Integration is the hard part, so we plan for it
 > Delivery: calm and practical. For PDPL say "we would confirm the details with legal counsel". Do not mention fines. Point at the four boxes at the bottom for the boardroom themes.
 Thanks Advait. An AI plan only helps if it fits the way the business already runs, so let me cover integration and risk.
 On integration, nothing is replaced on day one. RouteMind reads file or API exports from the transport and warehouse systems, adds traffic and weather feeds, and sends the stops to a driver app. Unclear addresses cause many failed drops, so we use Makani, Dubai's ten-digit entrance code, where we have it.
@@ -68,7 +68,7 @@ Harsh will present the plan and the business case.
 
 ## SLIDE 7 | Harsh | 75 | A capped pilot tests the payback before we scale
 > Delivery: slow and calm on the three numbers. Point at the roadmap on the CUE, at the gate tile on "gate". End with the ask, hold eye contact through the pause, then the closing line.
-Thanks Yash. Here is how we prove it, at low risk.
+Thanks Karan. Here is how we prove it, at low risk.
 One decision today: a 90-day pilot at one hub, {{pilot_cost}} dirhams, all-in.
 [CUE: point to the roadmap] We connect the data, run RouteMind in shadow mode beside our dispatchers, then live on one zone.
 Counting only {{share_kept_pct}} per cent of the simulated saving, payback is about {{payback_months}} months after roll-out. At half the saving it is {{payback_half}} months. Too slow, so we gate the money.

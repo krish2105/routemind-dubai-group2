@@ -1,6 +1,6 @@
 # Team Split (7 members, 7 slides)
 
-Group chat names: Gagandeep, Yash, Atharva, Krishna, Advait, Harsh (Karan Baid left on 15 Nov 2026; Yash took over Slide 6). Swap slides if someone prefers another, but keep one slide and one deliverable per person. Printable version: `team/Group2_Team_Plan.pdf` and `team/Group2_Role_Cards.pdf`.
+Group chat names: Gagandeep, Yash, Atharva, Krishna, Advait, Karan Baid, Harsh (Karan was away 15 to 16 Nov 2026; Yash built the Slide 6 content, Karan presents it). Swap slides if someone prefers another, but keep one slide and one deliverable per person. Printable version: `team/Group2_Team_Plan.pdf` and `team/Group2_Role_Cards.pdf`.
 
 | Member | Slide (time) | Slide content | Code / prototype ownership | Prompt file |
 |---|---|---|---|---|
@@ -9,7 +9,7 @@ Group chat names: Gagandeep, Yash, Atharva, Krishna, Advait, Harsh (Karan Baid l
 | **Atharva** | 3: The AI loop (1:15) | Workflow diagram, ETA error vs naive, techniques | ETA notebook + JSON + `/eta`, `ga.ts` | `03_Atharva.md` |
 | **Krishna** | 4: Live demo (2:00) | Demo, baseline vs AI, jam moment | Repo + Vercel, `clarkeWright.ts`, worker, store, `/command`, `/optimizer`, demo recording, final zip | `04_Krishna.md` |
 | **Advait** | 5: Utilisation, CO2, SLAs (1:15) | KPI table, CO2, on-time, fairness, copilot example | `kpi.ts`, `/fleet`, `/customer`, copilot API (EN/AR), assumptions | `05_Advait.md` |
-| **Yash** (from Karan Baid) | 6: Integration and risk (1:15) | Integration map, risk table, override, ecosystem | `reroute.ts`, `events.ts`, `/rerouting`, `/integration`, risk register, QA and checklist | `06_Karan.md` |
+| **Karan Baid** (content built by Yash) | 6: Integration and risk (1:15) | Integration map, risk table, override, ecosystem | `reroute.ts`, `events.ts`, `/rerouting`, `/integration`, risk register, QA and checklist | `06_Karan.md` |
 | **Harsh** | 7: Roadmap and ROI (1:15) | 3-phase rollout, payback, gates, the ask | `roi.ts`, `/business-case`, RL notebook + `/rl-lab`, **freeze script and cross-check** | `07_Harsh.md` |
 
 Talk time: 1:00 + 1:15 + 1:15 + 2:00 + 1:15 + 1:15 + 1:15 = **9:15** (leaves about 45 seconds for handovers).
